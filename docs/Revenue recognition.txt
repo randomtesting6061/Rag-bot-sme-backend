@@ -1,0 +1,318 @@
+Revenue recognition
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceRevenue recognitionSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Revenue recognitionZenskar is ASC 606- and IFRS 15-compliant.
+Although ASC 606 and IFRS 15 have some differences, both establish the principles that an entity applies when reporting information about the nature, amount, timing, and uncertainty of revenue and cash flows from a contract with a customer.
+Applying either standard, an entity recognizes revenue to depict the transfer of promised goods or services to the customer in an amount that reflects the consideration to which the entity expects to be entitled in exchange for those goods or services.
+Both ASC 606 and IFRS 15 have defined a 5-step model for revenue recognition:
+
+Identify the contract
+Identify separate performance obligations
+Determine the transaction price
+Allocate transaction price to performance obligations
+Recognize revenue when each performance obligation is satisfied
+
+
+⚙️ Step 1: Identify the contract
+📚NoteAll contracts created in Zenskar are inherently ASC 606- and IFRS 15-compliant. There is no further action required of you.
+Let us build an example contract that contains the following three products:
+ProductDescriptionPlatform annual feeA prepaid, recurring flat fee of $3600 per year for access to the platform.Implementation feeA one-time implementation fee of $600.Extra seatsA fee of $10 per seat for 60 extra seats.
+Fig. 1: A Zenskar contract is inherently ASC 606- and IFRS 15-compliant.
+
+⚙️ Step 2: Identify separate performance obligations
+Performance obligation (POB) is your promise to transfer services or products to your customer. During this step, you should itemize every distinct POB. A service or product is considered distinct when it is of value to the customer and can be transferred independently of other services or products in the contract.
+📚NoteIdentifying POs will result in the unbundling of a contract into POB. This is a crucial step to recognize revenue correctly.
+📚NoteThe following are examples of circumstances which do not give rise to a POB:
+providing goods at scrap value
+activities relating to internal administrative contract set-up
+
+Add performance obligations in Zenskar
+
+To add POBs from the contract mentioned in Step 1, navigate to Accounting > Revenue Rule Library.
+The Create Performance Obligation Template page is displayed.
+
+
+
+Fill in the required details in the Template Information section:
+
+
+Name: a descriptive name for the POB template.
+Description: describe what the template is for.
+Revenue Account: refer to the documentation on the hierarchy of default accounts.
+Revenue Distribution: choose from Point in Time and Over Time.
+
+
+Fill in the required details in the Criteria section:
+
+
+Map a product to a POB by selecting product parameters and defining conditions.
+The following product parameters are available:
+
+ParameterConditionValueProductequalsSelect the product from the Value drop-down menu.Pricing ModelequalsSelect the pricing model from the Value drop-down menu.Contract Item Namecontains
+not contains
+starts with
+end withProduct Start DateequalsSelect a date.Product End DateequalsSelect a date.Aggregateequals
+is empty
+is not emptySelect an aggregate  from the Value drop-down menu.Entitlementis empty
+is not empty
+
+One or more parameters can be used to define conditions for mapping a product to a POB template.
+
+
+
+To map multiple products to the same POB template, click on the Add more products to the POB  checkbox. Thereafter, map the desired product to the POB template by selecting corresponding product parameters and defining conditions.
+
+
+
+Continuing with the example: add performance obligations
+The contract mentioned in Step 1 has three distinct products that could result in the contract unbundling into three potential POBs:
+
+Platform annual fee
+Implementation fee
+Extra seats
+
+📚NoteThere are circumstances that could result in services or products being combined into a POB. For example, if one service or product depends on the price or performance of another service or product, you may consider combining them into one PO.
+In the current example, one potential POB, Platform annual fee, is dependent on the performance of another potential PO, Implementation fee. Therefore, it makes sense to combine them.
+Let us add two POBs:
+
+Platform access: this POB has the following products serving as value sources.
+
+ProductPercentagePlatform annual fee100Implementation fee100
+
+Performance obligation parameterDetailsNameAny descriptive string that uniquely identifies the POB.DescriptionDescribe your PO.POB periodOver what period do you expect the customer to make the payment?POB policyRefer the documentation on POB policies.Value sourceThe products that contribute value to the POB:
+• a POB may have multiple products as value sources
+• multiple POBs may share a portion of the value of a product
+
+Extra seats: this PO has only one product serving as value source.
+
+ProductPercentageExtra seats100
+
+📚NoteIdentifying POBs is entirely dependent on the circumstances under which your business operates. Therefore, Zenskar provides you the necessary tools and lets you decide how to identify POBs.
+View performance obligations
+
+To view the POBs from the contract mentioned in Step 1, navigate to Contracts.
+Click on the kebab menu located at the end of the row containing the contract you are interested in.
+Click on the Revenue Recognition menu option, as shown below:
+
+
+
+The list of POBs associated with the contract will be displayed, as shown below:
+
+
+Edit performance obligations
+
+The following fields can be edited in a revenue plan:
+FieldDetailsStart dateThis date can be different from the contract start date. For example, the implementation of your service or product may not be trivial and may take a couple of months. You can choose to start recognizing the revenue two months after the invoice creation.End dateThis date can also be different from the contract start date based on your special circumstances.Revenue distribution methodRefer the documentation on revenue distribution methods.Revenue config change impactIf the end date of a PO is edited, the revenue plan is affected. There are two ways of handling this change:
+• update all periods: revenue postings are considered loked if they have already been recognized and corresponding journal entries created. Locked revenue postings cannot be altered. However, the changes affecting such locked revenue postings can be redistributed over the remaining periods using any revenue redistribution method supported by Zenskar. For example, if the revenue postings for January, 2024, through August, 2024, have been recognized, any changes affecting these postings can be redistributed in the revenue postings of September, 2024, through December, 2024.
+• update remaining periods: for changes that do not affect the locked revenue postings, this method can be used.Revenue redistribution methodIn the event of a change in the end date of a revenue plan, the following revenue redistribution methods are supported:
+• straight-line
+• front-loaded
+• back-loadedDeferral accountThe revenue account where deferred revenue is posted.Revenue account
+
+⚙️ Step 3: Determine the transaction price
+Transaction price is the most likely value that you expect to be entitled to in exchange for the promised services or products supplied under a contract. The product definition will contain the transaction price necessary for revenue recognition.
+Fig. 4: "Platform annual fee" as product.
+Fig. 5: One-time "implementation fee" as product.
+Fig. 6: "Extra seats" as product.
+
+⚙️ Step 4: Allocate transaction price to performance obligations
+Allocate transaction price to each PO on the basis of the relative stand-alone selling prices of each distinct service or product promised in the contract. Continuing with our example, the following two POs can be created:
+
+Platform access: this PO has the following products serving as value sources.
+
+ProductPercentagePlatform annual fee100Implementation fee100
+
+Extra seats: this PO has only one product serving as value source.
+
+ProductPercentageExtra seats100
+You can create more POBs, view and edit POs associated with a contract:
+
+📚NoteIdentifying POs is entirely dependent on the circumstances under which your business operates. Therefore, Zenskar provides you the necessary tools and lets you decide how to identify POs.
+⚙️ Step 5: Recognize revenue when each performance obligation is satisfied
+Fig. 9: Invoice.
+The invoice has resulted in a journal entry that has credited the deferred revenue and debited the accounts receivable for $4800.
+Fig. 10: Journal entry created upon invoice approval.
+If we perform revenue recognition of the Platform Access performance obligation for a single month and post the revenue to the general ledger, we will see the following journal entry.
+Fig. 11: Journal entry created on revenue recognition of the Platform Access performance obligation for a single month.Updated 17 days ago CreditsRevenue distribution and redistribution methodsTable of Contents
+
+⚙️ Step 1: Identify the contract
+
+
+⚙️ Step 2: Identify separate performance obligations
+
+
+
+Add performance obligations in Zenskar
+View performance obligations
+Edit performance obligations
+
+
+
+⚙️ Step 3: Determine the transaction price
+
+
+⚙️ Step 4: Allocate transaction price to performance obligations
+
+
+⚙️ Step 5: Recognize revenue when each performance obligation is satisfied
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

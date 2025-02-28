@@ -1,0 +1,359 @@
+Customers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceCustomersSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by CustomersOverview
+To automate your billing process, you must add your customers' details to Zenskar.
+There are three ways to add a customer in Zenskar:
+
+Manually
+
+👨‍🔧 Add customers manually, one at a time
+🗈 Add customer(s) by uploading a CSV
+
+
+🌐 Zenskar APIs
+🔌 Connectors
+
+
+⚙️ Add a customer
+Add customers manually, one at a time
+
+Navigate to the Customers page, and click on the ADD CUSTOMER button.
+
+
+
+Fill all the necessary details in the Add Customer form.
+
+
+
+Customer information
+FieldDescriptionNameFull name of the customerCustomer IDUnique ID assigned to the customer: this could be the ID assigned in the system from where the customer details are being imported (eg., CRM).EmailEmail address of the user.
+Shipping address
+You must fill in the complete address, zip code, city, state, country, and phone number.
+🚧ImportantEnsure that the customer details entered in these fields are exactly the same as the details in the other systems from where they are being imported.
+Business entity
+Associate a business entity  with the customer.
+
+
+Tax information
+Manage tax-related data such as tax codes, exemptions, and rates for proper tax calculation and compliance with local tax laws. Add goods and services tax (GST) and value-added tax (VAT) related IDs applicable to the customers in the following jurisdictions:
+IndiaIND (GST)USAUSA (VAT)AustraliaAUS (GST)European UnionEU (VAT)SingaporeSG (VAT)FranceFR (VAT)
+
+
+Custom data
+You can add custom JSON data. Custom data is additional customer metadata which can be used when creating custom aggregate queries.
+
+
+For example, if one of your customers, the fictitious ACME corporation, has multiple users signed up for your product, you can generate a single bill for the multiple users and assign it to the company.
+JSON{
+  "users": [
+    "[email protected]",
+    "[email protected]"
+  ]
+}
+For another example, if you want to store information about a customer's preferred method of communication and their time zone, you could do the following:
+JSON{
+  "additional_info": 
+  	{
+      "preferred_communication": "email", "timezone": "PST"
+    }
+}
+You can exempt a customer from taxation by adding the following JSON:
+JSON{
+  "exempt_tax":true
+}
+
+Auto charge invoices
+Allow customers to configure payment settings, such as auto-charge options, for convenient and automated payment processing.
+
+🚧NoteYou must have a fully-configured and functioning payment gateway.
+Email communications
+Enabling this setting will let your senders send emails to your customers.
+
+Add customer(s) by uploading a Zenskar-compatible CSV
+You can add a single customer or customers in bulk by uploading a Zenskar-compatible CSV file.
+
+Navigate to the Customers page, and click on the down arrow present on the + ADD CUSTOMER button.
+Click on the Upload CSV button.
+The Upload CSV dialog pops up.
+
+
+
+Use the Click to upload or drag and drop card to upload the CSV file containing your customers' data.
+
+🚧NoteThe CSV has to be in a Zenskar-compatible format.
+
+
+Click on the IMPORT CSV DATA button to add your customers' data to Zenskar.
+
+
+
+Sample CSV file
+
+You can download a sample Zenskar-compatible CSV file by clicking the Download sample CSV file card on the Upload CSV dialog.
+
+
+
+You can add your customers' data to this CSV file.
+
+
+🚧NoteRemember to remove the example John Doe user from the sample CSV before adding your data.
+Add a customer using the Zenskar APIs
+You can add your customers' details to Zenskar using the create customer REST API.
+Add a customer using Zesnkar connectors
+Zenskar's third-party integrations will help you perform two-way sync of your customers' data. Zenskar provides connectors for many well-known CRM, CPQ, and ERP software systems.
+
+Navigate to Integrationsto view the list of connectors available. Follow the third-party-specific documentation to establish a connection.
+
+
+🔖Did not find the connector you were looking for?Contact [email protected]. to raise a request for a new connector.
+🔍 View customer details
+
+Navigate to Customers in the left side panel.
+Click on the row containing the customer you are interested in.
+On the View Customerpage, you can view details such as invoices, contracts, entitlements, payments, journal entries, monitoring, email logs, integrations, wallet details, and child customers.
+
+
+View and add secondary contacts
+📖DefinitionYou manage multiple contacts associated with a customer as secondary contacts. You can choose what type of communication is sent to each secondary contact.
+
+Navigate to Customers in the left side panel.
+Click on the row containing the customer you are interested in.
+On the View Customerpage, click on the kebab menu located beside the Edit button to reveal the Manage Secondary Contacts menu option, as shown below.
+
+
+
+On the Manage Secondary Contacts form, click on the + ADD CONTACT button to add a new secondary contact.
+
+
+
+On the Edit Customer form, fill in the required details.
+
+
+
+Wallet
+Credits can be given to a customer for promotional or other purposes. These credits are added to their wallet. Customers can use these credits to reduce their invoice due amount.
+Create wallet
+
+Navigate to Customers in the left side panel.
+Click on the row containing the customer you are interested in.
+On the View Customerpage, move to the Wallet Details tab.
+Click on the +ADD CUSTOMER CREDIT WALLET button to reveal the Add New Wallet form.
+Fill in the details, and click on the ADD button.
+
+🚧NoteOnly one wallet can be added for each currency.
+
+
+Adjust wallet balance
+
+Navigate to Customers in the left side panel.
+Click on the row containing the customer you are interested in.
+On the View Customerpage, move to the Wallet Details tab.
+Click on the Adjust link.
+Fill in the details in the Adjust Balance form, and click APPLY button.
+
+
+Add to customer balance: give customer more credits for promotional or other purposes.
+Deduct from customer balance: deduct credits for products or services provided or to settle invoice.
+Customer-facing portal
+Refer customer-facing portal documentation for more details.Updated 16 days ago AnalyticsMeteringTable of Contents
+
+Overview
+
+
+⚙️ Add a customer
+
+
+
+Add customers manually, one at a time
+Add customer(s) by uploading a Zenskar-compatible CSV
+Add a customer using the Zenskar APIs
+Add a customer using Zesnkar connectors
+
+
+
+🔍 View customer details
+
+
+
+View and add secondary contacts
+Wallet
+Customer-facing portal
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,217 @@
+Hierarchy of default accounts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceHierarchy of default accountsSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Hierarchy of default accountsThe hierarchy of default accounts provided by Zenskar is described in this article.
+📚DefinitionIn Zenskar, a business entity (or entity) is a company wholly controlled by another company called a holding company or parent. A business entity is also known as a subsidiary.In Zenskar, an organization is the holding company or parent that wholly controls all business entities.
+Assets
+
+Cash: a type of current asset account for all money owned by the entity.
+Accounts receivable: money that an entity expects to receive for services and products already delivered.
+
+Payment gateways: money than an entity expects to receive from payment gateways.
+Customers: money that an entity expects to receive from its customers.
+
+
+Unbilled revenue: money that an entity has earned by providing services or products but has not billed its customers for.
+
+Liabilities
+
+Customer wallet: balance that a customer can use as an offset against billed amount.
+Accounts payable: money that an entity must pay to its vendors. Typical payable items include supplier invoices, legal fees, contractor payments, and so on.
+Deferred revenue: also known as unearned revenue, deferred revenue is a type of contract liability that denotes money that an entity has billed its customers for but has not earned it yet by delivering the goods or services.
+
+🚧NoteDeferred revenue is considered a liability to the entity because there is a possibility that the service or product may not be delivered, or the customer might cancel the order.Deferred revenue is the opposite of unbilled revenue.
+
+Sales tax: money that an entity must pay as taxes in appropriate tax jurisdictions.
+Contra accounts receivable: in general, a contra account reduces the value of a related asset account. In Zenskar, contra account accounts for money that an entity must pay to other entities in the form of refunds, thereby reducing the value of cash account:
+
+Customers: refund amount to be paid by an entity to its customers.
+Payment gateways: refund amount to be paid by an entity to a payment gateway.
+
+
+
+Income
+
+Sales and services revenue: the default revenue account for accrued revenue of the entity from its main activities like sales and services.
+Other revenue: the alternate revenue account for accrued revenue of the entity from side activities that is unrelated to the entity's day-to-day activities, such as dividend income or profiits from investments.
+
+Expenses
+
+Sales returns and allowances: expenses due to sales returns or promotional allowances given to customers.
+Tax withheld: tax paid by an entity on behalf of the customer.
+Payment gateway fees: expense incurred due to payment gateway charging some transaction fees.
+Updated 17 days ago AccountingCreditsTable of Contents
+Assets
+Liabilities
+Income
+Expenses
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

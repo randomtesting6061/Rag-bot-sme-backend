@@ -1,0 +1,348 @@
+Installation and setup of Zenskar’s package for Salesforce
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceInstallation and setup of Zenskar’s package for SalesforceSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Installation and setup of Zenskar’s package for SalesforceOverview
+Salesforce package provided by Zenskar allows you to sync your Salesforce account with Zenskar and the flexibility to automate your processes using Flow.
+
+Prerequisites
+
+You must have permission to install packages in your Salesforce account.
+You must obtain an API key from Zenskar. Refer to How to manage API keys for details.
+Get your organization Id by navigating to the General tab on the Settings page.
+
+
+Installation
+
+Reach out to [email protected] for the Salesforce package download link.
+You will be redirected to the following screen. You can choose one of the following options:
+
+
+Install for Admins Only
+Install for All Users (recommended)
+Install for Specific Profiles
+
+🚧NoteYou must login with an account credential that has the required permissions to install the package.
+
+
+Configuration
+Configure Zenskar API key and Organisation Id
+
+On successful installation of the package, navigate to the Setup Page on Salesforce.
+
+
+
+
+Search for Named Credentials, as shown below.
+
+
+
+
+In Named Credentials you will see the following labels:
+
+
+ZenskarEndpoint
+ZenskarStagingEndpoint
+
+
+
+Click on the ZenskarEndpoint label.
+On the ZenskarEndpoint page**,** click on the value under External Credentials in the Authentication section**.** The value must be Zenskar, if the package was successfully installed.
+
+
+
+On the Zenskar named-credentials  page, under the Principals section, click on the Actions drop-down menu available for the ZenskarPrincipal parameter.
+
+
+
+Select the Edit option from the Actions drop-down menu.
+
+
+
+In the Edit Principal modal dialog, add the following:
+
+Parameter NameSequence NumberAPIKey1Organisation2
+
+
+Once added, click on the Save button to save the configuration.
+
+
+Provide permission to users for Zenskar External Principal
+For more information
+Refer to thisSalesforce guide.
+
+On the Setup page, search for Profiles
+
+
+
+On the Profile page, search for System Administrator, as shown below.
+Click on the System Administrator profile.
+
+
+
+You will arrive at the Profiles page. Click on Enabled External Credential Principal Access to go to the corresponding settings page.
+
+
+
+Click on the Edit button beside the Enabled External Credential Principal Access option, as shown below.
+
+
+
+Select Zenskar - ZenskarPrincipal from the Available External Credential Principals list.
+Click on the Add button to move the selection from the Available External Credential Principals to Enabled External Credential Principals list, as shown below.
+
+
+
+
+
+Once moved, click on the Save button to save the configuration. Your API keys and Organisation are now ready to use.
+
+🔖NoteYou can repeat the above steps to provide access to other users.
+Set up Salesforce object layout
+You can enable Custom Fields on Objects Layout to allow seamless integration.
+Available custom fields
+AccountAutoCharge Invoice (Zenskar)CustomerID (Zenskar)Email (Zenskar)Email Communication (Zenskar)External ID (Zenskar)
+OpportunityContract End Date (Zenskar)Contract ID(Zenskar)Contract Renew Policy (Zenskar)Contract Start Date (Zenskar)
+ProductProductID (Zenskar)
+PriceBookEntryLinkID (Zenskar)
+🔖NoteLinkID (Zenskar) acts as the Reference ID on Zenskar.
+Needed only if creating per-unit pricing on SalesforceBilling Cadence Every (Zenskar)Billing Cadence Offset (Zenskar)Billing Cadence Period (Zenskar)Discount Percentage (Zenskar)Is Recurring(Zenskar)Pricing Unit (Zenskar)
+🔖NoteIf you choose to use Salesforce fields, update Flows accordingly.
+
+Go to the Setup Home page.
+Click on Object Manager and search for Account.
+
+
+
+Click on Account to arrive at the Account page.
+
+
+
+On the accounts page, click on Page Layouts in the left sidebar.
+Click on Account Layout, as shown below**.**
+
+
+
+On the Account Layout page, all available fields are shown in the Account Layout section, whereas the fields associated with account are shown in the Account Sample section.
+
+
+
+On the Account Layout page, move all the fields with (Zenskar) suffix to Account Information section.
+Once added, click on the Save button.
+
+
+Successful completion of this activity will make all Zenskar fields available when you create or edit an account on Salesforce.
+🔖NoteSteps 1-8 can be repeated to show custom fields in layout for Opportunity, Product, and PricebookEntry.
+Once Account, Opportunity and PriceBookEntry layouts are updated, your Salesforce account is properly integrated with Zenskar.Updated 17 days ago SalesforceUse default FlowTable of Contents
+
+Overview
+
+
+Prerequisites
+
+
+Installation
+
+
+Configuration
+
+
+
+Configure Zenskar API key and Organisation Id
+Provide permission to users for Zenskar External Principal
+Set up Salesforce object layout
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

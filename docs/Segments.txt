@@ -1,0 +1,250 @@
+Segments
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceSegmentsSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by SegmentsSegments module provides a comprehensive view of different customer segments created based on various filters. Segments module allows efficient management and customization of communication strategies for different customer groups.
+⚙️ Create a segment
+
+
+Navigate to Communications > Segments in the left side-panel.
+
+
+You will arrive at Segments page.
+
+
+Click on the CREATE NEW SEGMENT button.
+
+
+In the Add New Segment page, add the following details:
+
+Segment name: any user-defined string that describes the segment.
+Add filters to create a segment: major filters types available are as follows:
+
+
+FilterSub-filtersCustomerCustomer Name
+Customer Email
+Custom Data
+Connector Name\
+Default Payment Method
+Default Payment Method Status
+Customer CountryInvoiceStatus
+Due date exceeded by(days)
+Created afterPayment methodType
+Status
+Connector
+Is defaultConnectorName
+ConnectionMonitor
+
+
+Click on the CREATE SEGMENT button to save the segment.
+
+
+
+📚 Filters explained
+A filter is used to create a segment of customers. A filter can be as simple as shown below.
+Fig. 1: Create a simple segment based on a filter of type customer.
+You can add multiple filters of the same type, as shown below.
+Fig. 2: Create a complex segment based on filters of type customer.
+You can also combine filters of different types to create a complex segment, as shown below.
+
+
+⚙️ Edit a segment
+
+Navigate to Communications > Segments in the left side-panel.
+You will arrive at Segments page.
+Click on the segment you would like to edit. Alternatively, you can use the kebab menu located at the end of the row containing the segment.
+Make the necessary edits.
+Click on the SAVE button.
+
+
+⚙️ Use a segment
+
+Navigate to Communications > Configurations in the left side-panel.
+You will arrive at Configurations page.
+Click on the + ADD COMMUNICATION button.
+On the Add New Messaging page, add the following details:
+
+Communication name: any string that describes the message.
+Segment: click on the drop-down menu to select the segment of customers.
+Event type: choose between email invoice and email payment reminder.
+Trigger type: choose between automatic and manual.
+Alert or communication type: choose between email alert and webhook.
+
+for email alert, select the sender and the attachment.
+
+
+
+
+
+Updated 13 days ago Document templatesSendersTable of Contents
+⚙️ Create a segment
+📚 Filters explained
+⚙️ Edit a segment
+⚙️ Use a segment
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

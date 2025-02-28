@@ -1,0 +1,225 @@
+Metering
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceMeteringSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by MeteringOverview
+📖DefinitionsMetrics represent all the data that you capture to analyze trends across your business and technology domains. Raw metrics are unfiltered data. Derived metrics, on the other hand, are generated when a certain combination of selection criteria (or filters) is applied on the raw metrics.Metering is the act of measuring customer activity or consumption of resources to collect the metrics needed to generate an invoice.Aggregates are derived metrics. Average, count, distinct, maximum, minimum, and sum are some selection criteria (or filters) applied on raw metrics to derive aggregates.
+Your application can be instrumented with specific metering capabilities to extract the metrics needed to generate an invoice. These metrics could be the number of messages sent or received, number of active users, or it could be some aggregate of resource consumption (CPU, memory, storage) that makes sense to your customers.
+Map of concepts
+Generic nameName in ZenskarCommentsRaw metricsUsage EventsUsage events are the specific type of raw metrics we are interested in. For example, per-minute temperature readings from a sensor are also raw metrics. However, they are of no interest to our billing system.MeteringMeteringBillable metrics orBillable MetricsBillable metrics are the specific type of derived metrics we are interested in. For example, filtering out the highest temperature reading from raw metrics gathered from a sensor are also derived metrics. However, they too are of no interest to our billing system.AggregatesAggregates- A set of built-in SQL aggregate functions used for deriving billable metrics.  - Any other custom SQL query condition that you employ to filter your data.
+Zenskar can be configured to connect with your data sources to ingest raw metrics or aggregates. Zenskar can ingest data from various data sources seamlessly. Alternatively, you can send us your usage events using our application programming interfaces (APIs) to generate an invoice, as shown in Fig. 1.
+Various data sources that Zenskar can connect to and various ways customers can send raw metrics to Zenskar
+
+Data ingestion
+Read the documentation on the various ways Zenskar can ingest your data.
+
+Data processing
+Raw Metrics versus aggregates
+You have seen how to configure data sources and data-ingestion APIs. There are two types of data that these sources can send: raw metrics and aggregates. It is important to remember that aggregates are actionable data derived from raw metrics. If the data ingested by Zenskar is raw metrics, further filtering is necessary to derive aggregates, as shown in Fig. 2.
+📖The Structured Query LanguageZenskar stores all the data in the form of RDBMS tables. Therefore, the power of the Structured Query Language (SQL) must be employed to derive and\or retrieve aggregates from the databases. If the source data is raw metrics, SQL queries must be written to derive and retrieve specific aggregates for calculations. However, if the source data is aggregates, SQL queries must only retrieve specific aggregates for calculations.
+Fig. 8: Deriving aggregates from raw metrics by applying necessary filters
+Deriving Aggregates from Raw Metrics
+Zenskar provides you two ways to create SQL queries to derive and\or retrieve aggregates. Once you pick your source, a list of relevant tables are displayed. You can define SQL queries on these tables to derive or retrieve the aggregates needed to generate an invoice. There are two ways to create SQL queries:
+
+Visual query builder
+SQL builder
+Updated 14 days ago CustomersData ingestionTable of Contents
+
+Overview
+
+
+
+Map of concepts
+
+
+
+Data ingestion
+
+
+Data processing
+
+
+
+Raw Metrics versus aggregates
+Deriving Aggregates from Raw Metrics
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

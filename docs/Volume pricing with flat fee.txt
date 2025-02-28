@@ -1,0 +1,241 @@
+Volume pricing with flat fee
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceVolume pricing with flat feeSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Volume pricing with flat feeOverview
+Volume pricing with flat fee is a pricing strategy where a flat fee is charged, and additional usage is billed based on predefined volume tiers. Unlike standard volume pricing, where only the per-unit price decreases, this model introduces different flat fees at each volume level to account for increased operational or service costs.
+This model is commonly used in SaaS, cloud services, and subscription-based platforms where customers pay a base fee and receive a certain volume of usage, with additional pricing based on their total consumption.
+
+Example: API request
+A cloud service provider charges customers for API requests based on usage tiers, with a different flat fee applied at each tier.
+Number of API requestsFlat fee (USD per month)Price per request (USD)1 - 10,000500.0110,001 - 50,0001000.0850,001 - 100,0002500.06100,001+5000.04
+If a customer makes 75,000 API requests in a month:
+
+
+They fall into the 50,001 - 100,000 tier.
+
+
+The flat fee for this tier is $250.
+
+
+API request pricing is $0.06 per request.
+
+
+Flat fee (USD per month)Usage fee (USD)Total (USD)25075000 × 0.06700
+
+Use a product based on volume pricing with flat fee
+Step 1: create a product
+
+
+Navigate to Contracts > Products  in the left side panel.
+
+
+Click + CREATE NEW drop-down menu at the top right of the Products page,.
+
+
+Select the Product menu option.
+
+
+
+
+Fill the relevant details on the Create Product form, and click on the SAVE & PROCEED button.
+On the Edit Product page, click on the + ADD PRICE button.
+On the Add Price Details form, click on the Pricing Models drop-down menu, and select Volume With Flat Fee option.
+
+
+
+Create volume tiers by specifying the flat fee and the usage fee for each tier, as shown below.
+
+
+
+Fill in all the other product details and click on the CONFIRM button.
+
+
+Step 2: Use the product
+
+Add the product to a contract.
+Add the product to a plan.
+
+
+Volume pricing versus volume pricing with flat fee
+ModelHow it worksExampleStandard Volume PricingThe per-unit price decreases as volume increases, but no fixed fee is applied per tier.Paying $0.01 per API request for 1-10K requests, then $0.008 for 10K+ requests.Volume Pricing with Flat FeeA different flat fee applies at each tier, and per-unit pricing also varies based on usage.Paying a $250 flat fee for 50K-100K requests, plus $0.006 per request.
+Updated 4 days ago Volume pricingPrepaid commitment with postpaid overagesTable of Contents
+
+Overview
+
+
+Example: API request
+
+
+Use a product based on volume pricing with flat fee
+
+
+
+Step 1: create a product
+Step 2: Use the product
+
+
+
+Volume pricing versus volume pricing with flat fee
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

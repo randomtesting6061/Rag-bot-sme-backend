@@ -1,0 +1,376 @@
+PostgreSQL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferencePostgreSQLSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by PostgreSQLPostgreSQL is a powerful, open source object-relational database system.
+Zenskar's PostgreSQL connector offers the following features:
+
+Replicate data from tables, views and materilized views. Other data objects won't be replicated to the destination like indexes, permissions.
+Multiple methods of keeping syncing data, including Change Data Capture (CDC) and replication using the xmin system column.
+All sync modes are available, providing flexibility in how data is delivered to your destination.
+Reliable replication at any table size with checkpointing and chunking of database reads.
+
+🐕‍🦺 Setup guide
+Step 1: users and permissions
+Create a dedicated read-only PostgreSQL user
+Create a dedicated read-only PostgreSQL user for replicating data. Alternatively, you can use an existing user:
+SQLCREATE USER <user_name> PASSWORD 'your_password_here';
+Provide the user read-only access to relevant schemas and tables:
+SQLGRANT USAGE ON SCHEMA <schema_name> TO <user_name>;
+GRANT SELECT ON ALL TABLES IN SCHEMA <schema_name> TO <user_name>;
+ALTER DEFAULT PRIVILEGES IN SCHEMA <schema_name> GRANT SELECT ON TABLES TO <user_name>;
+📖NoteYou must re-run the above command for each schema from which you expect to replicate data.
+⚙️ Step 2: create a PostgreSQL data source in Zenskar
+Set up data source
+
+Log into your Zenskar account.
+In the left navigation bar, click Metering > Data Sources. In the top-right corner, click + ADD DATA SOURCE.
+In the Set Up Source section of the Add New Data Source page, enter a name for the Google Sheets data source connection.
+Select Postgres from the Source Type dropdown.
+
+Configure data source
+In the Source Config section of the Add New Data Source page, add the following details:
+
+Connect using SSL: select Yes or No depending on whether you would like Zenskar to establish an SSL connection with the data source
+Host: database hosting server
+Port: the port at which PostgreSQL listens for incoming requests
+schemas-0*: the schema you would like to replicate in Zenskar
+Database Name: the database name
+Password: the database password
+SSL Modes: select from disable, allow, prefer, require, verify-ca, and verify-full
+Refer the section on SSH tunneling for details on all SSH-related configuration parameters.
+Replication Method: select from Standard and Logical Replication (CDC)
+
+🚧NoteYou must allow inbound traffic from Zenskar IP addresses .
+⚙️ Advanced Configuration
+Set up with CDC
+Zenskar uses logical replication of the PostgreSQL write-ahead log (WAL) to incrementally capture deletes using a replication plugin.
+You should configure PostgreSQL data source with CDC when:
+
+You need a record of deletions.
+You have a very large database (500 GB or more).
+Your table has a primary key but doesn't have a reasonable cursor field for incremental syncing (updated_at).
+
+These are the additional steps required to configure your PostgreSQL source using CDC:
+
+Provide additional REPLICATION permissions to read-only user
+Enable logical replication on your PostgreSQL database
+Create a replication slot on your PostgreSQL database
+Create publication and replication identities for each PostgreSQL table
+Enable CDC replication in the Zenskar
+
+Step 1: prepopulate PostgreSQL source configuration
+For CDC, you must connect to primary/master databases. Pointing the connector configuration to replica database hosts for CDC will lead to failures.
+Step 2: Provide additional permissions to read-only user
+To configure CDC for the PostgreSQL source connector, grant REPLICATION permissions to the read-only user created earlier:
+ALTER USER <user_name> REPLICATION;
+Step 3: Enable logical replication on your PostgreSQL database
+To enable logical replication on bare metal, VMs (EC2/GCE/etc), or Docker, configure the following parameters in the postgresql.conf file# for your PostgreSQL database:
+ParameterDescriptionSet value towal_levelType of coding used within the PostgreSQL write-ahead loglogicalmax_wal_sendersThe maximum number of processes used for handling WAL changesmin: 1max_replication_slotsThe maximum number of replication slots that are allowed to stream WAL changes1 (if Zenskar is the only service reading subscribing to WAL changes. More than 1 if other services are also reading from the WAL)
+To enable logical replication on AWS PostgreSQL RDS or Aurora:
+
+Go to the Configuration tab for your DB cluster.
+Find your cluster parameter group. Either edit the parameters for this group or create a copy of this parameter group to edit. If you create a copy, change your cluster's parameter group before restarting.
+Within the parameter group page, search for rds.logical_replication. Select this row and click Edit parameters. Set this value to 1.
+Wait for a maintenance window to automatically restart the instance or restart it manually.
+
+To enable logical replication on Azure Database for PostgreSQL, change the replication mode of your Postgres DB on Azure to logical using the replication menu of your PostgreSQL instance in the Azure Portal. Alternatively, use the Azure CLI to run the following command:
+az postgres server configuration set --resource-group group --server-name server --name azure.replication_support --value logicalaz postgres server restart --resource-group group --name server
+Step 4: create a replication slot on your PostgreSQL database
+Zenskar requires a replication slot configured only for its use. Only one source should be configured that uses this replication slot.
+For this step, Zenskar requires use of the pgoutput plugin. To create a replication slot called zenskar_slot using pgoutput, run as the user with the newly granted REPLICATION role:
+SELECT pg_create_logical_replication_slot('zenskar_slot', 'pgoutput');
+The output of this command will include the name of the replication slot to fill into the Zenskar source setup page.
+Step 5: create publication and replication identities for each PostgreSQL table
+For each table you want to replicate with CDC, follow the steps below:
+
+Add the replication identity (the method of distinguishing between rows) for each table you want to replicate:
+
+ALTER TABLE tbl1 REPLICA IDENTITY DEFAULT;
+In rare cases, if your tables use data types that support TOAST or have very large field values, consider instead using replica identity type full: ALTER TABLE tbl1 REPLICA IDENTITY FULL;.
+
+Create the PostgreSQL publication. You should include all tables you want to replicate as part of the publication:
+
+CREATE PUBLICATION zenskar_publication FOR TABLE <tbl1, tbl2, tbl3>;`
+The publication name is customizable. Refer to the Postgres docs if you need to add or remove tables from your publication in the future.
+🚧NoteThe Zenskar UI currently allows selecting any tables for CDC. If a table is selected that is not part of the publication, it will not be replicated even though it is selected. If a table is part of the publication but does not have a replication identity, that replication identity will be created automatically on the first run if the Zenskar user has the necessary permissions.
+PostgreSQL replication methods
+The PostgreSQL source currently offers three methods of replicating updates: CDC, xmin, and standard (with a user defined cursor). Both CDC and xmin are the more reliable methods of updating your data.
+CDC
+Zenskar uses logical replication of the PostgreSQL write-ahead log (WAL) to incrementally capture deletes using a replication plugin. We recommend configuring your PostgreSQL source with CDC when:
+
+You need a record of deletions.
+You have a very large database (500 GB or more).
+Your table has a primary key but doesn't have a reasonable cursor field for incremental syncing (updated_at).
+
+If your goal is to maintain a snapshot of your table in the destination but the limitations prevent you from using CDC, consider using the xmin replication method.
+Xmin
+Xmin replication is the new cursor-less replication method for PostgreSQL. Cursorless syncs enable syncing new or updated rows without explicitly choosing a cursor field. The xmin system column which (available in all PostgreSQL databases) is used to track inserts and updates to your source data.
+This is a good solution if:
+
+There is not a well-defined cursor candidate to use for Standard incremental mode.
+You want to replace a previously configured full-refresh sync.
+You are replicating PostgreSQL tables less than 500GB.
+You are not replicating non-materialized views. Non-materialized views are not supported by xmin replication.
+
+Connecting with SSL or SSH tunneling
+SSL modes
+Here is a breakdown of available SSL connection modes:
+
+disable: disable encrypted communication between Zenskar and the database
+allow: enable encrypted communication only when required by the database
+prefer: allow unencrypted communication only when the source doesn't support encryption
+require: always require encryption
+
+❗️Connection failureIf SSL mode is set to require, the connection will fail if the database doesn't support encryption.
+
+verify-ca: always require encryption, and verify that the source has a valid SSL certificate
+verify-full: always require encryption and verify the identity of the data source
+
+SSH tunneling
+For SSH tunnel method, select:
+
+SSH Key Authentication to use an RSA private key as your secret for establishing the SSH tunnel
+Password Authentication to use a password as your secret for establishing the SSH tunnel
+
+Connect via SSH Tunnel
+You can connect to a PostgreSQL instance via an SSH tunnel.
+When using an SSH tunnel, you are configuring Zenskar to connect to an intermediate server (also called a bastion or a jump server) that has direct access to the database. Zenskar connects to the bastion and then asks the bastion to connect directly to the server.
+To connect to a PostgreSQL instance via an SSH tunnel:
+
+While setting up the PostgreSQL source connector, from the SSH tunnel dropdown, select:
+
+SSH Key Authentication to use a private as your secret for establishing the SSH tunnel
+Password Authentication to use a password as your secret for establishing the SSH Tunnel
+
+
+For SSH Tunnel Jump Server Host, enter the hostname or IP address for the intermediate (bastion) server that Zenskar will connect to.
+For SSH Connection Port, enter the port on the bastion server. The default port for SSH connections is 22.
+For SSH Login Username, enter the username to use when connecting to the bastion server. Note: This is the operating system username and not the PostgreSQL username.
+For authentication:
+
+If you selected SSH Key Authentication, set the SSH Private Key to the private key that you are using to create the SSH connection.
+If you selected Password Authentication, enter the password for the operating system user to connect to the bastion server. Note: This is the operating system password and not the PostgreSQL password.
+
+
+
+Generating a private--public key pair for SSH tunneling
+Zenskar supports all SSH-compatible key formats, such as RSA and Ed25519. To generate an RSA key, run the following command on your server:
+ssh-keygen -t rsa -m PEM -f zenskar_rsa
+Alternatively, to generate an Ed25519 key, run the following command:
+ssh-keygen -t ed25519 -m PEM -f zenskar_rsa
+The above command produces, what is known as an asymmetric key pair: a private key and a public key.
+The private key in generated in the PEM format whereas teh public key remains in the standard format which can be used in the authorized_keys file on your bastion host. Add the public key to your bastion host to the user you want to use with Zenskar. The private key is provided via copy-and-paste to the Zenskar connector configuration screen to allow it to log into the bastion server.
+Data type mapping
+According to PostgreSQL documentation, PostgreSQL data types are mapped to the following data types when synchronizing data:
+ PostgreSQL data type mapping PostgreSQL typeResulting typeNotesbigintnumberbigserial, serial8numberbitstringFixed-length bit string (e.g. "0100").bit varying, varbitstringVariable-length bit string (e.g. "0100").boolean, boolbooleanboxstringbyteastringVariable length binary string with hex output format prefixed with "\x" (e.g. "\x6b707a").character, charstringcharacter varying, varcharstringcidrstringcirclestringdatestringParsed as ISO8601 date time at midnight. CDC mode doesn't support era indicators.double precision, float, float8numberInfinity, -Infinity, and NaN are not supported and converted to null.hstorestringinetstringinteger, int, int4numberintervalstringjsonstringjsonbstringlinestringlsegstringmacaddrstringmacaddr8stringmoneynumbernumeric, decimalnumberInfinity, -Infinity, and NaN are not supported and converted to null.pathstringpg_lsnstringpointstringpolygonstringreal, float4numbersmallint, int2numbersmallserial, serial2numberserial, serial4numbertextstringtimestringParsed as a time string without a time-zone in the ISO-8601 calendar system.timetzstringParsed as a time string with time-zone in the ISO-8601 calendar system.timestampstringParsed as a date-time string without a time-zone in the ISO-8601 calendar system.timestamptzstringParsed as a date-time string with time-zone in the ISO-8601 calendar system.tsquerystringtsvectorstringuuidstringxmlstringenumstringtsrangestringarrayarrayE.g. "[\"10001\",\"10002\",\"10003\",\"10004\"]".composite typestringUpdated 13 days ago MySQLQuickBooksTable of Contents
+
+🐕‍🦺 Setup guide
+
+
+
+Step 1: users and permissions
+⚙️ Step 2: create a PostgreSQL data source in Zenskar
+⚙️ Advanced Configuration
+
+
+
+PostgreSQL replication methods
+
+
+
+CDC
+Xmin
+
+
+
+Connecting with SSL or SSH tunneling
+
+
+
+SSL modes
+SSH tunneling
+
+
+
+Data type mapping
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,245 @@
+Data migration and integration options
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceData migration and integration optionsSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Data migration and integration optionsData migration: for historical data
+DatasetMigrating historical data (sales-led and product-led motions)CustomersThe following options are available:• Migrate customer data using Zenskar's third-party-software connectors.
+• Push customer data to Zenskar using Zenskar's customer-data-ingestion APIs.
+• Upload Zenskar-compatible CSV containing customer data.
+• Create customers manually in the Zenskar application.Usage dataThe following options are available:• Let Zenskar pull usage data from your data sources.
+• Push usage data to Zenskar using Zenskar's usage-data-ingestion APIs.
+• Upload a Zenskar-compatible CSV containing usage data.ContractsThe following options are available:• Migrate contract data using Zenskar's CRM connector.
+• Push contract data to Zenskar using Zenskar's contract-data-ingestion APIs.
+• Create contracts or plans manually in the Zenskar application.
+• Upload a Zenskar-compatible CSV containing contract data.
+Data integration: for contemporary data
+DatasetSales-led motionProduct-led motionCustomers
+
+*Recommended**:
+• Sync customer data using Zenskar's third-party-software connectors.
+• Create customers manually  in the Zenskar application.\
+
+
+*Available**:
+•  Push customer data to Zenskar using Zenskar's customer-data-ingestion APIs .\
+
+
+*Available but not recommended**:
+• Upload Zenskar-compatible CSV containing customer data.
+
+
+Push_ customer data to Zenskar using Zenskar's customer-data-ingestion APIs.
+Usage data
+
+*Recommended**:
+• Let Zenskar pull usage data from your data sources.
+• Push usage data to Zenskar using Zenskar's usage-data-ingestion APIs.\
+
+
+*Available but not recommended**:
+• Upload a Zenskar-compatible CSV containing usage data.
+
+
+
+*Recommended**:
+• Let Zenskar pull usage data from your data sources .
+• Push usage data to Zenskar using Zenskar's usage-data-ingestion APIs .\
+
+
+*Available but not recommended**:
+• Upload a Zenskar-compatible CSV containing usage data.
+
+Contracts
+
+*Recommended**:
+• Sync contract data using Zenskar's CRM connector.
+• Create contracts or plans manually in the Zenskar application.\
+
+
+*Available**:
+• Push contract data to Zenskar using Zenskar's contract-data-ingestion APIs.\
+
+
+*Available but not recommended**:
+• Upload a Zenskar-compatible CSV containing contract data.
+
+• Push contract data to Zenskar using Zenskar's contract-data-ingestion APIs, and receive notifications via webhooks.
+👍 Pros and 👎 cons of various data-ingestion methods
+Data-ingestion methodPros and cons of letting Zenskar pull usage data from your data sources.Pros and cons of using data-ingestion APIs to push data to Zenskar.Pros and cons of manually uploading a Zenskar-compatible CSV.Pros and cons of manually entering events in the web form.
+Important third-party software integrations
+The following table lists all the available third-party
+ConnectorTypeCustomersContractsProductsInvoicesPaymentsCredit notesJournal entriesTaxAvalara AvaTaxTaxAutomates tax calculations in invoices.HubSpotCRM• Import only
+• Export only
+• Import and export• Import only
+• Export only
+• Import and export• Import only
+• Export only
+• Import and exportNetSuiteERPExport onlyExport onlyQuickBooksERPExport onlyExport onlyExport onlyExport onlyExport onlySalesforceCPQExport onlyExport onlyStripePayment Gateway• Import only
+• Export only
+• Import and exportWhen a customer clicks on the PAY ONLINE link in an  invoice, a Stripe checkout session is created for the customer to complete the payment.XeroERPExport onlyExport onlyExport onlyExport onlyExport onlyZoho BooksERPExport onlyExport onlyExport only
+Updated 17 days ago What does Zenskar implementation entail?Integrating your ERP software with ZenskarTable of Contents
+Data migration: for historical data
+Data integration: for contemporary data
+👍 Pros and 👎 cons of various data-ingestion methods
+Important third-party software integrations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

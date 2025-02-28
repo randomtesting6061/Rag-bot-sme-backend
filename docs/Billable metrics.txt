@@ -1,0 +1,484 @@
+Billable metrics
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceBillable metricsSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Billable metricsIntroduction
+
+
+🚧PrerequisitesYou must configure a data source or a usage events before trying to create billable metrics.
+Example raw-metric schema
+This example-based guide uses a raw metric named telephone usage and the following schema. We are selling call minutes, SMS, and internet data.
+JSON{
+  "data": {
+    "sms": "int",
+    "data": "float",
+    "call_minutes": "float"
+  },
+  "timestamp": "timestamp",
+  "customer_id": "string"
+}
+Example raw metric data
+The following example events will be used in the guide.
+data.smsdata.datadata.call_minutestimestampcustomer_id433.756.02024-04-16 11:33:38.0008578d067-b019-471c-b28c-5a3f35a3d05a122.023.02024-04-17 11:25:02.0008578d067-b019-471c-b28c-5a3f35a3d05a161.834.02024-04-18 11:25:43.0008578d067-b019-471c-b28c-5a3f35a3d05a
+Example customer
+The customer ID 8578d067-b019-471c-b28c-5a3f35a3d05a belongs to a fictional customer named John Doe.
+Fig. 2: John Doe, the example customer.
+
+Add new billable metric
+
+Navigate to Metering > Billable Metrics in the left side panel.
+On the Billable Metrics page, click on the + ADD NEW BILLABLE METRIC button.
+
+
+
+On the Add New Billable Metric page, there are two ways to add a new billable metric:
+
+Visual Builder: a wizard that helps you build a billable-metric query.
+SQL Builder: a SQL-based tool that helps you handcraft a billable-metric query.
+
+
+
+Fig. 5: Visual Builder and SQL Builder tools on the Add New Billable Metric page.
+
+Create the desired billable-metric query using either the visual builder or the SQL builder.
+Click on the CREATE BILLABLE METRIC button.
+
+
+Add a billable metric using the visual builder
+The wizard-based Visual Builder presents four main steps:
+
+Select tables and filters
+Map customer
+Set date field
+Set billable metric over
+
+Step 1: select tables and filters
+There are two ways you can let Zenskar access your customers' data:
+
+data source
+raw metrics
+
+Select data source
+
+Select the table that contains usage data.
+If the table you selected is related to a data source, the Data Source tag will appear below the Table Name drop-down.
+
+Fig. 5: Select data table: data source.
+Select raw metrics
+
+Select the table that contains usage data.
+If the table you selected is related to a raw metric, the Raw Metric tag will appear below the Table Name drop-down.
+
+Fig. 6: Select data table: raw metric.
+In this guide, we will use the telephone usage raw metric.
+📚NOTEYou must add and configure raw metrics (or data sources) like telephone usage. Zenskar will transform all raw metrics (or data sources) into database tables like telephone_usage.
+Fig. 7: The example raw-metric data table: telephone_usage.
+Select filters
+The raw-metric schema of telephone usage results in the following columns when Zenskar creates a SQL table:
+Columnscustomer_idtimestampdata.smsdata.call_minutesdata.data
+Filters can be created using any of these columns. The conditions available are dependent on the data type of the column selected. The data type--condition mapping is shown below:
+Data typeConditionsInt64 
+Float64 
+Decimalis 
+is not 
+less than 
+greater than 
+is empty 
+is not emptyBoolis 
+is not 
+is empty 
+is not emptyDate32 
+DateTime64is 
+is not 
+is before 
+is after 
+is empty 
+is not emptyString 
+UUIDis 
+is not 
+contains 
+does not contain 
+starts with 
+ends with 
+is empty 
+is not empty
+The data type of the column is determined by the schema you defined while creating a raw metric. A sample raw metric with all available data types is shown below:
+JSON{
+    "customer_id": "String",
+    "timestamp": "DateTime64",
+    "data": {
+        "a_string_field": "String",
+        "an_int64_field": "Int64",
+        "a_float64_field": "Float64",
+        "a_date32_field": "Date32",
+        "a_datetime64_field": "DateTime64",
+        "a_UUID_field": "UUID",
+        "a_bool_field": "Bool",
+        "a_decimal_field": "Decimal"
+    }
+}
+
+A simple filter
+For the example data mentioned above, a simple filter based on timestamp can be created:
+ColumnConditionValuetimestampis before2024-04-18
+Fig. 8: A simple filter.
+This filter will yield the following result:
+customer_idtimestampdata.call_minutesdata.smsdata.data8578d067-b019-471c-b28c-5a3f35a3d05a2024-04-17 11:25:02.00023.0122.08578d067-b019-471c-b28c-5a3f35a3d05a2024-04-16 11:33:38.00056.0433.7
+All the raw-metric data that you sent to Zenskar for the customer 8578d067-b019-471c-b28c-5a3f35a3d05a whose timestamp is before the date 2024-04-18 is returned as the result.
+Fig. 9: A simple filter that fetches all data based on the timestamp database table column: customer is 8578d067-b019-471c-b28c-5a3f35a3d05a and the timestamp is before the date 2024-04-18.
+A complex AND filter
+For the example data mentioned above, a complex filter based on timestamp AND data.call_minutes can be created:
+ColumnConditionValuetimestampis before2024-04-18data.call_minutesgreater than30
+This filter will yield the following result:
+customer_idtimestampdata.call_minutesdata.smsdata.data8578d067-b019-471c-b28c-5a3f35a3d05a2024-04-16 11:33:38.00056.0433.7
+All the raw-metric data that you sent to Zenskar for the cusotmer 8578d067-b019-471c-b28c-5a3f35a3d05a before the date 2024-04-18 ANDwhere data.call_minutes is greater than 30 is returned as the result.
+Fig. 10: A complex AND-based filter
+A complex OR filter
+Simply clicking on the AND condition will change it to OR and vice versa, as shown below.
+
+For the example data mentioned above, a complex filter based on timestamp OR data.call_minutes can be created:
+ColumnConditionValuetimestampis before2024-04-18data.call_minutesgreater than30
+This filter will yield the following result:
+customer_idtimestampdata.call_minutesdata.smsdata.data8578d067-b019-471c-b28c-5a3f35a3d05a2024-04-17 11:25:02.00023.0122.08578d067-b019-471c-b28c-5a3f35a3d05a2024-04-18 11:25:43.00034.0161.88578d067-b019-471c-b28c-5a3f35a3d05a2024-04-16 11:33:38.00056.0433.7
+All the raw-metric data that you sent to Zenskar for the cusotmer 8578d067-b019-471c-b28c-5a3f35a3d05a before the date 2024-04-18 ORwhere data.call_minutes is greater than 30 is returned as the result.
+
+Step 2: map customer
+You must select a column in your table that can uniquely identify your customers.
+
+
+This can also be your customer's email ID
+
+
+You must map this column to one of the following columns in Zenskar:
+
+email
+external_id: this is usually a unique identifier (UUID) that your system generates or is generated by your CRM.
+customer name
+
+
+
+🚧NoteThe Zenskar columns email, external_id, and customer name are created when you add your customer to Zenskar.
+
+
+
+
+Step 3: set date field
+
+Step 4: set billable metric over
+🚧NoteRefer the documentation on data processing to understand how billable metrics work.
+
+Select the aggregation method:
+
+AggregateDescriptionCOUNTreturns the number of items found in a columnSUMreturns the sum of all the values, or only the DISTINCT values, in the column. SUM can be used with numeric columns only. Null values are ignored.MAXreturns the maximum value in a column.MINreturns the minimum value in a column.AVGreturns the average of the values in a column ignoring null values.UNIQUE COUNT
+
+Select the column over which the aggregation must be performed.
+
+COUNT
+For the example data mentioned above, COUNT will return 3 for any column.
+
+SUM
+For the example data mentioned above, SUM will return the following values:
+Billable-metric typeBillable metric returneddata.call_minutes113.0data.sms71data.data7.5
+❗️NOTEThe SUM aggregate must be performed over columns of numeral data type: int, float, bigint, double, tinyint, smallint. Trying to SUM column of any other data type will result in the following error:
+
+
+
+MAX
+For the example data mentioned above, MAX will return the following values:
+Billable-metric typeBillable metric returneddata.call_minutes56.0data.sms43data.data3.7
+❗️NOTEThe MAX aggregate must be performed over columns of numeral data type: int, float, bigint, double, tinyint, smallint. Trying to run MAX aggregate over a column of any other data type will result in the following error:
+
+
+
+MIN
+For the example data mentioned above, MIN will return the following values:
+Billable-metric typeBillable metric returneddata.call_minutes23.0data.sms12data.data1.8
+❗️NOTEThe MIN aggregate must be performed over columns of numeral data type: int, float, bigint, double, tinyint, smallint. Trying to run MIN aggregate over a column of any other data type will result in the following error:
+AVG
+For the example data mentioned above, AVG will return the following values:
+Billable metric typeBillable metric returneddata.call_minutes37.666668data.sms23.666666666666668data.data2.5
+❗️NOTEThe AVG aggregate must be performed over columns of numeral data type: int, float, bigint, double, tinyint, smallint. Trying to run AVG aggregate over a column of any other data type will result in the following error:
+
+
+
+UNIQUE COUNT
+For the example data mentioned above, UNIQUE COUNT will return the following values:
+Billable-metric typeBillable-metric returnedNotescustomer_id1In the example data mentioned above, there exists only one customer with 8578d067-b019-471c-b28c-5a3f35a3d05a as ID.timestamp3In the example data mentioned above, there exist three unique timestamps.data.call_minutes3In the example data mentioned above, there exist three unique call-minute entries.data.sms3In the example data mentioned above, there exist three unique SMS entries.data.data3In the example data mentioned above, there exist three unique internet-data-usage entries.
+
+
+
+SQL builder
+You can build raw SQL queries using the SQL builder. You can choose the SQL builder:
+
+as an alternative to the visual builder to create billable-metric queries
+to edit queries built by visual builder
+
+🚧NOTEYou can switch to the SQL builder to edit a billable-metric query built using the visual builder. However, this switch is permanent, and you will not be able to switch back to the visual builder.
+
+Features of the SQL builder
+
+Syntax highlighting
+Code completion
+
+
+
+Table browser: select the table you are interested in to list all columns. The column names can be copied and used in the SQL builder . The Zenskar variables that can be used in the SQL queries are also available below the table browser.
+
+
+👷Engineering effort requiredCreating raw SQL queries for complex scenarios is the job of an engineer proficient in SQL.
+
+Tying it all together
+Create billable metrics for the example data
+Select database table and create filter
+For the database table telephone_usage, create the following filter:
+ColumnConditionValuedata.call_minutesgreater than0
+
+Map customer
+
+Set date field
+
+Set billable metric over the desired field
+We will use the SUM aggregate to determine the total call minutes during the billing period.
+
+Create billable metric
+Provide a name that describes your billable metric.
+
+Create a billable metric for SMS and internet data usage
+Create two more billable metrics for SMS and internet data usage. Repeat the steps you followed creating the billable metric for call minutes.
+
+
+Navigate to Metering > Billable Metrics to view all the billable metrics you created, as shown below.
+
+Create products that use these billable metrics
+Create a product for call minutes offered
+
+Create a product for SMSes offered
+
+Create a product for internet data offered
+
+Create a contract that uses these products
+Updated 14 days ago Manual: use Zenskar's web form to upload dataSQL-query templatesTable of Contents
+
+Introduction
+
+
+
+Example raw-metric schema
+Example raw metric data
+Example customer
+
+
+
+Add new billable metric
+
+
+Add a billable metric using the visual builder
+
+
+
+Step 1: select tables and filters
+Step 2: map customer
+Step 3: set date field
+Step 4: set billable metric over
+
+
+
+SQL builder
+
+
+
+Features of the SQL builder
+
+
+
+Tying it all together
+
+
+
+Create billable metrics for the example data
+Create a billable metric for SMS and internet data usage
+Create products that use these billable metrics
+Create a contract that uses these products
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,232 @@
+Metabase
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceMetabaseSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Metabase🐕‍🦺 Setup guide
+This guide will help you set up Metabase as a data source for Zenskar.
+🚧PrerequisitesTo connect Metabase with Zenskar, you need:
+username and password: credentials to authenticate with Metabase instance. This may be used to generate a new session_token, if necessary. An email from Metabase may be sent to the owner's account everytime this is being used to open a new session.
+session_token: credential token to authenticate requests sent via Metabase API. A session token expires after 14 days by default.
+instance_api_url: the URL to interact with Metabase instance API, that uses https.
+
+⚙️ Acquire a session token
+You can find or create session tokens from Metabase by running the following command:
+Shellcurl -X POST \
+-H "Content-Type: application/json" \
+-d '{"username": "[email protected]", "password": "sample_password"}' \
+http://localhost:3000/api/session
+If you’re working with a remote server, you’ll need to replace localhost:3000 with your server address. This request will return a JSON object with a key called id and the token as value in the form of a UUID or GUID:
+{"id":"38f4939c-ad7f-4cbe-ae54-78906daf1234"}
+You can use the received token as your session_token when configuring the connector.
+🚧Expiration of tokensCredential tokens expire after 14 days by default. You need to update your connector configuration with a new token when that happens.
+If you are hosting your own Metabase instance, you can configure this session duration on your metabase server by setting the environment variable MAX_SESSION_AGE (in minutes).
+❗️Invalid or expired session token errorsThe connector will alert you of an invalid or expired session token by returning a 401 Unauthorized response status code.
+Supported streams
+
+Card
+Collections
+Dashboard
+User
+Databases
+Native Query Snippet
+Updated 17 days ago LookerMongoDBTable of Contents
+🐕‍🦺 Setup guide
+
+
+⚙️ Acquire a session token
+
+
+Supported streams
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

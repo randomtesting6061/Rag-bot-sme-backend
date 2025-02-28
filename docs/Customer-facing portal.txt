@@ -1,0 +1,254 @@
+Customer-facing portal
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceCustomer-facing portalSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Customer-facing portalProvides your customers complete information about their accounts.The customer-facing portal is designed to provide your customers complete information about their accounts. They can access historical data regarding invoices, payments, and entitlements.
+🔜Coming soonWork is in progress to add the following features to the customer portal:
+reports
+contracts
+billing information
+default payment methods
+branding: logo and color options
+
+Accessing customer portal
+
+Use the left-side panel to navigate to the Customers page..
+
+
+
+Click on the user you are interested in to move to the customer-details page.
+Click on the kebab-menu located on the top-right corner, as shown in the image below.
+Click on the View Customer Portal option to view the customer portal.
+
+
+👍Customer portal can be embedded in your websiteTo help your customers to login and access the customer portal from your website, you can embed the customer portal in your website using an API provided by Zenskar.
+Customer portal features
+Invoices
+All the invoices associated with a customer are shown here with the following details: Invoice ID, Status, Invoice Total, Due Date, Amount Due, Billing Period, and Generated On.
+
+Payments
+Payments tab contains the history of transactions (for example, invoice payments, refunds).
+
+Entitlements
+Entitlements tab contains the list of entitlements associated with a customer.
+
+
+Edit Profile
+Your customer can access their Profile page by clicking on the profile drop-down menu located at the top-right corner. They can view or edit their profile.
+
+
+Use Zenskar API to fetch customer-portal URL for a given customer
+
+Get your API key to authenticate your API requests.
+Make an HTTP POSTAPI request with the following details:
+
+ParameterValueURLhttps://api.zenskar.com/customer/sessionorganisationNavigate to Settings > General.
+X-API-KEYGet your API key  to authenticate your API requests.customer_id1. Click on Customers in the left sidebar.
+2. Click on the row containing the customer you are interested in.
+3. On the page that displays the customer's details, copy the UUID from the URL, as shown below:
+return_urlThis is the URL where your customers will be returned to when they click on your logo on the customer portal. In the example below, the return_url is https://zenskar.com.idle_timeoutDuration of inactivity, in seconds, after which the customer portal session will expire. In the example below, idle_timeout is 86400seconds (24 hours).
+A sample API request made using the cURL tool is shown below:
+cURLcurl --location --request POST 'https://api.zenskar.com/customer/session' \
+-H 'organisation: c3b949f8-633f-4fec-9105-e2b3a4d06b98' \
+-H 'X-API-KEY: <your-api-key>' \
+-H 'Content-Type: application/json' \
+--data-raw '{"customer_id":"063f8b97-f795-4f0b-89b4-88b114c83f44","return_url":"https://zenskar.com","idle_timeout":86400}'
+A sample response is shown below:
+{
+    "redirect_url": "https://customer.zenskar.com/session/c3b949f8-633f-4fec-9105-e2b3a4d06b98_063f8b97-f795-4f0b-89b4-88b114c83f44_xW7oVSJj3tIkmHX5XjSybRsxTvOqoHWNhR0Cf-Pe0aI?return_url=https://zenskar.com"
+}Updated 17 days ago Webhook alertsBusiness entitiesTable of Contents
+
+Accessing customer portal
+
+
+Customer portal features
+
+
+
+Invoices
+Payments
+Entitlements
+
+
+
+Use Zenskar API to fetch customer-portal URL for a given customer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

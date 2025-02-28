@@ -1,0 +1,1271 @@
+Document templates
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceDocument templatesSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Document templatesDocument templates help you to create document attachments for emails tailored to meet the demands of your customers.
+📚 Types of document templates
+There are four types of document templates available in Zenskar:
+
+Invoice
+Payment receipt
+Refund receipt
+Contract document
+
+
+⚙️ Create a document template
+
+Navigate to Communications > Document Templates in the left side-panel.
+You will arrive at Document Templates page.
+On the Document Templates page, click on the + ADD NEW DOCUMENT TEMPLATE button to land on the Add New Document Template page.
+On the Add New Document Template page, enter the following details:
+
+Name: any user-defined string that describes the template.
+Document input type: select from HTML and text.
+Document output type: select from PDF and HTML.
+Additional options: you can add Zenskar-compatible JSON key-value pairs or override sample JSON data.
+Template data: you can leave this empty if you do not have HTML data. Zenskar will generate a sample HTML for you once you save the template. You can edit this HTML.
+You can click on the Show Sample Data button to view sample JSON data that is used to create the final HTML or PDF output.
+
+JSON{
+  "seller": {
+    "id": "888ae523-8878-4ed7-85cc",
+    "name": "Zenskar",
+    "address": "Cupertino<br/>California<br/>10029<br/>United States"
+  },
+  "customer": {
+    "name": "Acme Inc",
+    "email": "[email protected]",
+    "address": "Acme Inc<br/>Missouri<br/>65616<br/>United States"
+  },
+  "invoice_data": {
+    "id": "4dfbv54",
+    "invoice_date": "3rd March 2023",
+    "due_by": "9rd March 2023",
+    "total": "200",
+    "amount_due": 200,
+    "period": {
+      "from": "January 1, 2023",
+      "to": "January 31, 2023"
+    },
+    "payment_link": "https://zenskar.com/",
+    "invoice_numbers": "INV-202112"
+  },
+  "logo": "https://uploads-ssl.webflow.com/5fe2c7874ee3c6c56889bbd2/64b627b5cf2b8b7a17afe170_646f4a2343cb308828d8d20a_zenskar_logo.png",
+  "billing_duration": "1-31 Jan 2023",
+  "name": "Zenskar",
+  "address": "Road Runner<br/>Missouri<br/>65616<br/>United States",
+  "document_lines": [
+    {
+      "item_name": "Free Units",
+      "templating_data": {
+        "free-units": true,
+        "formatted_unit_price": "$0/minute",
+        "formatted_amount": "$0.00",
+        "unit_price": 0,
+        "free_units_granted": 100,
+        "amount": 0,
+        "formatted_free_units_granted": "100 minutes",
+        "formatted_total_free_units": "200 minutes",
+        "indent_level": 1
+      }
+    },
+    {
+      "item_name": "Volume Pricing",
+      "templating_data": {
+        "volume-pricing": true,
+        "formatted_quantity": "200 GBs",
+        "formatted_unit_price": "$1/GB",
+        "formatted_amount": "$200.00",
+        "quantity": 2000,
+        "unit_price": 1,
+        "amount": 2000,
+        "indent_level": 1
+      }
+    }
+  ],
+  "ach_details": {
+    "bank_name": "TEST BANK",
+    "routing_number": "110000000",
+    "account_number": "test_5e3f52c6b3a3",
+    "swift_code": "TSTEZ122"
+  },
+  "payment_info": {
+    "id": "pi_3N1Oz5ITOeIKeOoD03XavSna",
+    "receipt_number": "4ac7-1",
+    "created_at": "February 27, 2023",
+    "payment_method": "visa - 4242",
+    "amount": "$200"
+  },
+  "payment_receipt": {
+    "receipt_number": "PR-109238"
+  }
+}
+
+
+
+
+⚙️ Edit a document template
+
+Navigate to Communications > Document Templates in the left side-panel.
+You will arrive at Document Templates page.
+Click on the template you wish to edit.
+Make the necessary edits and click the SAVE CHANGES button.
+
+
+Preview a document template
+You can preview the output PDF or HTML by clicking the Preview button, as shown below.
+
+Edit the HTML of a document template
+You can edit the document template HTML by clicking the Edit HTML button, as shown below.
+
+📚TipYou can edit the document template HTML directly in the Edit HML form. However, for a better editing experience, it is recommended that you copy the HTML from the form and paste it into your favorite code editor.
+Corresponding to the sample JSON data shown above, the following is the HTML generated by Zenskar. Use this HTML as a starting point for further customizations.
+HTML<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="utf-8" />
+    <title>Invoice</title>
+    <style>
+      body {
+        font-family: 'Figtree', sans-serif;
+        margin: 0;
+        font-display: swap;
+      }
+
+      .invoice-box {
+        max-width: 1200px;
+        margin: auto;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        font-size: 14px;
+        line-height: 24px;
+        color: #555;
+        width: 100%;
+      }
+
+      .invoice-box td.top-header {
+        width: 50% !important;
+      }
+
+      .invoice-box .float-right {
+        float: right;
+        padding-right: 50px;
+      }
+
+      .invoice-box table {
+        width: 100%;
+        text-align: left;
+        line-height: inherit;
+        border-collapse: collapse;
+      }
+
+      .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+      }
+
+      .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+      }
+
+      .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+      }
+
+      .invoice-box table tr.information table td {
+        padding-bottom: 20px;
+      }
+
+      .invoice-box table tr.information table td:nth-child(2) {
+        padding-bottom: 20px;
+        padding-right: 100px !important;
+        text-align: left;
+      }
+
+      .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+      }
+
+      .invoice-box table td.header-row {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+      }
+
+      .invoice-box table tr.details td {
+        padding-bottom: 20px;
+      }
+
+      /* .invoice-box table tr.item td {
+        border-bottom: 1px solid #eee;
+      } */
+
+      .invoice-box table tr.item.indent-0 {
+        border-top: 1px solid #eee;
+      }
+
+      .invoice-box table tr.item.last td {
+        border-bottom: none;
+      }
+
+      .invoice-box table tr.item td.row {
+        display: flex;
+      }
+
+      .invoice-box table tr.item td .col {
+        display: inline-block;
+        flex: 1;
+      }
+
+      .right-indent {
+        text-align: right;
+        padding-left: 10px !important;
+      }
+
+      .indent-2 {
+        padding-left: 75px !important;
+      }
+
+      .indent-1 {
+        padding-left: 50px !important;
+      }
+
+      .indent-0 {
+        padding-left: 25px !important;
+      }
+
+      .big-block {
+        width: 40% !important;
+      }
+
+      .small-block {
+        width: 20% !important;
+      }
+
+      .invoice-box table tr.item td .indent-1 {
+        white-space: nowrap;
+        padding-left: 50px;
+        text-align: left;
+      }
+
+      .invoice-box table tr.item td .indent-2 {
+        padding-left: 40px;
+      }
+
+      .invoice-box table tr.total {
+        border-top: 1px solid #ddd;
+      }
+
+      .invoice-box table tr.total td:nth-child(2) {
+        /* border-top: 2px solid #eee; */
+        font-weight: bold;
+      }
+
+      .invoice-box table tr.total td:nth-child(1) {
+        text-align: right;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+
+        .invoice-box table tr.information table td {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+      }
+
+      @media print {
+        .invoice-box {
+          max-width: unset;
+          box-shadow: none;
+          border: 0px;
+        }
+
+        .footer {
+          bottom: 0 !important;
+        }
+
+        .main-section {
+          min-height: 1100px;
+        }
+      }
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact;
+        }
+      }
+      @media print {
+        .pagebreak {
+          page-break-before: always;
+        }
+      }
+    </style>
+    <style>
+      .invoice-header {
+        padding-top: 70px;
+        background-color: #f7f8f9;
+      }
+      .invoice-header-row {
+        height: 60px;
+        display: flex;
+      }
+      .invoice-header .title {
+        color: #1a1a1a;
+        font-weight: 800;
+        font-size: 40px;
+        text-transform: uppercase;
+        display: inline-block;
+        padding-left: 62px;
+        flex-grow: 1;
+        border-left: 8px solid #1a1a1a;
+      }
+      .invoice-header .logo {
+        height: 60px;
+        display: inline-block;
+        padding-right: 70px;
+      }
+      .primary-details {
+        padding: 35px 70px;
+        display: flex;
+      }
+      .details-col {
+        flex: 1;
+        margin: 0;
+      }
+      .details-row {
+        display: flex;
+      }
+      .details-col dt {
+        color: #707880;
+        display: inline-block;
+        flex-basis: 100px;
+        flex-shrink: 0;
+      }
+      .details-col dd {
+        color: #1a1a1a;
+        font-weight: bold;
+        display: inline-block;
+        margin: 0;
+        flex-grow: 1;
+      }
+      .main-section {
+        padding: 27px 70px 40px;
+      }
+      .secondary-details {
+        display: flex;
+        border-bottom: 2px solid #707880;
+        padding-bottom: 14px;
+      }
+      .address-header {
+        font-weight: bold;
+      }
+      .address {
+        padding-top: 7px;
+        padding-bottom: 7px;
+      }
+      b.customer-email {
+        color: #1a1a1a;
+      }
+      .bill-amount {
+        padding-top: 14px;
+        text-align: right;
+      }
+      .bill-amount .amount-due {
+        font-weight: 900;
+        font-size: 26px;
+        line-height: 32px;
+        color: #1a1a1a;
+      }
+
+      .bill-amount .due-date {
+        color: #707880;
+        font-weight: 600;
+      }
+
+      .bill-amount .payment-button {
+        display: inline-block;
+        border: 1px solid #5046e4;
+        border-radius: 2px;
+        width: 144px;
+        height: 32px;
+        line-height: 32px;
+        margin-top: 8px;
+        font-weight: bold;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #5046e4;
+        text-decoration: none;
+        text-align: center;
+      }
+      .bill-amount button {
+        width: 144px;
+        height: 32px;
+        margin-top: 12px;
+        /* UI Properties */
+        /* UI Properties */
+        background: #ffffff 0% 0% no-repeat padding-box;
+        border: 1px solid #5046e4;
+        border-radius: 2px;
+        opacity: 1;
+
+        /* text-align: left; */
+        font: normal normal bold 12px/24px Figtree;
+        letter-spacing: 0px;
+        color: #5046e4;
+        text-transform: uppercase;
+        opacity: 1;
+      }
+      .footer {
+        color: #e7e9eb;
+        background-color: #373741;
+        position: static;
+        width: 1200px;
+      }
+      .footer-content {
+        padding: 36px 70px 46px;
+        font-size: 12px;
+        line-height: 22px;
+        max-width: 434px;
+      }
+      .footer-header {
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .bank-text {
+        padding-top: 4px;
+        padding-bottom: 10px;
+      }
+      .invoice-box table.bank-details td {
+        padding: 0;
+      }
+      .bank-details .field-name {
+        width: 150px;
+      }
+      .invoice-note-box {
+        display: flex;
+        margin-top: 50px;
+        flex-direction: column;
+        overflow-wrap: break-word;
+        text-wrap: pretty;
+      }
+      .invoice-note-box-title {
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .invoice-note-box-note {
+        font-size: 14px;
+        white-space-collapse: preserve;
+      }
+    </style>
+  </head>
+
+  <body>
+    {{#summary.show_invoice_summary}}
+    <div class="invoice-box">
+      <div class="top-margin"></div>
+      <div class="invoice-header">
+        <div class="invoice-header-row">
+          <div class="title">Invoice Summary</div>
+          <img class="logo" src="{{logo}}" alt="Logo" />
+        </div>
+        <div class="primary-details">
+          <dl class="details-col">
+            <div class="details-row">
+              <dt>Invoice No.</dt>
+              <dd>{{invoice_data.id}}</dd>
+            </div>
+            <div class="details-row">
+              <dt>Billing period</dt>
+              <dd>{{billing_duration}}</dd>
+            </div>
+          </dl>
+          <dl class="details-col">
+            <div class="details-row">
+              <dt>Invoice Date</dt>
+              <dd>{{invoice_data.invoice_date}}</dd>
+            </div>
+            <div class="details-row">
+              <dt>Due Date</dt>
+              <dd>{{invoice_data.due_by}}</dd>
+            </div>
+          </dl>
+          <dl class="details-col">
+            {{#customer.tax_id}}
+            <div class="details-row">
+              <dt>TAX ID</dt>
+              <dd>{{.}}</dd>
+            </div>
+            {{/customer.tax_id}}
+          </dl>
+        </div>
+      </div>
+      <div class="main-section">
+        <div class="secondary-details">
+          <div class="details-col">
+            <div class="address-header">Bill To</div>
+            <div class="address">
+              {{#customer.name}}{{.}}<br />{{/customer.name}}{{#customer.address}}{{{.}}}<br />{{/customer.address}}
+            </div>
+            <div>
+              {{#customer.email}}Email
+              <b class="customer-email">{{.}}</b>{{/customer.email}}
+            </div>
+          </div>
+          <div class="details-col">
+            <div class="address-header">Bill From</div>
+            <div class="address">
+              {{#seller.name}}{{.}}<br />{{/seller.name}}{{#seller.address}}{{{.}}}<br />{{/seller.address}}
+            </div>
+          </div>
+          <div class="details-col bill-amount">
+            <div class="amount-due">{{summary.amount_due}}</div>
+            <div class="due-date">Due on {{invoice_data.due_by}}</div>
+            {{#invoice_data.payment_link}}
+            <a
+              target="_blank"
+              class="payment-button"
+              href="{{invoice_data.payment_link}}"
+              >Pay Online</a
+            >
+            {{/invoice_data.payment_link}}
+          </div>
+        </div>
+
+        <table cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="header-row big-block indent-0">Date</td>
+            <td class="header-row small-block">Amount Type</td>
+            <td class="header-row small-block">Reference Id</td>
+            <td class="header-row small-block">Remarks</td>
+            <td class="header-row small-block right-indent">Amount</td>
+          </tr>
+          {{#summary.summary}}
+          <tr>
+            <td class="col big-block indent-0">{{date}}</td>
+            <td class="col small-block">{{amount_type}}</td>
+            <td class="col small-block">{{reference_id}}</td>
+            <td class="col small-block">{{remarks}}</td>
+            <td class="col small-block right-indent">{{amount}}</td>
+          </tr>
+          {{/summary.summary}}
+
+          <tfoot>
+            <td colspan="4" class="header-row indent-0">
+              Amount Due for Invoice <b>{{invoice_data.id}}</b> as of
+              <b>{{summary.current_date}}</b>
+            </td>
+            <td class="header-row right-indent">{{summary.amount_due}}</td>
+          </tfoot>
+        </table>
+      </div>
+      {{#ach_details}}
+      <div class="footer">
+        <div class="footer-content">
+          <div class="footer-header">Pay with ACH or wire transfer</div>
+          <div class="bank-text">
+            Bank transfers, also known as ACH payments, can take up to five
+            business days. To pay via ACH, transfer funds using the following
+            bank information.
+          </div>
+          <table class="bank-details">
+            <tr>
+              <td class="field-name">Bank name</td>
+              <td class="field-name">{{bank_name}}</td>
+            </tr>
+            <tr>
+              <td>Routing number</td>
+              <td>{{routing_number}}</td>
+            </tr>
+            <tr>
+              <td>Account number</td>
+              <td>{{account_number}}</td>
+            </tr>
+            <tr>
+              <td>SWIFT code</td>
+              <td>{{swift_code}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      {{/ach_details}}
+    </div>
+    <div class="pagebreak"></div>
+    {{/summary.show_invoice_summary}}
+    <div class="invoice-box">
+      <div class="top-margin"></div>
+      <div class="invoice-header">
+        <div class="invoice-header-row">
+          <div class="title">Invoice</div>
+          <img class="logo" src="{{logo}}" alt="Logo" />
+        </div>
+        <div class="primary-details">
+          <dl class="details-col">
+            <div class="details-row">
+              <dt>Invoice No.</dt>
+              <dd>{{invoice_data.id}}</dd>
+            </div>
+            <div class="details-row">
+              <dt>Billing period</dt>
+              <dd>{{billing_duration}}</dd>
+            </div>
+          </dl>
+          <dl class="details-col">
+            <div class="details-row">
+              <dt>Invoice Date</dt>
+              <dd>{{invoice_data.invoice_date}}</dd>
+            </div>
+            <div class="details-row">
+              <dt>Due Date</dt>
+              <dd>{{invoice_data.due_by}}</dd>
+            </div>
+          </dl>
+          <dl class="details-col">
+            {{#customer.tax_id}}
+            <div class="details-row">
+              <dt>TAX ID</dt>
+              <dd>{{.}}</dd>
+            </div>
+            {{/customer.tax_id}}
+          </dl>
+        </div>
+      </div>
+      <div class="main-section">
+        <div class="secondary-details">
+          <div class="details-col">
+            <div class="address-header">Bill To</div>
+            <div class="address">
+              {{#customer.name}}{{.}}<br />{{/customer.name}}{{#customer.address}}{{{.}}}<br />{{/customer.address}}
+            </div>
+            <div>
+              {{#customer.email}} Email<b class="customer-email">{{.}}</b
+              >{{/customer.email}}
+            </div>
+          </div>
+          <div class="details-col">
+            <div class="address-header">Bill From</div>
+            <div class="address">
+              {{#seller.name}}{{.}}<br />{{/seller.name}}{{#seller.address}}{{{.}}}<br />{{/seller.address}}
+            </div>
+          </div>
+          <div class="details-col bill-amount">
+            <div class="amount-due">{{invoice_data.invoice_amount_due}}</div>
+            <div class="due-date">Due on {{invoice_data.due_by}}</div>
+            {{#invoice_data.payment_link}}
+            <a
+              target="_blank"
+              class="payment-button"
+              href="{{invoice_data.payment_link}}"
+              >Pay Online</a
+            >
+            {{/invoice_data.payment_link}}
+          </div>
+        </div>
+
+        <table cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="header-row big-block indent-0">Item</td>
+            <td class="header-row small-block">Service Period</td>
+            <td class="header-row small-block">Price</td>
+            <td class="header-row small-block">Quantity</td>
+            <td class="header-row small-block right-indent">Amount</td>
+          </tr>
+
+          {{#document_lines}}
+          <tr>
+            <td class="col big-block indent-{{templating_data.indent_level}}">
+              {{item_name}}
+            </td>
+            {{#templating_data.formatted_service_period}}
+            <td class="col small-block">
+              {{templating_data.formatted_service_period}}
+            </td>
+            {{/templating_data.formatted_service_period}}
+            {{^templating_data.formatted_service_period}}
+            <td class="col small-block"></td>
+            {{/templating_data.formatted_service_period}}
+            {{#templating_data.per-unit-pricing}}
+            <td class="col small-block">
+              {{templating_data.formatted_unit_price}}
+            </td>
+            <td class="col small-block">
+              {{templating_data.formatted_quantity}}
+            </td>
+            <td class="small-block right-indent">
+              {{templating_data.formatted_amount}}
+            </td>
+            {{/templating_data.per-unit-pricing}}
+            {{#templating_data.custom_tiered_pricing}}
+            <td class="col small-block">{{templating_data.price}}</td>
+            <td class="col small-block">
+              {{templating_data.formatted_quantity}}
+            </td>
+            <td class="small-block right-indent">
+              {{templating_data.formatted_amount}}
+            </td>
+            {{/templating_data.custom_tiered_pricing}}
+            {{#templating_data.package-pricing}}
+            <td class="col small-block">
+              {{templating_data.formatted_package_price}}
+            </td>
+            <td class="col small-block">
+              {{templating_data.formatted_quantity}}
+            </td>
+            <td class="small-block right-indent">
+              {{templating_data.formatted_amount}}
+            </td>
+            {{/templating_data.package-pricing}}
+            {{#templating_data.custom_line_item_data}}
+            <td class="col small-block"></td>
+            <td class="col small-block"></td>
+            <td class="small-block right-indent">
+              {{templating_data.formatted_amount}}
+            </td>
+            {{/templating_data.custom_line_item_data}}
+            {{#templating_data.subscription-with-proration}}
+            <td class="col small-block"></td>
+            <td class="col small-block"></td>
+            <td class="small-block right-indent">
+              {{templating_data.formatted_amount}}
+            </td>
+            {{/templating_data.subscription-with-proration}}
+            {{#templating_data.prorated-fixed-charge}}
+            <td class="col small-block"></td>
+            <td class="col small-block"></td>
+            <td class="small-block right-indent">
+              {{templating_data.formatted_amount}}
+            </td>
+            {{/templating_data.prorated-fixed-charge}}
+            {{#templating_data.minimum-amount-overages}}
+            <td class="col small-block">
+              {{templating_data.formatted_quantity}}
+            </td>
+            <td class="col small-block">
+              {{templating_data.formatted_minimum_amount}}
+            </td>
+            <td class="small-block right-indent">
+              {{templating_data.formatted_amount}}
+            </td>
+            {{/templating_data.minimum-amount-overages}}
+            {{#templating_data.discount}}
+            <td class="col small-block">
+              {{templating_data.formatted_quantity}}
+            </td>
+            <td class="col small-block">
+              {{templating_data.formatted_discount_to_show}}
+            </td>
+            <td class="small-block right-indent">
+              -{{templating_data.formatted_discount_given}}
+            </td>
+            {{/templating_data.discount}} {{#templating_data.tax}}
+            <td class="col small-block">
+              {{templating_data.formatted_quantity}}
+            </td>
+            <td class="col small-block">
+              {{templating_data.formatted_percent}}
+            </td>
+            <td class="small-block right-indent">
+              {{templating_data.formatted_tax_amount}}
+            </td>
+            {{/templating_data.tax}} {{#templating_data.surcharge_data}}
+            <td class="col small-block">
+              {{templating_data.formatted_quantity}}
+            </td>
+            <td class="col small-block">
+              {{templating_data.surcharge_percent}}%
+            </td>
+            <td class="small-block right-indent">
+              {{templating_data.surcharge_total}}
+            </td>
+            {{/templating_data.surcharge_data}}
+            {{#templating_data.volume-pricing}}
+            <td class="col small-block">
+              {{templating_data.formatted_unit_price}}
+            </td>
+            <td class="col small-block">
+              {{templating_data.formatted_quantity}}
+            </td>
+            <td class="small-block right-indent">
+              {{templating_data.formatted_amount}}
+            </td>
+            {{/templating_data.volume-pricing}}
+            {{#templating_data.step-pricing}}
+            <td class="col small-block">
+              {{templating_data.formatted_flat_fee}}
+            </td>
+            <td class="col small-block">
+              {{templating_data.formatted_quantity}}
+            </td>
+            <td class="small-block right-indent">
+              {{templating_data.formatted_amount}}
+            </td>
+            {{/templating_data.step-pricing}} {{#templating_data.free-units}}
+            <td class="col small-block">
+              {{templating_data.formatted_unit_price}}
+            </td>
+            <td class="col small-block">
+              {{templating_data.formatted_free_units_granted}}&sol;{{templating_data.formatted_total_free_units}}
+            </td>
+            <td class="small-block right-indent">
+              {{templating_data.formatted_amount}}
+            </td>
+            {{/templating_data.free-units}} {{#templating_data.tiered-pricing}}
+            <td class="col small-block">{{templating_data.no_tiers}} Tiers</td>
+            <td class="col small-block">
+              {{templating_data.formatted_quantity}}
+            </td>
+            {{#templating_data.tiers}}
+          </tr>
+
+          <tr class="item">
+            <td class="col big-block indent-{{templating_data.indent_level}}">
+              {{tier_name}}
+            </td>
+            <td class="col small-block">{{formatted_unit_price}}</td>
+            <td class="col small-block">{{formatted_quantity}}</td>
+            <td class="small-block right-indent">{{formatted_amount}}</td>
+          </tr>
+          {{/templating_data.tiers}} {{/templating_data.tiered-pricing}}
+          {{#templating_data.2d-tiered-pricing}}
+          {{#templating_data.column_tiers}}
+          <tr class="item">
+            <td class="col big-block indent-{{indent_level}}">
+              {{column_name}}
+            </td>
+            <td class="col small-block">{{no_tiers}} Tiers</td>
+            <td class="col small-block">{{formatted_column_quantity}}</td>
+          </tr>
+          {{#tiers}}
+          <tr class="item">
+            <td class="col big-block indent-{{indent_level}}">{{tier_name}}</td>
+            <td class="col small-block">{{formatted_unit_price}}</td>
+            <td class="col small-block">{{formatted_quantity}}</td>
+            <td class="small-block right-indent">{{formatted_amount}}</td>
+          </tr>
+          {{/tiers}} {{/templating_data.column_tiers}}
+          {{/templating_data.2d-tiered-pricing}}
+          {{#templating_data.matrix-pricing}} {{#templating_data.tiers}}
+          <tr class="item">
+            <td class="col big-block indent-{{templating_data.indent_level}}">
+              {{tier_name}}
+            </td>
+            <td class="col small-block">{{formatted_unit_price}}</td>
+            <td class="col small-block">{{formatted_quantity}}</td>
+            <td class="small-block right-indent">{{formatted_amount}}</td>
+          </tr>
+          {{/templating_data.tiers}} {{/templating_data.matrix-pricing}}
+          {{#templating_data.percent-pricing}}
+          <td class="col small-block">{{templating_data.formatted_percent}}</td>
+          <td class="col small-block">
+            {{templating_data.formatted_quantity}}
+          </td>
+          <td class="small-block right-indent">
+            {{templating_data.formatted_amount}}
+          </td>
+          {{/templating_data.percent-pricing}} {{#templating_data.subscription}}
+          <td class="col small-block"></td>
+          <td class="col small-block"></td>
+          <td class="small-block right-indent">
+            {{templating_data.formatted_amount}}
+          </td>
+          {{/templating_data.subscription}} {{#templating_data.max}}
+          <td class="col small-block"></td>
+          <td class="col small-block"></td>
+          <td class="small-block right-indent">
+            {{templating_data.formatted_amount}}
+          </td>
+          {{/templating_data.max}} {{/document_lines}}
+          {{#discount_data.discount_data}}
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total Before Discount:</td>
+            <td class="small-block right-indent">
+              {{discount_data.total_before_discount}}
+            </td>
+          </tr>
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Discount ({{discount_data.discount_percent}}%):</td>
+            <td class="small-block right-indent">
+              -{{discount_data.discount_total}}
+            </td>
+          </tr>
+          {{/discount_data.discount_data}} {{#surcharge_data.surcharge_data}}
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total Before Surcharge:</td>
+            <td class="small-block right-indent">
+              {{surcharge_data.total_before_surcharge}}
+            </td>
+          </tr>
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Surcharge ({{surcharge_data.surcharge_percent}}%):</td>
+            <td class="small-block right-indent">
+              {{surcharge_data.surcharge_total}}
+            </td>
+          </tr>
+          {{/surcharge_data.surcharge_data}} {{#tax_data.tax_total}}
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total Before Tax:</td>
+            <td class="small-block right-indent">
+              {{tax_data.total_before_tax}}
+            </td>
+          </tr>
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{tax_data.tax_item_name}} ({{tax_data.tax_percent}}%):</td>
+            <td class="small-block right-indent">{{tax_data.tax_total}}</td>
+          </tr>
+          {{/tax_data.tax_total}}
+          {{#avalara_tax_data.formatted_amount_after_tax}}
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{avalara_tax_data.tax_item_name}}</td>
+            <td class="small-block right-indent">
+              {{avalara_tax_data.formatted_tax_amount}}
+            </td>
+          </tr>
+          {{/avalara_tax_data.formatted_amount_after_tax}} {{#custom_data}}
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{item_name}}:</td>
+            <td class="small-block right-indent">{{formatted_amount}}</td>
+          </tr>
+          {{/custom_data}}
+
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total:</td>
+            <td class="small-block right-indent">{{invoice_data.total}}</td>
+          </tr>
+          {{#customer_balance.balance_is_non_zero}}
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Applied Balance:</td>
+            <td class="small-block right-indent">
+              {{customer_balance.balance}}
+            </td>
+          </tr>
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Amount Due:</td>
+            <td class="small-block right-indent">
+              {{customer_balance.amount_due}}
+            </td>
+          </tr>
+          {{/customer_balance.balance_is_non_zero}}
+          {{^customer_balance.balance_is_non_zero}}
+          {{#invoice_data.show_applied_balance}}
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Applied Balance:</td>
+            <td class="small-block right-indent">
+              {{invoice_data.applied_balance}}
+            </td>
+          </tr>
+          {{/invoice_data.show_applied_balance}}
+          <tr class="total">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Amount Due:</td>
+            <td class="small-block right-indent">
+              {{invoice_data.invoice_amount_due}}
+            </td>
+            {{/customer_balance.balance_is_non_zero}}
+          </tr>
+        </table>
+        {{#invoice_note}}
+        <div class="invoice-note-box">
+          <!-- need CSS reset to use <p> without margins -->
+          <span class="invoice-note-box-title">{{invoice_note.title}}</span>
+          <span class="invoice-note-box-note"
+            >{{#invoice_note.note}}{{{.}}}<br />{{/invoice_note.note}}</span
+          >
+        </div>
+        {{/invoice_note}}
+      </div>
+      {{#ach_details}}
+      <div class="footer">
+        <div class="footer-content">
+          <div class="footer-header">Pay with ACH or wire transfer .</div>
+          <div class="bank-text">
+            Bank transfers, also known as ACH payments, can take up to five
+            business days. To pay via ACH, transfer funds using the following
+            bank information.
+          </div>
+          <table class="bank-details">
+            <tr>
+              <td class="field-name">Bank name</td>
+              <td class="field-name">{{bank_name}}</td>
+            </tr>
+            <tr>
+              <td>Routing number</td>
+              <td>{{routing_number}}</td>
+            </tr>
+            <tr>
+              <td>Account number</td>
+              <td>{{account_number}}</td>
+            </tr>
+            <tr>
+              <td>SWIFT code</td>
+              <td>{{swift_code}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      {{/ach_details}} {{^ach_details}} {{#payment_instructions}}
+      <div class="footer">
+        <div class="footer-content">
+          <div class="footer-header">{{title}}</div>
+          <div class="bank-text">{{description}}</div>
+          <table class="bank-details">
+            {{#details_list}}
+            <tr>
+              <td>{{key}}</td>
+              <td>{{value}}</td>
+            </tr>
+            {{/details_list}}
+          </table>
+        </div>
+      </div>
+      {{/payment_instructions}} {{/ach_details}}
+    </div>
+  </body>
+</html>
+
+Updated 13 days ago Usage alertsSegmentsTable of Contents
+
+📚 Types of document templates
+
+
+⚙️ Create a document template
+
+
+⚙️ Edit a document template
+
+
+
+Preview a document template
+Edit the HTML of a document template
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

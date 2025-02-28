@@ -1,0 +1,179 @@
+Single sign-on authentication
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceSingle sign-on authenticationSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Single sign-on authenticationZenskar supports single sign-on via the Sign in with Google button.
+
+Sign in with Google helps you easily and securely sign in to Zenskar with your Google account. If you are already logged in to your Google account, you don't have to enter a username and password when you use use Sign in with Google button.
+🚧NoteTo use Sign in with Google, you need a Google account. You can use your private (gmail.com) Google Account or Google Workspace (custom domain) account.
+ 🤔 What happens when you use Sign in with Google? Sign in with Google uses a securely transmitted code that's based on your Google Account. It allows Zenskar to authenticate you and create an account based on the information it shares from your Google Account, like name, email, and profile picture.🚧NoteSign in with Google never shares your account password with Zenskar.
+ 🤔 What happens if I already have an account on Zenskar and try to use Sign in with Google button? 
+If you have an account with Zenskar that you created using Sign up with Google, you can log in.
+
+If you have a Zenskar account that you created using custom email, a new account will be created for you.
+
+ 🤔 What happens if I delete my Zenskar account? Your Zenskar account and Google account are independent of each other. Deleting your Zenskar account has no effect on your Google account.
+ 🤔 How does Sign in with Google work if I have more than one Google Account? If you have more than one Google Account, Sign in with Google prompts you to choose which account you want to use.If the Google Account you want to use isn’t one of the choices, select Add another account.
+ 🤔 What happens if I delete my Google Account? If you delete your Google Account, you will delete your sign-in credentials for Zenskar. You can login to Zenskar using a previous username and password if you had an account with Zenskar before you used Sign in with Google. Else, you may create a new account.
+ 🤔 How do I stop using Sign in with Google? If you no longer want to use your Google Account to sign in to Zenskar, you can remove this connection.
+Sign in into your Google Account.
+View the apps and services that use Sign in with Google.
+Select Zenskar.
+Select See details > Stop using Sign in with Google > Confirm.
+Updated 17 days ago Two-factor authenticationSAML authentication
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

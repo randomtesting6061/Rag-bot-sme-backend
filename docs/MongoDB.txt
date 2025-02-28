@@ -1,0 +1,254 @@
+MongoDB
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceMongoDBSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by MongoDB🐕‍🦺 Setup guide
+This guide will help you set up MongoDB as a data source for your Zenskar account.
+Prerequisites
+Create users
+Run mongo shell, switch to admin database and create a READ_ONLY_USER. READ_ONLY_USER will be used for Zenskar integration.
+mongouse admin;db.createUser({user: "READ_ONLY_USER", pwd: "READ_ONLY_PASSWORD", roles: [{role: "read", db: "TARGET_DATABASE"}]})
+🚧AccessPlease ensure that the user has appropriate access levels: read-only privileges. A user with higher or lower privileges may result in errors.
+Enable MongoDB authentication
+Open /etc/mongod.conf and add/replace specific keys:
+net:  
+	bindIp: 0.0.0.0
+
+security:  
+	authorization: enabled
+
+Setting bindIP to 0.0.0.0 will allow connections to database from any IP address.
+The last line will enable MongoDB security: only authenticated users will be able to access the database.
+
+Configure firewall
+Make sure that MongoDB is accessible from external servers. Specific commands will depend on the firewall you are using (UFW/iptables/AWS/etc). Please refer to appropriate documentation.
+Your READ_ONLY_USER should now be ready for use with Zenskar.
+TLS/SSL on a Connection
+It is recommended to use encrypted connection. Connection with TLS/SSL security protocol for MongoDb Atlas Cluster and Replica Set instances is enabled by default. To enable TSL/SSL connection with Standalone MongoDb instance, please refer to MongoDb Documentation.
+⚙️ Set up MongoDB as data source in Zenskar
+⚙️ Set up data source and type
+
+Log into your Zenskar account.
+In the left navigation bar, navigate to Metering > Data Sources. In the top-right corner, click + ADD DATA SOURCE.
+In the Set Up Source section of the Add New Data Source page, enter a name for the MongoDB data source connection.
+Select MongoDB from the Source Type dropdown.
+
+⚙️ Configure data source
+In the Source Config section of the Add New Data Source page, do the following:
+
+User: username to use when connecting
+Database Name: database name
+Password: used to authenticate the user
+Authentication Source: specifies the database that the supplied credentials should be validated against. Defaults to admin.
+MongoDb Instance Type
+
+Standalone MongoDb instance
+
+TLS: indicates whether to create encrypted connection
+Host: URL of the database
+Port: Port to use for connecting to the database
+
+
+Replica Set
+
+Replica Set: A replica set name
+Server addresses: the members of a replica set
+
+
+MongoDb Atlas Cluster
+
+Cluster URL: URL of a cluster to connect to
+
+
+
+
+
+For more information regarding configuration parameters, please see MongoDb Documentation.Updated 17 days ago MetabaseMySQLTable of Contents
+
+🐕‍🦺 Setup guide
+
+
+
+Prerequisites
+⚙️ Set up MongoDB as data source in Zenskar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

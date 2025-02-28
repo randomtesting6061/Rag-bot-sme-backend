@@ -1,0 +1,230 @@
+What does Zenskar implementation entail?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceWhat does Zenskar implementation entail?SearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by What does Zenskar implementation entail?🔖ImportantIntegrating Zenskar with your system takes only 3-6 weeks, depending on the complexity of your requirements.
+The optional pilot program
+The primary objective of the pilot program is to showcase the capabilities of Zenskar: a modern, flexible, no-code billing infrastructure for your business. However, the pilot program is optional if you have already chosen Zenskar as the billing infrastructure for your business.
+Implementation roadmap
+ObjectivesTime frameZenskar's responsibilitiesYour responsibilities (Zenskar will be your guide)
+
+🤝 Align on the requirements, and get 🆗 approvals from all relevant stakeholders.
+
+
+😊 Fulfill custom feature requests, if any.
+
+Weeks 1-2
+
+Align with you on the requirements for going live, such as:
+• contracts,
+• invoice formats,
+• usage data structure,
+• revenue recognition/AR  nuances.
+
+
+Build and ship custom feature requests, if any.
+
+
+
+Get stakeholders' approvals on the requirements for going live, such as:
+• contracts,
+• invoice formats,
+• usage data structure,
+• revenue recognition/AR  nuances.
+
+
+Get approvals on custom feature requests.
+
+⚙️ Configure your Zenskar sandbox account with contracts, customers, usage data/aggregates, and journal entries.Weeks 1-2Configure your sandbox based on mutually agreed-upon requirements for contracts, customers, usage data/aggregates and journal entries.
+
+Share contracts and customers data.
+
+
+Usage data:
+• Let Zenskar pull usage data from your data sources, such as data warehouse and spreadsheets. 🚧 Note: you do not need to allocate engineering bandwidth.
+• Alternatively, push usage data using Zenskar's data-ingestion API. 🚧 Note: you must allocate engineering bandwidth.
+
+ℹ️ Optional:
+Connect test/production accounts of your CRM/ERP/Tax/Payment software with Zenskar’s sandbox account.Week 3Assist you in connecting test/production accounts of your CRM/ERP/Tax/Payment tools with Zenskar’s sandbox account.Connect test/production accounts of your CRM/ERP/Tax/Payment software with Zenskar’s sandbox account.🧪 Testing:
+Compare Zenskar with the existing process for a sample set of contracts, invoices and journal entries for the last billing cycle in the sandbox account.Week 4Assist you in comparing the invoices and journals generated by Zenskar with the invoices and journal entries in your existing setup.Generate invoices and journal entries on Zenskar and compare them with the invoices and journal entries generated by your existing setup.⚙️ Configure your Zenskar production account for automation.Week 5Assist you in configuring live contracts, customer details, and setting up ongoing usage data, and aggregates in your Zenskar production account.Configure live contracts, customer details, and set up ongoing usage data and aggregates in your Zenskar production account.ℹ️ Optional (if you want to migrate historical data into Zenskar):
+Import historical contracts, customer details,invoices, and journal entries into your Zenskar production account.Week 6Assist you in importing and configuring historical contracts, customer details, invoices and journal entries into your Zenskar production account.Import/configure historical contracts, customer details, invoices and journal entries into your Zenskar production account.🚀 Sign-off and go live.Week 6Ensure everything is ready to go live.Go live on your Zenskar production account.
+Data migration and integration options
+The documentation on data migration and integration options describes various options for migrating historical data and for integrating contemporary data for both sales-led and product-led motions.Updated 17 days ago What does Zenskar pilot program entail?Data migration and integration optionsTable of Contents
+The optional pilot program
+Implementation roadmap
+Data migration and integration options
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

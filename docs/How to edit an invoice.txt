@@ -1,0 +1,243 @@
+How to edit an invoice
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceHow to edit an invoiceSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by How to edit an invoice🚧Prerequisite
+Only a draft invoice can be edited.
+Only credit notes can be issued against approved, paid, and partially paid invoices.
+
+Edit a draft invoice
+
+In the side panel, navigate to Invoices.
+Click on the draft invoice you would like to scrutinize.
+
+🔖NoteA draft invoice can be identified by the DRAFT suffix in the name or by its status tag in the Status column, as shown below.
+
+
+In the Invoice Breakdown section, click on the Edit link available for each product in a contract.
+
+
+
+Edit the invoice. You may choose to edit one or more of the products. Further, there is no limit to the number of times you can edit a draft invoice.
+
+
+
+Click on the SAVE link.
+Click on the REGENERATE INVOICE button to generate a preview of the latest invoice.
+
+
+Issue credit notes against approved, paid, and partially paid invoices
+
+In the side panel, navigate to Invoices.
+Click on the approved invoice you would like to scrutinize.
+
+🔖NoteAn approved invoice can be identified by its status tag in the Status column, as shown below.
+
+
+Click on the ISSUE CREDIT NOTE button on the Invoices page.
+A panel will emerge from the right side:
+
+
+Enter the credit note amount: any amount less than or equal to the invoice amount can be entered.
+
+🔖NoteIf you wish to issue a full refund, there are two conditions to be noted:
+No credit notes were issues against the approved invoice earlier. In this case, enter an amount equal to the original invoice amount.
+One or more credit notes not equaling in amount to the invoice amount were issued against the approved invoice earlier. In this case, enter an amount equal to the current invoice amount, which will be lesser than the original amount.
+
+
+Click on the Submit button.
+
+
+
+The approved invoice will be marked as void. The credit notes will appear as invoice line items in the new invoice.
+
+Updated 17 days ago SAML authenticationHow to edit historical dataTable of Contents
+Edit a draft invoice
+Issue credit notes against approved, paid, and partially paid invoices
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

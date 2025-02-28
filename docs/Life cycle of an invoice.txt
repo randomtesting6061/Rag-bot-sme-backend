@@ -1,0 +1,233 @@
+Life cycle of an invoice
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceLife cycle of an invoiceSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Life cycle of an invoiceThe life cycle of an invoice refers to the stages that an invoice goes through from its creation to final payment. It includes several steps, from the initial agreement between buyer and seller to the closure of the transaction once payment is made. This guide helps you understand the typical life cycle of an invoice in Zenskar.
+Life cycle of an invoice
+The following is a state diagram of an invoice in Zenskar.
+📚What is a state diagram?A state diagram, also known as a state machine diagram or state chart, is a visual representation used to model the various states an object or system can be in and how it transitions between those states.In this document, the object we are dealing with is an invoice.
+%%{
+  init: {
+    'theme': 'dark',
+    'themeVariables': {
+      'darkMode': 'true'
+    }
+  }
+}%%
+
+stateDiagram-v2
+  classDef voidEvent fill:#f00,color:white,font-weight:bold,stroke-width:2px,stroke:yellow
+  classDef deleteEvent fill:#f00,color:white,stroke-width:2px,stroke:red
+  classDef paidEvent fill:green,color:white,stroke-width:2px,stroke:green
+  classDef partiallyPaidEvent fill:#90EE90,color:black,stroke-width:2px,stroke:#90EE90
+  classDef approvedEvent fill:yellow,color:black,stroke-width:2px,stroke:yellow
+  classDef draftBlock fill:black,color:white,stroke-width:2px,stroke:black
+
+  [*] --> Draft:::draftBlock
+  Draft --> Approved: Draft approved
+  Draft --> Deleted:::deleteEvent: Draft deleted
+  note right of Deleted : Only a **draft** invoice can be deleted. Once an invoice moves to the **approved** state, it becomes a **formal record of the transaction**. As a result, it cannot be deleted.
+
+  Approved --> Paid:::paidEvent: Customer makes full payment
+  Approved:::approvedEvent --> PartiallyPaid:::partiallyPaidEvent: Customer makes partial payment
+  PartiallyPaid --> Paid:::paidEvent: Customer makes full payment
+  Paid --> [*]:Accounting
+  Approved --> Void:::voidEvent: Credit notes issued
+  Paid --> Void:::voidEvent: Credit notes issued
+  PartiallyPaid --> Void:::voidEvent: Credit notes issued
+  Void --> [*]:Accounting
+  note left of Void : If circumstances require a full refund to the customer, credit notes equal to the refund amount must be issued. As a result, an **approved**, **partially paid**, or **paid** invoice will move to the **void** state. Partial refunds also require credit notes, but the state of the invoice will remain unchanged.
+
+Draft📚 A newly generated invoice is called a draft invoice: a preliminary version that is open to modifications.
+Approved📚 Once you have reviewed the draft invoice and confirmed that the details are accurate, the draft invoice can be approved.  * Once you have verified all the details of a draft invoice, it can be approved by clicking on the Approve invoice button.🚧NoteOnce a draft invoice is approved, it becomes a formal record of a transaction between you and your customer. Relevant accounting entries are created. Therefore, unlike a draft invoice, an approved invoice cannot be edited. Once approved, any adjustments to the invoice can be made only by issuing credit notes. Therefore, it is important to scrutinize the draft invoice before approving it.
+Partially paid📚 When customers make a partial payment on an approved invoice, it becomes a partially paid invoice.
+Paid📚 When customers make a full payment on an approved invoice, it becomes a paid invoice.An approved invoice can become a paid invoice in the following ways:
+Customer can make multiple partial payments amounting to the invoice due amount.
+Customer can make one payment amounting to the invoice due amount.
+
+Void📚 If circumstances require a full refund to the customer, credit notes equal to the refund amount must be issued. As a result, an approved, partially paid, or paid invoice will become void.
+If an invoice has only been approved and no payments were made by the customer, relevant accounting adjustments are made.
+If an invoice is already paid, then a refund is issued to the customer's source payment method.
+Updated 13 days ago What’s NextLearn about refunds via credit notes.Credit NotesTable of Contents
+Life cycle of an invoice
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,217 @@
+Tiered pricing with flat fee
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceTiered pricing with flat feeSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Tiered pricing with flat feeOverview
+Tiered pricing with flat fee is a pricing strategy where customers are charged a flat fee, and additional usage is billed based on the specific tier they fall into. Unlike volume-based pricing, which applies the same unit price once a certain threshold is reached, tiered pricing assigns distinct costs to each tier based on usage levels.
+This approach is commonly employed in SaaS, cloud services, and subscription-based platforms, where pricing is structured in tiers to incentivize higher usage while ensuring a fair and scalable cost distribution across customers.
+
+Example: Cloud storage
+A cloud storage provider charges customers for storage based on usage tiers, with a different flat fee applied at each tier.
+Storage tiers (GB)Flat fee (USD per month)Price per request (USD)1–100500.01101–5001000.08501–10002500.061000+5000.04
+If a customer stores 750 GB data in a month, the total bill they have to pay is USD 448:
+Storage tiers (GB)Flat fee (USD)Usage fee (USD)Flat fee + Usage fee (USD)1–10050100 × 0.0151101–500100400 × 0.08132501–750250250 × 0.06265Total448
+
+Create a product based on volume pricing with flat fee
+Step 1
+
+
+Navigate to Contracts > Products  in the left side panel.
+
+
+Click + CREATE NEW drop-down menu at the top right of the Products page,.
+
+
+Select the Product menu option.
+
+
+
+
+Fill the relevant details on the Create Product form, and click on the SAVE & PROCEED button.
+On the Edit Product page, click on the + ADD PRICE button.
+On the Add Price Details form, click on the Pricing Models drop-down menu, and select Tiered With Flat Fee option.
+
+
+
+Create tiers by specifying the flat fee and the usage fee for each tier, as shown below.
+
+
+
+Fill in all the other product details and click on the CONFIRM button.
+
+
+Step 2: Assign the product to a contract or plan
+
+Add the product to a contract.
+Add the product to a plan.
+
+
+Volume pricing with flat fee versus tiered pricing with flat fee
+ModelHow It WorksExampleVolume Pricing with Flat FeeA single flat fee is applied based on the highest usage tier, and all units are billed at that tier’s per-unit rate.If 750 GB is stored, only the 501-1000 GB tier’s pricing applies ($100 + $0.01 per GB).Tiered Pricing with Flat FeeEach tier has its own flat fee, and pricing is calculated separately for usage within each tier.If 750 GB is stored, fees are charged at all three tiers separately, leading to a total of $170.Updated 5 days ago Tiered pricingTwo-dimensional tiered pricingTable of Contents
+
+Overview
+
+
+Example: Cloud storage
+
+
+Create a product based on volume pricing with flat fee
+
+
+
+Step 1
+Step 2: Assign the product to a contract or plan
+
+
+
+Volume pricing with flat fee versus tiered pricing with flat fee
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

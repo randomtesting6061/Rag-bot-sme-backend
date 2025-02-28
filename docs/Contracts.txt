@@ -1,0 +1,256 @@
+Contracts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceContractsSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by ContractsOverview
+You offer services and products to your customers based on certain mutually agree-upon rules. The usage is also billed based on mutually agreed-upon rules. This guide helps you understand how Zenskar automates the cumbersome billing process using the concepts of contract and contract plans.
+Contract
+What is a contract
+🔖ContractA contract, in general, is a formal and legally binding agreement between you and your customer. This is an all-encompassing document that defines how you and your customer will conduct business. However, in Zenskar, the concept of a contract refers only to a subset of the general contract and contains data related to usage, pricing models, and other billing determinants.
+Components of a contract
+A contract has two components:
+
+Features
+Products
+
+Features
+
+FeatureDescriptionTaxChoose this feature if you would like to handle the collection of taxes.
+AvaTax⚠️ Choose this feature only if you have a properly configured Avalara AvaTax account. Avalara AvaTax uses automation to make tax determination faster, easier, and more accurate.Avalara tax codes can be found here . The Avalara tax codes determine the taxability of the goods and services you sell.
+DiscountA contract-level discount applicable on the overall invoice value.
+Payment termsChoose this feature to assign due date. A due date can be assigned based on invoice creation or invoice approval date:
+Minimum commitmentA minimum amount that you can charge even if the products and services are not availed during the billing period. Custom currency!
+Products
+🔖ProductIn Zenskar, a product is any service or product you sell to your customer as part of a contract.
+In a metered product, you measure customer activity or consumption of resources.
+In a non-metered product, you do not measure customer activity or consumption of resources. You charge the customer based on the number of units purchased.
+
+Refer the products documentation to know more.
+Plan
+What is a plan
+🔖PlanA plan is a reusable contract pattern that contains product and feature definitions.
+A plan can be used as a guide to make tangible Zenskar contracts.
+A contract that is based on a plan will inherit all the products and features of the plan it is based on. You can override the plan values to create customized contracts.
+
+Refer the plan documentation to know more.
+How to create a contract
+Navigate to Contracts > Contracts and click on the + ADD NEW CONTRACT button. The following form will be displayed.
+
+You can create a contract in two ways:
+
+Build a contract from scratch 
+Select a reusable contract template as a base and apply optional customization 
+
+Other details
+
+Contract name: a unique name for the contract.
+Customer: assign the contract to a customer. For this to work, you must already have added your customers' details in Zenskar.
+Start/End date: the dates the contract starts and ends.
+Description: a brief description of the contract.
+Currency
+Billing cycle start
+Renewal policy: refer contract renewal documentation.
+
+
+The page above lists the products and their prices, which can be changed and updated in the contract. After updating the contract, a draft invoice is created, which needs to be approved and sent to the customer.Updated 17 days ago SQL-query templatesProduct, sub-product, add-on, and product catalogTable of Contents
+
+Overview
+
+
+Contract
+
+
+
+What is a contract
+Components of a contract
+
+
+
+Plan
+
+
+
+What is a plan
+
+
+
+How to create a contract
+
+
+
+Other details
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

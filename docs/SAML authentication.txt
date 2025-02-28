@@ -1,0 +1,261 @@
+SAML authentication
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceSAML authenticationSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by SAML authenticationSingle sign-on based on Security Assertion Markup LanguageZenskar supports single sign-on (SSO) based on security assertion markup language (SAML).
+📚DefinitionsIdentity provider (IdP): performs authentication and passes the user's identity and authorization level to the service provider (SP). Google is an IdP.Service provider (SP): trusts the IdP and authorizes the given user to access the requested resource. Zenskar is an SP.
+Obtain signing certificate from Zenskar
+Before enabling SAML-based SSO in your Cloud Identity or Google Workspace, you must contact [email protected] to obtain a signing certificate, which is a base64-encoded RS256 signing certificate in PEM format:
+-----BEGIN CERTIFICATE-----
+MIICmzCCAYMCBgF7v8/V1TANBgkq...
+-----END CERTIFICATE-----
+After authenticating a user, Zenskar passes a SAML assertion to Cloud Identity or Google Workspace. To enable Cloud Identity and Google Workspace to verify the integrity and authenticity of that assertion, Zenskar  signs the assertion with a special token-signing key and provides a certificate that enables Cloud Identity or Google Workspace to check the signature.
+Configuring Cloud Identity or Google Workspace
+You must configure single sign-on in Cloud Identity or Google Workspace.
+
+
+Open the Admin Console and log in using a super-admin user.
+
+
+In the menu, click Show more and go to Security > Authentication > SSO with third-party IdP.
+
+
+Click Add SSO profile.
+
+
+Set Setup SSO with third party identity provider to enabled.
+
+
+Enter the following settings:
+
+
+Sign-in page URL:
+https://ZENSKAR_AUTH_SERVER/protocol/saml
+
+
+Sign-out page URL:
+https://ZENSKAR_AUTH_SERVER/protocol/openid-connect/logout
+
+
+Use a domain specific issuer: clear
+
+
+Change password URL:
+https://ZENSKAR_AUTH_SERVER/account
+
+
+In all URLs, replace the following with values provided by Zenskar:
+
+ZENSKAR_AUTH_SERVER: the fully qualified domain name of Zenskar's authentication server
+
+
+
+Under Verification certificate, click Upload certificate, and then pick the token signing certificate that you received from Zenskar.
+
+
+Click Save.
+
+
+Sign out of the Admin Console.
+
+
+Testing single sign-on
+You've completed the single sign-on configuration. You can now check whether SSO works as intended.
+
+
+Choose a Zenskar user that satisfies the following criteria:
+
+
+The user has an email address.
+
+
+The email address corresponds to the primary email address of an existing user in your Cloud Identity or Google Workspace account.
+
+
+The Cloud Identity user does not have super-admin privileges.
+User accounts that have super-admin privileges must always sign in by using Google credentials, so they aren't suitable for testing single sign-on.
+
+
+
+
+Open a new browser window and go to the Google Cloud console.
+
+
+On the Google sign-in page, enter the email address of the user account, and then click Next.
+
+You are redirected to Zenskar.
+
+
+Enter your Zenskar credentials, and then click Log in.
+After successful authentication, Zenskar redirects you back to the Google Cloud console. Because this is the first login for this user, you're asked to accept the Google terms of service and privacy policy.
+
+
+If you agree to the terms, click Accept.
+
+
+You are redirected to the Google Cloud console, which asks you to confirm preferences and accept the Google Cloud terms of service. If you agree to the terms, click Yes, and then click Agree and Continue.
+
+
+Click the avatar icon, and then click Sign out.
+You are redirected to Zenskar, logged out, and redirected to www.google.com.
+
+
+If you have trouble signing in, keep in mind that user accounts with super-admin privileges can bypass SSO, so you can still use the Admin console to verify or change settings.Updated 17 days ago Single sign-on authenticationHow to edit an invoiceTable of Contents
+Obtain signing certificate from Zenskar
+Configuring Cloud Identity or Google Workspace
+Testing single sign-on
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

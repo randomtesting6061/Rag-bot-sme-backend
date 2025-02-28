@@ -1,0 +1,313 @@
+Set up Snowflake for integration with Zenskar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceSet up Snowflake for integration with ZenskarSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Set up Snowflake for integration with ZenskarPreparing Snowflake for integration.🐕‍🦺 Setup guide
+In this guide, we will explore how to set up Snowflake for integration with Zenskar. The outcome of this guide will be a SQL script that does the following for integration with Zenskar:
+
+Create a Snowflake role
+Create a Snowflake user
+Create a Snowflake warehouse
+Create a Snowflake database
+Grant the role and user appropriate privileges and access
+
+⚙️ Define identifiers
+Define some identifiers to refer to Snowflake objects in the SQL script.
+
+In Snowflake SQL statements, in addition to referring to objects by name (see Identifier Requirements), you can also use a string literal, session variable, bind variable, or Snowflake Scripting variable to refer to an object. For example, you can use a session variable that is set to the name of a table in the FROM clause of a SELECT statement.
+
+To use an object name specified in a literal or variable, use IDENTIFIER().
+SQLIDENTIFIER( { string_literal | session_variable | bind_variable | snowflake_scripting_variable } )
+<string_literal>: string identifying the name of the object:
+
+The string must either be enclosed by single quotes ('name') or start with a dollar sign ($name).
+The string literal can be a fully-qualified object name (e.g. 'db_name.schema_name.object_name' or $db_name.schema_name.object_name).
+
+SQLset zenskar_role = '<zenskar_role>';
+set zenskar_username = '<zenskar_user>';
+set zenskar_warehouse = '<zenskar_warehouse>';
+set zenskar_database = '<zenskar_database>';
+set zenskar_schema = '<zenskar_schema>';
+set zenskar_password = '<password>';
+📖Identifiers and placeholdersIn the above snippet, the structure of the statement is set IDENTIFIER = 'PLACEHOLDER';. For example, in the statement set zenskar_role = '<zenskar_role>';, zenskar_role is the identifier whereas <zenskar_role> is the placeholder. Replace the placeholder with appropriate values before executing the SQL script.
+⚙️ Create a role for Zenskar
+Create a role for Zenskar in Snowflake. Only a user assigned with the securityadmin role can create a new role.
+
+SECURITYADMIN (aka Security Administrator)
+Role that can manage any object grant globally, as well as create, monitor, and manage users and roles. More specifically, this role:
+
+Is granted the MANAGE GRANTS security privilege to be able to modify any grant, including revoking it.
+Inherits the privileges of the USERADMIN role via the system role hierarchy (i.e. USERADMIN role is granted to SECURITYADMIN).
+
+
+The following script snippet uses the securityadmin role privileges to create a role dedicated to Zenskar (identifier($zenskar_role)). Further, the snippet grants the privileges of the sysadmin role to the newly created Zenskar role.
+
+SYSADMIN (aka System Administrator)
+Role that has privileges to create warehouses and databases (and other objects) in an account.
+If, as recommended, you create a role hierarchy that ultimately assigns all custom roles to the SYSADMIN role, this role also has the ability to grant privileges on warehouses, databases, and other objects to other roles.
+
+ use role securityadmin;
+ create role if not exists identifier($zenskar_role);
+ grant role identifier($zenskar_role) to role SYSADMIN;
+⚙️ Create a user for Zenskar
+Create a user dedicated to Zenskar.
+SQL create user if not exists identifier($zenskar_username)
+ password = $zenskar_password
+ default_role = $zenskar_role
+ default_warehouse = $zenskar_warehouse;
+
+To facilitate querying immediately after a session is initiated, Snowflake supports specifying a default warehouse for each individual user. The default warehouse for a user is used as the warehouse for all sessions initiated by the user.
+A default warehouse can be specified when creating or modifying the user, either through the web interface or using CREATE USER/ALTER USER.
+
+⚙️ Grant Zenskar role to Zenskar user
+The Zenskar role we configured earlier, must be assigned to the Zenskar user.
+SQLgrant role identifier($zenskar_role) to user identifier($zenskar_username);
+⚙️ Create a warehouse and a database for Zenskar
+Only a sysadmin has privileges to create warehouses and databases:
+SQLuse role sysadmin;
+📖DefinitionA virtual warehouse is a cluster of compute resources. A warehouse is needed to execute certain types of SQL statements because it provides resources such as CPU, memory, and local storage.
+SQL create warehouse if not exists identifier($zenskar_warehouse);
+📖DefinitionAll data in Snowflake is maintained in databases. Each database consists of one or more schemas, which are logical groupings of database objects, such as tables and views. Snowflake does not place any hard limits on the number of databases, schemas (within a database), or objects (within a schema) you can create.
+SQL  create database if not exists identifier($zenskar_database);
+⚙️ Grant usage access on the warehouse to Zenskar
+The following steps grant usage access on warehouse to the Zenskar role.
+SQLgrant USAGE  
+ on warehouse identifier($zenskar_warehouse)  
+ to role identifier($zenskar_role);
+⚙️ The final annotated SQL script
+The final annotated SQL script is shown below. You can replace the placeholders with real values and execute the script in your Snowflake environment.
+SQL-- set all required identifiers
+set zenskar_role = '<zenskar_role>';
+set zenskar_username = '<zenskar_user>';
+set zenskar_warehouse = '<zenskar_warehouse>';
+set zenskar_database = '<zenskar_database>';
+set zenskar_schema = '<zenskar_schema>';
+set zenskar_password = '<password>';
+
+ begin;
+
+ -- create zenskar role
+ use role securityadmin;
+ create role if not exists identifier($zenskar_role);
+ grant role identifier($zenskar_role) to role SYSADMIN;
+
+ -- create zenskar user
+ create user if not exists identifier($zenskar_username)
+ password = $zenskar_password
+ default_role = $zenskar_role
+ default_warehouse = $zenskar_warehouse;
+
+ grant role identifier($zenskar_role) to user identifier($zenskar_username);
+
+ -- change role to sysadmin to create warehouse and database
+ use role sysadmin;
+
+ -- create zenskar warehouse
+ create warehouse if not exists identifier($zenskar_warehouse);
+
+ -- create zenskar database
+ create database if not exists identifier($zenskar_database);
+
+ -- grant zenskar warehouse access
+ grant USAGE
+ on warehouse identifier($zenskar_warehouse)
+ to role identifier($zenskar_role);
+
+ commit;
+
+ begin;
+
+ USE DATABASE identifier($zenskar_database);
+
+ -- create schema for zenskar data
+ -- CREATE SCHEMA IF NOT EXISTS identifier($zenskar_schema);
+
+ commit;
+Updated 17 days ago SnowflakeConfigure Zenskar's Snowflake connectorTable of Contents
+🐕‍🦺 Setup guide
+⚙️ Define identifiers
+⚙️ Create a role for Zenskar
+⚙️ Create a user for Zenskar
+⚙️ Grant Zenskar role to Zenskar user
+⚙️ Create a warehouse and a database for Zenskar
+⚙️ Grant usage access on the warehouse to Zenskar
+⚙️ The final annotated SQL script
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

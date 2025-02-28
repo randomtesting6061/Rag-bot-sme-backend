@@ -1,0 +1,250 @@
+Redshift
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceRedshiftSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Redshift
+Overview
+The Redshift source supports Full Refresh syncs. Zenskar will copy all rows in the tables and columns you set up for replication.
+This Redshift source connector is built on top of the source-jdbc code base and is configured to rely on JDBC 4.2 standard drivers provided by Amazon via Mulesoft here as described in Redshift documentation here.
+Sync overview
+Resulting schema
+The Redshift source does not alter the schema present in your warehouse. Depending on the destination connected to this source, however, the schema may be altered. See the destination's documentation for more details.
+Features
+FeatureSupportedNotesFull Refresh SyncYesIncremental SyncYesCursor-based, using ORDER BY on a user-defined cursor columnReplicate Incremental DeletesNot supported in RedshiftLogical Replication (WAL)Not supported in RedshiftSSL SupportYesSSH Tunnel ConnectionNoNamespacesYesEnabled by defaultSchema SelectionYesMultiple schemas may be used at one time. Keep empty to process all of existing schemas
+Incremental Sync
+The Redshift source connector supports incremental syncs. To setup an incremental sync for a table in Redshift, you must setup a user-defined cursor field such as an updated_at column. The connector relies on this column to know which records were updated since the last sync it ran.
+Defining a cursor field allows you to run incremental-append syncs. To run incremental-dedupe syncs, you'll need to tell the connector which column(s) to use as a primary key. See the incremental-dedupe sync docs for more information.
+🐕‍🦺 Setup guide
+Prerequisites
+
+Active Redshift cluster
+Allow connections from Zenksar to your Redshift cluster
+
+⚙️ Set up the QuickBooks data source in Zenskar
+⚙️ Set up data source and type
+
+Log into your Zenskar account.
+In the left navigation bar, navigate to Metering > Data Sources. In the top-right corner, click + ADD DATA SOURCE.
+In the Set Up Source section of the Add New Data Source page, enter a name for the MongoDB data source connection.
+Select Redshift from the Source Type dropdown.
+
+⚙️ Configure data source
+In the Source Config section of the Add New Data Source page, do the following:
+📖JDBC URLThe JDBC URL has the following format:jdbc:redshift://<endpoint>:<port>/<database>.
+
+Host:  The host is the JDBC URL without the <port> and <database>.
+Port: The port number that you specified when you launched the cluster. If you have a firewall, make sure that this port is open for you to use. Default is set to 5439.
+Database: The database that you created for your cluster.
+Password: The password that you created for your cluster.
+Username: The user that you created for your cluster.
+JDBC URL Params: Please refer AWS Redshift documentation regarding building the JDBC connection URL and options for JDBC driver version 2.1 configuration.
+Updated 13 days ago QuickBooksShopifyTable of Contents
+
+Overview
+
+
+
+Sync overview
+Features
+
+
+
+🐕‍🦺 Setup guide
+
+
+
+Prerequisites
+⚙️ Set up the QuickBooks data source in Zenskar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

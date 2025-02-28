@@ -1,0 +1,260 @@
+Generate invoices
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceGenerate invoicesSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Generate invoicesFrom zero to invoice.Zenskar helps you manage billing at scale irrespective of the complexity of the pricing structures in your contracts. To generate an invoice, you must:
+Step 1: Create a customer
+Add a customer.
+
+Step 2: Help Zenskar ingest usage data
+📖Raw metrics versus aggregatesMetrics represent all the data that you capture to analyze trends across your business and technology domains. Raw metrics are unfiltered data. Derived metrics, on the other hand, are generated when a certain combination of selection criteria (or filters) is applied on the raw metrics.Aggregates are derived metrics. Average, count, distinct, maximum, minimum, and sum are some selection criteria (or filters) applied on raw metrics to derive aggregates.
+Fig. 1: Deriving aggregates from raw metrics by applying necessary filters
+
+Data Sources: We pull usage data from your data infrastructure. This usage data can be either raw metrics or aggregates.
+
+Data sourceDescriptionAuth0Auth0 is a flexible, drop-in solution to add authentication and authorization services to your applications.BigQueryBigQuery is a serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data.CockroachDBA distributed SQL database designed for speed, scale, and survival.Google SheetsAn online spreadsheet editor from Google.LookerYour unified business intelligence platform. Self-service. Governed. Embedded.MetabaseAn open-source business intelligence platform.MongoDBCross-platform document-oriented database.MySQLAn open-source relational database management system.PostgreSQLPostgreSQL is a powerful, open source object-relational database system with over 35 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.QuickBooksAn online accounting software for small businesses.RedshiftAmazon Redshift is a data warehouse product which forms part of the larger cloud-computing platform Amazon Web Services.SnowflakeData platform as a self-managed service.
+
+Raw Metrics: You push usage data to Zenskar. This usage data can be either raw metrics or aggregates.
+
+APICreate raw metricPost raw metric
+
+Finally, derive aggregates from raw metrics. There are two types of queries you can write:
+
+
+Aggregate query: SQL query to create a intermediate aggregate table, aggregates, to hold billable aggregates for all customers in a given billing period. This query is optional if your data source contains aggregates (not raw metrics).
+Customer-specific query: Mandatory SQL query to fetch customer-specific billable aggregates from the aggregates table.
+
+
+Step 3: Create products
+🔖ProductIn Zenskar, a product is any service or product you sell to your customer as part of a contract.In a metered product, you measure customer activity or consumption of resources in a given period.In a non-metered product, you do not measure customer activity or consumption of resources. The number of units purchased and the charges are defined in the contract.
+The legal contract you sign with your customer contains details of:
+
+all products
+pricing models associated with those products
+
+Based on your legal contract, create appropriate products in Zenskar. Common pricing models are listed below:
+Pricing modelFlat feePer-unitVolumeTieredPackageMatrix
+
+Step 4: Create contracts
+Plan
+Do you want a reusable contract template that can be further customized for special cases? If yes, create a plan.
+🔖PlanA plan is a reusable contract pattern that contains product and feature definitions.A plan can be used as a guide to make tangible Zenskar contracts.
+A contract that is based on a plan will inherit all the products and features of the plan it is based on. You can override the plan values to create customized contracts.
+
+Contract
+If reusable contract templates are not needed, you can create a contract directly using products. Else, you can use a contract template as base to create customized contracts.
+🔖ContractA contract, in general, is a formal and legally binding agreement between you and your customer. This is an all-encompassing document that defines how you and your customer will conduct business. However, in Zenskar, the concept of a contract refers only to a subset of the general contract and contains data related to usage, pricing models, and other billing determinants.
+Contract typesPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesDocumentation for many more contract types coming soon.
+
+Step 5: Generate invoices
+Generate invoices.Updated 13 days ago Life cycle of an invoiceCredit notesTable of Contents
+
+Step 1: Create a customer
+
+
+Step 2: Help Zenskar ingest usage data
+
+
+Step 3: Create products
+
+
+Step 4: Create contracts
+
+
+
+Plan
+Contract
+
+
+
+Step 5: Generate invoices
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

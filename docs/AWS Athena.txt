@@ -1,0 +1,249 @@
+AWS Athena
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceAWS AthenaSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by AWS Athena
+The Amazon Web Services (AWS) Athena data-source connector allows you to sync data to AWS. The AWS Athena data-source connector does the following:
+
+writes data as JSON files in AWS S3
+makes data available through a Lake Formation Governed Table in the Glue Data Catalog so that the data is available throughout other AWS services, such as EMR and Redshift.
+
+Prerequisites
+To use this connector, you will need the following:
+
+
+An AWS account.
+
+
+An S3 bucket where the data will be written.
+
+
+An AWS Lake Formation database where tables will be created (one per stream)
+
+
+AWS credentials:
+
+Access Key Id
+Secret Access Key
+
+
+
+🐕‍🦺 Setup guide
+⚙️ Step 1: create an Athena data source in Zenskar
+Set up data source
+
+Log into your Zenskar account.
+In the left navigation bar, click Metering > Data Sources. In the top-right corner, click + ADD DATA SOURCE.
+In the Set Up Source section of the Add New Data Source page, enter a name for the Athena data-source connection.
+Select Athena from the Source Type dropdown.
+
+Configure data source
+
+In the Source Config section of the Add New Data Source page, add the following details:
+
+Database Name: the database in which the tables will be created. You will find the instructions to create a new Lake Formation database here.
+Bucket: the AWS S3 bucket in which the data will be written. You will find the instructions to create a new S3 bucket here.
+AWS Region: the region in which your resources are deployed.
+AWS Access Key Id: You will find the instructions to create a new user here. Select Programmatic Access to generate Access Key Id-AWS Secret Access Key pair.
+AWS Secret Access Key
+
+Assigning proper permissions
+The policy used by the user or the role must have access to the following services:
+
+AWS Lake Formation
+AWS Glue
+AWS S3
+
+You can use the AWS policy generator to help you generate an appropriate policy.
+Ensure that the role or user you will use has appropriate permissions on the database in AWS Lake Formation. You will find more information about Lake Formation permissions in the AWS Lake Formation Developer Guide.
+Supported sync modes
+FeatureSupported?Full Refresh SyncYesIncremental - Append SyncYesNamespacesNo
+Data type map
+The Glue tables will be created with schema information provided by the source, i.e : You will find the same columns and types in the destination table as in the source except for the following types which will be translated for compatibility with the Glue Data Catalog:
+Type in the sourceType in the destinationnumberfloatintegerintUpdated 17 days ago Auth0BigQueryTable of Contents
+Prerequisites
+🐕‍🦺 Setup guide
+
+
+⚙️ Step 1: create an Athena data source in Zenskar
+
+
+Supported sync modes
+Data type map
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

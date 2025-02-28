@@ -1,0 +1,213 @@
+Tiered pricing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceTiered pricingSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Tiered pricingA pricing strategy where the cost of a service or product is set at different levels, or tiers, based on a single factor, such as quantity, quality, features, or customer segments.Tiered pricing is a pricing strategy where the cost of a service or product is set at different levels, or tiers, based on a single factor such as quantity, quality, features, or customer segments.
+How to add a product based on tiered pricing in Zenskar
+🔖ImportantRefer the products documentation to learn more about the concept of products in Zenskar.
+Step 1: Create a product based on tiered pricing
+
+Navigate to Contracts > Products, and click on the ADD PRODUCT button.
+Select the Tiered Pricing from the drop-down.
+Select or deselect Metered:
+
+If the service or product is metered, select the appropriate usage aggregate from the drop-down.
+If the service or product is not metered, enter the quantity.
+
+
+Fill in all other details, and select all the desired features.
+Save the product.
+
+Example: metered product
+Details:
+
+Computing resources are being sold at:
+
+Number of unitsPrice (USD per hour)1-990.01100-2000.005201-∞0.002
+
+Owing to the nature of consumption, this is a metered product.
+The usage aggregate named Compute is being used to fetch consumption details for a given billing period.
+
+
+Example: non-metered product
+Details:
+
+Cereals are being sold at:
+
+Number of unitsPrice (USD per pound)1-1001.5101-2001.3201-∞1.25
+
+500 units are being sold.
+This is a non-metered product.
+
+
+Difference between volume and tiered pricing
+📖Volume versus tiered pricingLet us assume:
+you are in the business of selling software licenses
+you are selling 250 licenses to a particular customer
+Number of licensesPrice per unit in USD1-100100101-20090201-∞80Comparing the total cost of 250 licenses in both the models:Number of licensesTiered pricingVolume pricing1-100100 * 100101-200100 * 90201-25050 * 80250 * 80Total2300020000Updated 13 days ago Step pricingTiered pricing with flat feeTable of Contents
+How to add a product based on tiered pricing in Zenskar
+
+
+Step 1: Create a product based on tiered pricing
+
+
+Difference between volume and tiered pricing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

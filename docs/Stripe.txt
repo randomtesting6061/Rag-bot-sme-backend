@@ -1,0 +1,249 @@
+Stripe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceStripeSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Stripe🐕‍🦺 Setup guide
+This guide will help you connect your Stripe account with your Zenskar account.
+🚧PrerequisitesYou must have a working Stripe account before you proceed with this guide.
+Integrate Stripe with Zenskar
+
+Login to your Zenskar account.
+Go to Settings > Connectors > Payment Gateways > Stripe.
+Click the Connect button on the Stripe connector card.
+
+
+
+You will be redirected to Stripe Connect Onboarding flow.
+Login to your Stripe account from the Stripe Connect Onboarding page:
+
+
+
+
+Complete the on-boarding process, and you will be redirected to the dashboard. A Connected badge on the Stripe connector card indicates a successful connection.
+
+
+Configure the Stripe connector
+
+To configure the Stripe connector, you can click on the Manage on the Stripe
+connector card:
+
+
+Enable the Customers module to sync customer information updates between Stripe and Zenskar. The following sync types are available:
+
+Import only: any customer information update on Stripe will be synced with Zenskar.
+Export only: any customer information update on Zenskar will be synced with Stripe.
+Import and Export: any customer information update to a selected field on one platform will
+be synced with the other platform.
+
+
+If the sync type selected is Import and Export, a desired customer information field can be selected for two-way sync on the next page of connector configuration:
+
+
+Features of the Stripe connector
+Zenskar initiated payments
+
+Payment links with different payment methods:
+When a customer clicks on the PAY ONLINE button on an invoice, a Stripe Checkout session is created for the customer to complete the payment.
+Auto-charge a customer:
+Zenskar initiates a payment intent capture on the customer’s default payment method when:
+
+you click on Charge Customer button on an invoice or
+you charge the invoice(s) from the Invoices page by clicking on the CHARGE button.
+
+
+
+Customer initiated payments
+ACH Credit Transfer:
+When a customer sends money via ACH Credit Transfer, Zenskar can automatically check if the customer has pending invoices, charge the ACH source on Stripe and reconcile the payment against the pending invoices (earliest due first).
+Payment Method sync
+Any changes to a customer’s payment methods (eg., changing the default payment method) will reflect on Zenskar.
+Customer sync
+Described in the Configure the Stripe connector section.
+📖SyncIn this guide, sync refers to the syncing of updates only. Thus, sync works for customers in Zenskar who also exist in Stripe. If you would like to import customers from Stripe to Zenskar, please contact [email protected].Updated 17 days ago RazorpayAnrokTable of Contents
+
+🐕‍🦺 Setup guide
+
+
+
+Integrate Stripe with Zenskar
+Configure the Stripe connector
+Features of the Stripe connector
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

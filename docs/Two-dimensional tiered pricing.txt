@@ -1,0 +1,241 @@
+Two-dimensional tiered pricing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceTwo-dimensional tiered pricingSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Two-dimensional tiered pricingTwo-dimensional or 2D tiered pricing is a pricing strategy where the cost of a service or product is set at different tiers, or levels, based on two dimensions, or factors.
+Difference between 2D tiered pricing model and tiered pricing model
+2D tiered pricing model is similar to tiered pricing model. The most important difference being that the tiered pricing model has tiers based on one factor whereas the 2D tiered pricing model has tiers based on two factors.
+In the following example for the tiered pricing model, commission tiers are defined for the service or product based on a single factor: quantity.
+Number of units of the service or productCommission charged per unit (USD)1-990.01100-2000.005201-∞0.002
+In the following example for the 2D tiered pricing model, commission tiers have been defined for the service or product based on two factors:
+
+quantity
+per-unit price range
+
+Number of units of the service or productCommission (USD per unit) when per unit costs $0–100Commission (USD per unit) when per unit costs more than $1000–500000.010.0250000–1000000.0050.01100000–1500000.0020.005150000-∞0.0010.002
+Fig.1: In this product based on the 2D-tiered pricing model, the y-axis can be thought of as representing the quantity, whereas the x-axis can be thought of as representing the per-unit price range. The commission rate is fixed based on values of both the x-axis and the y-axis.
+How to add a product based on 2D tiered pricing in Zenskar
+🔖ImportantRefer the products documentation to learn more about the concept of products in Zenskar.
+Step 1: Create a product based on 2D tiered pricing
+
+Navigate to Contracts > Products, and click on the ADD PRODUCT button.
+Select the 2D Tiered Pricing from the drop-down.
+Select or deselect Metered:
+
+If the service or product is metered, select the appropriate usage aggregate from the drop-down. The usage aggregates for 2D tiered pricing model must be created in the SQL query builder. Visual query builder  cannot be used.
+If the service or product is not metered, enter the quantity.
+
+
+Fill in all other details, and select all the desired features.
+Save the product.
+
+Example: metered product
+🔖NoteThis pricing model is available only for metered products.
+
+Let us assume that you sell provide a platform for sellers, and you charge commission on sales made by the sellers.
+Commission tiers have been defined based on two factors:
+
+quantity
+per-unit price range
+
+
+
+Number of units of the service or productCommission (USD per unit) when per unit costs $0–100Commission (USD per unit) when per unit costs more than $1000–500000.010.0250000–1000000.0050.01100000–1500000.0020.005150000-∞0.0010.002
+
+Owing to the nature of consumption, this is a metered product.
+The usage aggregate named demoAggregate is being used to fetch usage details for a given billing period.
+
+Fig. 1: A metered product based on 2D tiered pricing model.
+Creating usage aggregates for 2D tiered pricing model
+The usage aggregates for 2D tiered pricing model must be created in the SQL query builder due to the complexity of the pricing model. Visual query builder  cannot be used.
+👷Engineering effort requiredCreating raw SQL queries for complex scenarios is the job of an engineer proficient in SQL.Updated 17 days ago Tiered pricing with flat feeVolume pricingTable of Contents
+
+Difference between 2D tiered pricing model and tiered pricing model
+
+
+How to add a product based on 2D tiered pricing in Zenskar
+
+
+
+Step 1: Create a product based on 2D tiered pricing
+Example: metered product
+
+
+
+Creating usage aggregates for 2D tiered pricing model
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,239 @@
+Two-factor authentication
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceTwo-factor authenticationSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Two-factor authenticationStrengthening authentication.Authentication is the process of determining whether someone or something is, in fact, who or what it is declared to be. Typically, password-based authentication is used for authentication.However, password-based authentication is weak and can easily be circumvented, for example, by launching a man-in-the-middle or brute-force attacks. To strengthen the authentication protocol, multi-factor authentication (MFA) is used.
+📚Authentication versus authorizationAuthentication is the process of determining you are who you claim to be. Authorization is the process of determining what level of access you have to various resources once you have been successfully authenticated.
+Two-factor authentication
+Two-factor authentication (2FA) is a specific type of MFA that strengthens access security by requiring two authentication factors to verify your identity. The three most common authentication factors are:
+
+Something you know; a password, or a memorized PIN.
+Something you have: a smartphone, or a secure USB key.
+Something you are: a fingerprint, or facial recognition.
+
+2FA protects against phishing, social engineering and password brute-force attacks and secures your logins from attackers exploiting weak or stolen credentials.
+Enabling 2FA
+
+Click on the drop-up menu at the bottom left with your name.
+Click on Users option in the drop-up menu.
+Find the user for whom you wish to enable 2FA.
+Click on the kebab-menu as shown in the image below:
+
+
+
+Click on the Enable Two Factor Authentication option.
+The following message is displayed:
+
+
+
+Click OK.
+
+The 2FA is enabled. The next time the user logs in, all necessary 2FA configuration can be performed by following the instructions provided on the login screen.
+Configure 2FA
+Mobile authentication using QR code
+
+You can use FreeOTP or Google Authenticator.
+FreeOTP
+
+
+
+
+
+
+Google Authenticator
+
+
+
+
+
+
+Steps to configure 2FA
+
+Open the application and scan the barcode.
+Enter the one-time code provided by the application.
+Click Submit to finish the setup.
+
+You can optionally provide a device name to manage your OTP devices.
+Mobile authentication using time-based one-time password
+
+Time-based one-time password (TOTP) is a common form of two-factor authentication (2FA). Unique numeric passwords are generated with a standardized algorithm that uses the current time as an input.
+Use the following configuration values if the application allows setting them:
+
+Type: Time-based
+Algorithm: SHA1
+Digits: 6
+Interval: 30
+
+Steps to configure 2FA
+
+Open the application and scan the barcode.
+Enter the one-time code provided by the application.
+Click Submit to finish the setup.
+
+You can optionally provide a device name to manage your OTP devices.Updated 17 days ago Zenskar IPsSingle sign-on authenticationTable of Contents
+
+Two-factor authentication
+
+
+Enabling 2FA
+
+
+Configure 2FA
+
+
+
+Mobile authentication using QR code
+Mobile authentication using time-based one-time password
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

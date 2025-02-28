@@ -1,0 +1,260 @@
+Senders
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceSendersSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by SendersAdd and authenticate senders who can send emails and notifications to your customers.📖DefinitionsSender: a user authorized to send emails and notifications to your customers.
+🐕‍This guide will help you to:
+
+set up senders who are authorized to send emails and notifications to your customers
+verify your domain ownership.
+
+🚧 Critical background information
+📖 Learn about email authentication, DKIM, DNS, and more.Sending emails and notifications to your customers is a sensitive activity. Cyber adversaries can impersonate organizations and forge emails to target unsuspecting victims. Email forgery is also known as email spoofing.🤔 What is email authentication?Email authentication is a collection of techniques used to ascertain that the emails sent from a specific server are not forged. It eliminates the possibility of a malicious actor impersonating an organization to send spam or phishing emails.Zenskar takes the threat of email forgery seriously and employs DomainKeys Identified Mail (DKIM) email authentication standard to defend against email forgery. The other commonly used email authentication standards are SPF and DMARC.🤔 How does DKIM work?DKIM authentication uses public-key cryptography , also called asymmetric cryptography, to secure emails. DKIM leverages the following:
+Private keys: secret keys visible only to the domain owner. These keys are used by the sending email server to digitally sign an email.
+Public keys: keys published in Domain Name System (DNS) records for the receiver. These are retrieved by the receiving email server to verify the authenticity of the email.
+📖Your private keysZenskar, on your behalf, sends emails and notifications to your customers. To make this possible, we store and handle your private keys. We employ enterprise-grade security mechanisms to secure the private keys we handle.📖Your public keysZenskar will provide you all the necessary records to be updated in your DNS. These records will make it possible for the receiving email servers to retrieve the necessary public keys for verification.The following diagram shows an easy-to-understand depiction of the DKIM mechanism:🤔 Adding DKIM records to DNSA DNS record for DKIM can be:
+CNAME:  used if the DNS record is a pointer to a key.
+TXT: used if the DNS record contains a key.
+Zenskar uses Amazon SES email service. Amazon SES uses pointers to keys. Therefore, CNAME records must be added to your DNS to enable DKIM.For example, to enable DKIM for example.com domain, the following records will be required:TypeNameValueCNAME<selector 1>._domainkey.example.com<prefix 1>.dkim.amazonses.comCNAME<selector 2>._domainkey.example.com<prefix 2>.dkim.amazonses.comCNAME<selector 3>._domainkey.example.com<prefix 3>.dkim.amazonses.com🚧Caution<selector X> and <prefix X> used in the example above are placeholders. The DKIM records you download from Zenskar will have real data. Caution must be exercised while copying and pasting the data to your DNS. Any change in the data will result in verification failure and wasted time.
+Add a new sender
+⚙️ Step 1: Add a sender
+
+Navigate to Communications > Senders and click on the + ADD NEW SENDER button.
+In the ADD NEW SENDER page, enter the sender name and email Id.
+Click on SAVE & VERIFY SENDER button.
+An email with a verification link will be sent to the email ID supplied.
+
+
+Sender email verification
+The sender will receive an email with a verification link.
+
+Clicking on the link will complete the verification process.
+
+🚧Verification link expiryThe verification link in the email expires 24 hours after your verification request. If a link expires, go to  Edit Sender page and click on RESEND VERIFICATION EMAIL .
+Verifying status of a sender
+
+Navigate to Communications > Senders.
+Each sender in the sender list displayed will have one of the following tags:
+
+PENDING: if the email verification is pending.
+VERIFIED: if the email verification has been completed successfully.
+
+
+
+
+⚙️ Step 2: Domain ownership verification
+After the completion of Step 1, you will be automatically taken to the EDIT SENDER page. If you did not download the DKIM records, you may navigate to the Edit Sender page.
+
+Download the DKIM records by clicking the DOWNLOAD DKIM RECORD button.
+Add the DKIM records to your DNS.
+
+🚧ImportantYou must possess administrator access to your domain registrar web portal to add DKIM records to DNS. If you do not have such access, ask the web administrator of your organization to complete this action.
+
+🚧Domain ownership verification is criticalDomain ownership verification can take 24 hours or more. The verification can fail, and the process may need to be started again. This can cause significant delays.Senders can send emails even when your domain ownership has not been verified. However, it is highly likely that your emails may end up in your customer's spam folder.Therefore, it is critical to get your domain ownership verified with the slightest delay.
+The procedure to update DKIM records in DNS will vary depending on your domain registrar:
+
+GoDaddy
+
+🚧GoDaddy quirksGoDaddy automatically appends the domain to the host value.TypeNameValueCNAME<selector 1>._domainkey.example.com<prefix 1>.dkim.amazonses.comTherefore, while adding the above record, enter only <selector 1>._domainkey in the Host field.
+
+Namecheap
+Google Domains
+Hostgator
+Hover
+Squarespace
+AWS
+Cloudflare
+
+Edit sender details
+To edit the details of an existing sender, navigate to Communications > Senders. Click on the row corresponding to the sender whose details you wish to edit.
+🚧What can be edited?Currently, only the name of the sender can be edited.Updated 13 days ago SegmentsRole-based access controlTable of Contents
+
+🚧 Critical background information
+
+
+Add a new sender
+
+
+
+⚙️ Step 1: Add a sender
+⚙️ Step 2: Domain ownership verification
+
+
+
+Edit sender details
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,242 @@
+Databricks Lakehouse
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceDatabricks LakehouseSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Databricks Lakehouse
+🐕‍🦺 Setup guide
+Zenskar's Databricks data-source connector syncs data with Delta Lake on Databricks Lakehouse. Each stream is written to its own Delta table.
+🚧NoteYou must use Unity Catalog to use this connector.
+⚙️ Step 1: set up data source and type
+
+Log into your Zenskar account.
+In the left navigation bar, click Metering > Data Sources.
+In the top-right corner, click + ADD DATA SOURCE.
+In the Set Up Source section of the Add New Data Source page, enter a name for the Databricks data source connection.
+Select Databricks from the Source Type drop-down menu.
+
+
+⚙️ Step 2: configure data source
+In the Source Config section of the Add New Data Source page, fill in the following details:
+
+Databricks Access Token: refer the Databricks authentication section.
+Workspace Hostname: the hostname of the Databricks workspace. Refer the Section Retrieve Databricks workspace details section.
+
+
+A workspace is a Databricks deployment in a cloud service account. It provides a unified environment for working with Databricks assets for a specified set of users.
+
+
+Port Number: refer the Retrieve Databricks workspace details section.
+HTTP Path: refer the Retrieve Databricks workspace details section.
+
+
+Retrieve Databricks workspace details
+
+Open the workspace console.
+Open your SQL warehouse:
+
+
+
+Open the Connection Details tab:
+
+
+Databricks authentication
+Generate access token
+
+Open your workspace console.
+Click on the named drop-down menu at the top-right corner, and click on Settings option.
+Navigate to User Settings > Developer, and click on Generate new token, as shown below.
+
+
+
+Enter a description for the token and its lifetime. You can leave blank Lifetime (days) blank for a permanent token:
+
+
+Supported sync modes
+Sync modeNotesFull refresh sync⚠️ Warning: this mode deletes all previously synced data in the configured bucket path.Incremental: append syncIncremental: append + dedupedNamespacesUpdated 13 days ago CockroachDBGoogle SheetsTable of Contents
+
+🐕‍🦺 Setup guide
+
+
+
+⚙️ Step 1: set up data source and type
+⚙️ Step 2: configure data source
+
+
+
+Retrieve Databricks workspace details
+
+
+
+Databricks authentication
+
+
+
+Supported sync modes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

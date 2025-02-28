@@ -1,0 +1,339 @@
+Entitlements
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceEntitlementsSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by EntitlementsEntitlements refer to services or products that your customers are entitled to.What are entitlements?
+Entitlements refer to services or products that your customers are entitled to. Entitlements are generally used to store customer balances. Customer balances can be created in various ways. Some are listed below:
+
+Quantity-based entitlement (measured in units):
+
+You sell 10 units of a service or product to a customer for $100. In this case, the customer is entitled to 10 units of said service or product.
+You sell a subscription for $100 per month, and each month you offer the customer 50 free units to consume as a part of the subscription. If these free units are not consumed during the month, they are carried forward until the contract is active. In this case, the free units are tracked across billing cycles using entitlements.
+
+
+Credit-based entitlement (measured in currency): you sell $1000 worth of credits to a customer for $900. In this case, your customer is entitled to spend $1000 on your platform.
+
+🚧Entitlements vs free unitsFree units that expire at the end of product billing period need not be tracked across billing periods. Therefore, an entitlement is optional for such free units. For all other expiry conditions, an entitlement must be attached to the free units node.
+
+Add an entitlement from the Entitlements module
+
+Navigate to Entitlements > Entitlements in the left side panel.
+On the Entitlements page, click on the CREATE NEW ENTITLEMENT button.
+
+
+
+On the Create New Entitlement page, fill the details:
+
+Entitlement information:
+Entitlement type
+
+Select one option: Quantity (units) or Credits (currency)
+Enter a unit name: this is the name of the unit that will be displayed in the invoice.
+
+
+
+
+
+
+
+
+
+Add an entitlement to a product
+An entitlement can be added to a new or an existing product in the form of a:
+
+Free Units feature node
+Credits feature node
+
+Parameters of the free units node
+Type
+TypeDescriptionAddAdd free units to your customer's accountConsumeDeduct free units from your customer's accountAdd and consumeAdd or deduct free units from your customer's account based on calculations during invoice generation
+Quantity of free units
+Enter the quantity or credits that you wish to offer your customers.
+Expiry condition
+ConditionDescriptionCustomThe free units are tracked as entitlements across billing cycles based on a cadence value (a number) and unit (days, weeks, months or years)NeverThe free units are tracked as entitlements even across contracts. For example, the free units are carried forward even when a new contract is signed with the customer.End of contractThe free units are tracked as entitlements until they expire when the contract ends. Free units are not tracked when a new contract is signedEnd of product billing periodThe free units expire at the end of product billing cycle and need no further tracking.
+Granting condition
+ConditionDescriptionOn invoice approvalThe free units are granted when an invoice is moved from the draft to approved state.On Invoice creationThe free units are granted when an invoice is created.On payments successThe free units are granted when a successful payment is made against invoice.
+
+Free units name (entitlement)
+An entitlement can be attached to the free-units node using the Free Units Name drop-down menu.
+
+A new entitlement can be created and attached to the free-units node by typing a new name.
+
+Add an entitlement to a new product
+
+Navigate to Contracts > Products in the left side panel.
+Click on the + CREATE NEW PRODUCT.
+On the Add New Product page, add a Free Units node.
+Click on the Free Units Name drop-down menu to select an entitlement.
+
+
+Alternatively, you may create a new entitlement by typing a new name, as shown below:
+
+
+Optionally, you may click on the Click here to charge overages link to automatically add another free units node that consumes free units to compensate for overages.
+
+
+
+Click on the ADD PRODUCT button.
+
+Add an entitlement to an existing product
+
+Navigate to Contracts > Products in the left side panel.
+On the Products page, click on the row containing the product you wish to edit.
+On the Edit Product page, add a Free Units node.
+Click on the UPDATE button.
+
+
+
+Assign an entitlement to a customer
+
+Click on Customers in the left side panel.
+On the Customers page, click on the row containing the customer name to whom you wish to assign an entitlement.
+On the page showing customer details, click on the Entitlements tab, as shown below:
+
+
+
+Click on the + ADD ENTITLEMENT button.
+On the entitlements form, click on the Select Entitlement drop-down menu, and select the desired entitlement.
+Select a date.
+Click on the SAVE button.
+
+
+
+Edit or dissociate entitlement assigned to a customer
+
+Click on Customers in the left side panel.
+On the Customers page, click on the row containing the customer name to whom you wish to assign an entitlement.
+On the page showing customer details, click on the Entitlements tab, as shown below:
+
+
+
+Click on the kebab menu located at the end of the row containing the entitlement you wish to edit or dissociate.
+Click on Edit or Delete.
+
+
+Delete an entitlement
+
+Navigate to Entitlements > Entitlements in the left side panel.
+On the Entitlements page, click on the kebab menu located at the end of the row containing the entitlement you wish to delete.
+Click on the Delete menu option.
+
+Updated 17 days ago MonitoringCommunicationsTable of Contents
+
+What are entitlements?
+
+
+Add an entitlement from the Entitlements module
+
+
+Add an entitlement to a product
+
+
+
+Parameters of the free units node
+Add an entitlement to a new product
+Add an entitlement to an existing product
+
+
+
+Assign an entitlement to a customer
+
+
+Edit or dissociate entitlement assigned to a customer
+
+
+Delete an entitlement
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

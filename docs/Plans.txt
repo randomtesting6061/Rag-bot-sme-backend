@@ -1,0 +1,294 @@
+Plans
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferencePlansSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by PlansZenskar fully automates generating invoices irrespective of the complexity of the contracts. Existing billing products are constrained to contracts that can be specified as a list of products and prices corresponding to these products.
+🚧Prerequisites
+If you want to use the AvaTax feature in your contract plan, you must have a fully configured and active Avalara AvaTax account.
+
+📖 Definitions
+🔖MetricsMetrics represent all the data that you capture to analyze trends across your business and technology domains. Raw metrics are unfiltered data. Derived metrics, on the other hand, are generated when a certain combination of selection criteria (or filters) is applied on the raw metrics.Metering is the act of measuring customer activity or consumption of resources to collect the metrics needed to generate an invoice.Aggregates are derived metrics. Average, count, distinct, maximum, minimum, and sum are some selection criteria (or filters) applied on raw metrics to derive aggregates.
+🔖ContractA Contract, in general, is a formal and legally binding agreement between you and your customers. This is an all-encompassing document that defines how you and your customers will conduct business. In Zenskar, however, the concept of a contract refers only to a subset of the general contract and contains data related to pricing models and other billing determinants.
+🔖PlanA plan is a reusable contract pattern that contains product and feature definitions.
+A plan can be used as a guide to make tangible Zenskar contracts.
+A contract that is based on a plan will inherit all the products and features of the plan it is based on. You can override the plan values to create customized contracts.
+
+🔖ProductIn Zenskar, a product is any service or product you sell to your customer as part of the contract.
+In a metered product, you measure customer activity or consumption of resources.
+In a non-metered product, you do not measure customer activity or consumption of resources. You charge the customer based on the number of units purchased.
+
+Plan
+A plan can be created by navigating to Contracts > Plans, and clicking on the + Add New Plan button.
+
+A plan has the following properties:
+Name:  you can give the plan a descriptive name.
+Billing duration: you can specify the frequency of billing.
+Billing type: prepaid or postpaid.
+Features:
+
+FeatureDescriptionTaxChoose this feature if you would like to handle the collection of taxes.
+AvaTax⚠️ Choose this feature only if you have a properly configured Avalara AvaTax account. Avalara AvaTax uses automation to make tax determination faster, easier, and more accurate.Avalara tax codes can be found here . The Avalara tax codes determine the taxability of the goods and services you sell.
+DiscountA contract-level discount applicable on the overall invoice value.
+Payment termsChoose this feature to assign due date. A due date can be assigned based on invoice creation or invoice approval date:
+Minimum commitmentA minimum amount that you can charge even if the products and services are not availed during the billing period. Custom currency!
+
+Minimum Commitment
+Custom Currency
+
+Products
+Pricing models
+For all pricing models, billing can be configured as Recurring or One Time.
+Pricing modelDescriptionFlat feeA simple pricing strategy in which you charge a fixed fee for a particular service, regardless of the time it takes to complete.Per unit pricingYou charge customers for each item sold.
+Volume pricingYour customers get a different price per unit as the quantity of the units they purchase increases.Tiered pricingA pricing strategy in which you present customers with several product or service options, with corresponding pricing levels.Package pricingA pricing model that includes everything so that each product or service is not charged for separately.
+Features
+
+FeatureDescriptionFree units!DiscountA product-level discount
+TaxA product-level tax:AvaTaxA product-level Avalara AvaTax deduction:Minimum commitmentA product-level minimum commitment:
+How to create a plan
+Let us build a simple example plan using the following products and pricing:
+ProductPricingUpfront implementation fee1500 USDSubscription product400 USD/2 monthsUsage-based product4 USD/unit with minimum guaranteed charges at 40 USDImplementation engineer chargesBilled at the time of signing the contractInvoice-level discount4%
+📖DiscountsA discount can be applied at the plan-level and\or at a product-level. Each product can have a discount associated with it. Also, the overall invoice amount can be discounted irrespective of the product-level discount.
+Navigate to Contracts > Plas, and click on the + Add New Plan button.
+Add a product: upfront implementation fee
+Add a new product named (unimaginatively) Implementation Fee:
+
+This is an non-metered one-time fee
+This is a flat fee of 1500 USD
+
+
+Add a product: subscription
+Add a new product named Subscription Product:
+
+This is an non-metered recurring fee
+The billing cadence is once every two months
+
+
+Add a product: usage-based
+
+Add a product: implementation engineer charges
+
+Add plan-level features
+
+
+A plan-level discount of 4%.
+Payment terms: the invoice due date is set to 15 days from the date of approving the invoice.
+
+Save the plan
+All the products have been added to the plan. Click the Save button to save the plan.
+Use the plan
+You can use a plan to create a contract, as shown below:
+Updated 14 days ago Custom currencyContract renewalTable of Contents
+
+📖 Definitions
+
+
+Plan
+
+
+Products
+
+
+
+Pricing models
+Features
+
+
+
+How to create a plan
+
+
+
+Add a product: upfront implementation fee
+Add a product: subscription
+Add a product: usage-based
+Add a product: implementation engineer charges
+Add plan-level features
+Save the plan
+Use the plan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

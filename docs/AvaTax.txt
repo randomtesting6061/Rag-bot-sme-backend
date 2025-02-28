@@ -1,0 +1,182 @@
+AvaTax
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceAvaTaxSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by AvaTaxAvalara AvaTax is a cloud-based solution automating transaction tax calculations and the tax filing process. Avalara provides real-time tax calculation using tax content from more than 12,000 US taxing jurisdictions and over 200 countries, insuring your transaction tax is calculated based on the most current tax rules.
+🚧Prerequisites
+You must have a fully functioning Avalara account.
+You must configure the Zenskar's Avalara AvaTax connector.
+
+📚NoteDiscount can be applied at the level of a product and\or at the level of the contract.
+Fig. 1: Avalara AvaTax at the product level.
+Fig. 2: Avalara AvaTax at the contract level
+Anatomy of an Avalara tax code
+Most Avalara tax codes are made up of eight characters: two letters to start and six numbers at the end.
+
+The first letter indicates the tax code type (P for products, D for digital, Fr for freight, S for services, O for other).
+The second letter indicates the tax code category (for example, C for clothing).
+The six numbers indicate subcategories under the tax code category.
+
+Examples
+
+PC040101: Aprons
+PC040105: Bandanas
+PC040111: Coats and jackets
+
+
+Avalara tax code search tool
+Avalara uses tax codes to identify products that have specific tax rates depending on where they are taxed. Using Avalara tax codes makes tax calculation easy for your company because Avalara keeps track of rate changes for products that have tax codes.
+Avalara tax code search tool  helps you discover the appropriate tax codes.Updated 17 days ago DiscountPayment termsTable of Contents
+Anatomy of an Avalara tax code
+Avalara tax code search tool
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

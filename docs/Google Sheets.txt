@@ -1,0 +1,273 @@
+Google Sheets
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceGoogle SheetsSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Google Sheets🐕‍🦺 Setup guide
+This guide will help you set up Google Sheets as a data source for Zenskar.
+🚧Prerequisites
+A Google Cloud Platform (GCP) project.
+Google Sheets API must be enabled in your GCP project
+You must possess a Service Account Key with access to the Google Sheets spreadsheet you want to replicate
+URL of the Google spreadsheet you want to sync.
+
+Set up GCP
+Create a service account
+
+Open the Service Accounts page in your Google Cloud console.
+Select an existing project, or create a new project.
+
+
+
+At the top of the page, click + CREATE SERVICE ACCOUNT.
+
+
+
+Enter a name and description for the service account, then click CREATE AND CONTINUE.
+
+
+
+Under Service account permissions, select the roles to grant to the service account, then click Continue. We recommend the Viewer role.
+
+
+Generate a key
+
+Go to the APIs and services page and click on the email address of the service account you just created.
+
+
+
+In the Keys tab, click the ADD KEY drop-down menu, and click on the Create new key option.
+
+
+
+Select JSON as the key type, and click CREATE. This will generate and download the JSON key file that you'll use for authentication.
+
+
+Enable the Google Sheets API
+
+Go to the API Library page.
+Ensure that the correct project is selected at the top of the page.
+Find and select the Google Sheets API from the API library.
+Click ENABLE.
+
+📚NoteIf your spreadsheet is viewable by anyone with its link, no further action is needed. If not, give your Service Account access to your spreadsheet.
+⚙️ Set up data source and type
+
+Log into your Zenskar account.
+In the left navigation bar, click Metering > Data Sources. In the top-right corner, click + ADD DATA SOURCE.
+In the Set Up Source section of the Add New Data Source page, enter a name for the Google Sheets data source connection.
+Select Google Sheets from the Source Type drop-down menu.
+
+⚙️ Configure data source
+Configure the following options in the Source Config section of the Add New Data Source page:
+
+In Row Batch Size, define the number of records you want the Google API to fetch at a time. The default value is 200.
+
+🚧NoteThe Google API rate limit is 100 requests per 100 seconds per user and 500 requests per 100 seconds per project. Zenskar respects these rate limits and batches requests to the API in order to efficiently pull data.
+
+Select the Service Account Key Authentication option from the Authentication Type drop-down menu.
+In the Service Account Information textbox, enter your service account key in JSON format.
+
+📚InformationZenskar's Google Sheets data-source connector pulls data from a single Google Sheets spreadsheet. To replicate multiple spreadsheets, set up multiple Google Sheets data sources.
+🚧PermissionsPlease make sure the Service Account has the Project Viewer permission.
+👍SecurityZenskar only accesses the spreadsheet you want to replicate. We do not access any other file in your Google Drive.
+
+In the Spreadsheet Link textbox, enter the link to the Google Sheets spreadsheet. To get the link, go to the Google spreadsheet you want to sync, click Share in the top right corner, and click Copy link.
+Click on the SAVE SOURCE button.
+You will be taken to the Sync Required Tables & Columns page where you can select the tables and columns you would like to sync with Zenskar.
+
+Each individual sheet in a Google Sheets spreadsheet is treated as a separate table in Zenskar's database.
+
+You can choose which sheet to sync with Zenskar.
+
+All columns within a sheet are treated as columns in corresponding tables in the destination database.
+
+You can choose which columns to sync with Zenskar.
+
+
+Click on the FINISH SETUP button.
+Updated 17 days ago Databricks LakehouseLookerTable of Contents
+
+🐕‍🦺 Setup guide
+
+
+
+Set up GCP
+⚙️ Set up data source and type
+⚙️ Configure data source
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

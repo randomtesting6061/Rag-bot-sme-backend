@@ -1,0 +1,351 @@
+Shopify
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceShopifySearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Shopify
+🚧Prerequisites
+
+An active Shopify store.
+
+
+If you are syncing data from a store that you do not own, you will need to request access to your client's store (not required for account owners).
+
+
+A custom Shopify application with read_ scopes enabled.
+
+
+🐕‍🦺 Setup guide
+This connector supports OAuth2.0 and API Password (for private applications) authentication methods.
+⚙️ Step 1: create a custom application in Shopify
+A custom application is required to access Shopify APIs. The following instructions help you create a custom app and an Admin API Access Token.
+
+Log in to your Shopify partner dashboard.
+In the dashboard, navigate to Settings > App and sales channels > Develop apps > Create an app.
+Select a name for your new app.
+Select Configure Admin API scopes.
+Grant access to the following list of scopes. Only select scopes prefixed with read_, not write_ (for example,  read_locations,read_price_rules, etc.).
+Click Install app to give this app access to your data.
+
+Retrieve the API Password
+Once the app is installed, go to the API Credentials tab to copy the Admin API Access Token.
+Retrieve client credentials
+You can manually retrieve your app's client credentials in the Partner Dashboard.
+
+Log in to your Shopify partner dashboard.
+Click Apps.
+Click the name of the app you want to retrieve client credentials for.
+Click Client credentials.
+View or copy your client ID and client secret.
+
+⚙️ Step 2: set up data source and type
+
+Log into your Zenskar account.
+In the left navigation bar, click Metering > Data Sources.
+In the top-right corner, click + ADD DATA SOURCE.
+In the Set Up Source section of the Add New Data Source page, enter a name for the Shopify data source connection.
+Select Shopify from the Source Type drop-down menu.
+
+
+⚙️ Step 3: configure data source
+In the Source Config section of the Add New Data Source page, fill in the following details:
+
+
+Shopify Store : Enter your Shopify Store name.
+
+
+Shopify Authorization Method:
+
+
+To authorize API requests via OAuth 2.0, retrieve your Client ID, Client Secret, and Access Token.
+
+
+
+To authorize API requests via API Password, retrieve your password.
+
+
+
+
+
+Replication Start Date (defaults to 01 January, 2020): set a starting point for data replication. Any data created before this date will not be synced.
+
+
+Adduser_id to Transactions (slower): define which API type (REST/BULK) to use to fetch Transactions data. If you are a Shopify Plus user, leave the default value to speed up the fetch.
+
+
+📚 Custom app scopes
+Add the following scopes to your custom app to allow Zenskar can sync all available data. For more information on access scopes, see the Shopify docs.
+
+read_analytics
+read_assigned_fulfillment_orders
+read_content
+read_customers
+read_discounts
+read_draft_orders
+read_fulfillments
+read_gdpr_data_request
+read_gift_cards
+read_inventory
+read_legal_policies
+read_locations
+read_locales
+read_marketing_events
+read_merchant_managed_fulfillment_orders
+read_online_store_pages
+read_order_edits
+read_orders
+read_price_rules
+read_product_listings
+read_products
+read_publications
+read_reports
+read_resource_feedbacks
+read_script_tags
+read_shipping
+read_shopify_payments_accounts
+read_shopify_payments_bank_accounts
+read_shopify_payments_disputes
+read_shopify_payments_payouts
+read_themes
+read_third_party_fulfillment_orders
+read_translations
+
+📚 Supported sync modes
+The Shopify source supports both Full Refresh and Incremental syncs. You can choose if this connector will copy only the new or updated data, or all rows in the tables and columns you set up for replication, every time a sync is run.
+This source can sync data for the Shopify REST API and the Shopify GraphQL API and the Shopify GraphQL BULK API
+📚 Supported streams
+
+Abandoned Checkouts
+Articles
+Balance Transactions
+Blogs
+Collects
+Collections (GraphQL)
+Countries
+Custom Collections
+Customers
+Customer Journey Summary (GraphQL)
+Customer Address (GraphQL)
+Customer Saved Search
+Draft Orders
+Discount Codes (GraphQL)
+Disputes
+Fulfillments
+Fulfillment Orders (GraphQL)
+Inventory Items (GraphQL)
+Inventory Levels (GraphQL)
+Locations
+Metafields (GraphQL)
+Order Agreements (GraphQL)
+Orders
+Order Refunds
+Order Risks (GraphQL)
+Pages
+Price Rules
+Products (GraphQL)
+Product Images (GraphQL)
+Product Variants (GraphQL)
+Shop
+Smart Collections
+Transactions
+Transactions (GraphQL)
+Tender Transactions
+
+📚 Capturing deleted records
+The connector captures deletions for records in the Articles, Blogs, CustomCollections, Orders, Pages, PriceRules and Products streams.
+When a record is deleted, the connector outputs a record with the ID of that record and the deleted_at, deleted_message, and deleted_description fields filled out. No other fields are filled out for the deleted records.
+Check the following Shopify documentation for more information about retrieving deleted records.
+📚 Data-type mapping
+Shopify typeZenskar typestringstringnumbernumberarrayarrayobjectobjectbooleanboolean
+📚 Features
+FeatureSupported?Full Refresh SyncYesIncremental - Append SyncYesNamespacesNo
+🚧 Limitations & Troubleshooting
+Expand to see details about Shopify connector limitations and troubleshootingConnector limitationsRate limitingShopify has some rate limit restrictions. Typically, there should not be issues with throttling or exceeding the rate limits but, in some edge cases, you may encounter the following warning message:"Caught retryable error '<some_error> or null' after <some_number> tries.
+Waiting <some_number> seconds then retrying..."This is expected when the connector hits a 429 - Rate Limit Exceeded HTTP error. The sync operation will continue successfully after a short backoff period.These limitations are applied to all Shopify GraphQL bulk API requests.TroubleshootingIf you encounter access errors while using OAuth2.0 authentication, please make sure you've followed this Shopify Article to request the access to the client's store first. Once the access is granted, you should be able to proceed with OAuth2.0 authentication.Updated 13 days ago RedshiftSnowflakeTable of Contents
+
+🐕‍🦺 Setup guide
+
+
+
+⚙️ Step 1: create a custom application in Shopify
+⚙️ Step 2: set up data source and type
+⚙️ Step 3: configure data source
+📚 Custom app scopes
+
+
+
+📚 Supported sync modes
+
+
+📚 Supported streams
+
+
+📚 Capturing deleted records
+
+
+📚 Data-type mapping
+
+
+📚 Features
+
+
+🚧 Limitations & Troubleshooting
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

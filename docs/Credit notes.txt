@@ -1,0 +1,222 @@
+Credit notes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceCredit notesSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Credit notesA credit note is a document issued by a seller to a buyer, indicating a reduction in the amount that the buyer owes to the seller.
+🔖Note
+Approved, partially paid, and paid invoices cannot be edited. Therefore, credit notes must be issued to amend such invoices.
+Draft invoices can be directly edited. Therefore, credit notes do not apply to draft invoices.
+Refer to the documentation on the life cycle of a invoice for more details.
+Some prominent reasons for issuing a credit note are listed below:
+
+Billing errors: if the buyer was overcharged (e.g., an incorrect amount was invoiced), a credit note corrects the error.
+Discounts: sometimes, sellers issue credit notes as a result of post-sale discounts or price adjustments.
+Returns: if the buyer returns goods or products, the seller issues a credit note to reduce the amount owed.
+Damaged goods: if goods received by the buyer are damaged or defective, the seller may issue a credit note to reflect the compensation or price reduction.
+
+Create a credit note
+
+Navigate to the Invoices page in the left side panel.
+Select the approved, partially paid, or paid invoice against which you wish to issue a credit note.
+
+
+
+On the View Invoice page, click on the ISSUE CREDIT NOTE button, as shown below:
+
+
+
+Fill in the credit note details, and click on the Submit button on the Issue Credit Note form, as shown below:
+
+
+
+A new invoice will be generated. The credit note will appear as a line item in the new invoice.
+
+
+View credit notes
+To view all credit notes issued against a specific invoice, navigate to the Credit Notes tab of the View Invoice page  of the invoice you are interested in.
+
+To view all credit notes Navigate to Invoices > Credit Notes in the left side panel.
+Updated 14 days ago Generate invoicesPaymentsTable of Contents
+Create a credit note
+View credit notes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

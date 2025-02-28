@@ -1,0 +1,302 @@
+SQL-query templates
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceSQL-query templatesSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by SQL-query templates🚧PrerequisitesYou must understand how Zenskar handles metering before proceeding with this guide.
+What is a template engine?
+📖DefinitionsTemplate is a mold or pattern.Template engine is a software that generates dynamic content by replacing placeholders or variables in a template with contextual data.
+A generic example
+To understand templates and template engine, let us explore an example. A marketing team can create an email template, as shown below:
+Hello {{customer_name}},
+
+{{product_name}} is the best way to {{feature_set}}. We are currently offerring a discount of {{discount}}%.
+  
+ Hurry! This offer is only valid till {{discount_end_date}}.
+Here {{customer_name}}, {{product_name}}, {{feature_set}}, {{discount}}, and {{discount_end_date}}are placeholders.
+A properly configured template engine can replace placeholders with data derived from a given context. Let us now set some context: a customer, John Doe, had shown some interest in Awesome Software, which is now available at a discount of 20% till 23 August 2023.
+PlaceholderContext{{customer_name}}John Doe{{product_name}}Awesome Software{{feature_set}}file your taxes and attain nirvana{{discount}}20{{discount_end_date}}23 August 2023
+The template engine can merge the template and the context to generate the following email:
+Hello John Doe,
+
+Awesome Software is the best way to file your taxes and attain nirvana. We are currently offerring a discount of 20%.
+  
+Hurry! This offer is only valid till 23 August 2023.
+Let us now set another context: a customer, Jane Doe, was interested in Yet Another Awesome Software, which is now available at a discount of 30% till 23 August 2023.
+PlaceholderContext{{customer_name}}Jane Doe{{product_name}}Yet Another Awesome Software{{feature_set}}order food online and attain nirvana{{discount}}30{{discount_end_date}}23 August 2023
+The template engine can merge the template and the context to generate the following email:
+Hello Jane Doe,
+
+Yet Another Awesome Software is the best way to order food online and attain nirvana. We are currently offerring a discount of 30%.
+  
+Hurry! This offer is only valid till 23 August 2023.
+Understanding SQL-query templates in Zenskar
+The aim of the example presented in the above section is to help you understand the basic concepts related to templating. This section will help you understand how Zenskar leverages templates to provide you with potentially unlimited flexibility.
+📖DefinitionSQL template engine generates SQL queries by replacing placeholders or variables in an SQL query template with contextual data.
+Zenskar wants you to have total control over how you query various data sources to extract meaningful and actionable data. One tool we employ to achieve this flexibility is a SQL template engine.
+Fig. 1: SQL template engine generates valid SQL queries using templates and dynamic runtime data.
+There are two types of queries you can write:
+
+Aggregate query: SQL query to create a intermediate aggregate table, aggregates, to hold billable aggregates for all customers in a given billing period.
+
+📖Aggregate query is optionalIf your source data already contains aggregates (not raw metrics), this SQL query is not needed.
+Fig. 2: Aggregate query is optional if data source already contains aggregates.
+
+Customer-specific query: SQL query to fetch customer-specific billable aggregates from the aggregates table.
+
+📖Output of the customer-specific queryThe intermediate table aggregates contains aggregate data of all customers in a given billing period. The customer-specific query extracts customer-specific billable aggregate value (a single row) from the aggregates table.
+Example 1: Deriving aggregates from raw metrics
+Step 1: Define schema and send data to Zenskar
+Let us assume that you have submitted the following schema to Zenskar by navigating to Metering > Raw Metrics > + ADD RAW METRICS:
+JSON{
+    "data": {
+        "loan_id": "int",
+        "loan_status": "string",
+        "amount_financed": "float"
+    },
+    "timestamp": "timestamp",
+    "customer_id": "string"
+}
+Let us also assume that you are using the following HTTP POST API to send raw metrics to Zenskar:
+Shellcurl --location --request POST 'https://api.zenskar.com/usage/loan_demo' \
+-H 'organisation: 888ae523-8878-4ed7-85cc-6c0a54320568' \
+-H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSlI6ImFjY291bnQiLCJzdW
+-H 'Content-Type: application/json' \
+--data-raw '{"data":{"loan_id":114,"loan_status":"sample_data_1","amount_financed":47.08293585087888},"timestamp":"2023-09-18 10:10:41","customer_id":"sample_data_1"}'
+  
+The above steps can be visualized using the following diagram:
+Fig. 3: From defining data schema to invoice.
+Step 2: Create aggregate query
+
+Navigate to Metering > Usage Aggregates and click on the + ADD NEW AGGREGATE button.
+Input a name for the aggregate.
+Copy the name of the raw metrics table (eg., raw_metric_loan) from which you would like to derive aggregate.
+Activate the SQL Aggregator tab.
+Select Raw events.
+Create an aggregate query to retrieve the desired aggregate from the raw_metric_loan table.
+
+Structure of the raw metrics table, raw_metric_loan, in Zenskar:
+data.loan_iddata.loan_statusdata.amount_financedtimestampcustomer_id977active5002023-07-11 21:51:13.0001001943active6002023-07-07 00:27:20.0001002889active21002023-08-05 12:33:07.0001001117active3002023-07-15 16:35:21.0001001444active10002023-08-27 06:00:20.0001002432active3502023-08-20 21:53:46.0001002212active35002023-07-20 05:21:12.0001002
+An example aggregate query:
+SQLselect "customer_id",count(*) as quantity	
+from raw_metric_loan
+where "data.loan_status" = 'active' 
+  and "data.amount_financed" >=500 and "data.amount_financed" <= 2000
+  and Date("timestamp") >= Date({{start_date}}) and Date("timestamp") <= Date({{end_date}})
+group by "customer_id"
+The above query will get the total number of loans where:
+
+the amount_financed is between 500-2000 USD,
+the loan_status is active, and
+the sanctioning date was between a specified start date (Date("timestamp") >= Date({{start_date}})) and end date (Date("timestamp") <= Date({{end_date}}) grouped by customer_id.
+
+📖Special variables {{start_date}} and {{end_date}}The {{start_date}} and {{end_date}} are determined by the SQL template engine at the time of contract execution. Usually, {{start_date}} will be correspond automatically to the start date of the billing cycle whereas {{end_date}} will correspond to the end date of the billing cycle.You must not manipulate these variables.
+The output of the aggregate query will be stored in an intermediate table called aggregates. Assuming that the {{start_date}} is set to 2023-07-01 and {{end_date}} is set to 2023-08-31, the result will look like the below table:
+customer_idquantity1001110022
+Step 3: Create customer-specific query
+In Step 2, you derived the desired aggregates. However, the aggregates you derived were for all customers. Now, you must retrieve the customer-specific value for billing:
+SQLselect cast(quantity as decimal) as quantity
+from aggregates
+where "customer_id" = {{customer.external_id}}
+The result of the customer-specific query for customer_id set to 1001 will be:
+quantity1
+📖SQL template engine's customer objectThe SQL template engine has a context object called customer with all the properties that define a customer in Zenskar. Therefore, the SQL variable customer_id can be set to {{customer.email}} if you would like to treat email as key or it can be set to {{customer.external_id}} if you would like to use Zenskar's Customer Id field as key.
+Step 4: Finish
+Click on the CREATE AGGREGATE button.
+You can preview the output of the queries on the Usage Aggregate page by clicking on Preview.Updated 17 days ago Billable metricsContractsTable of Contents
+What is a template engine?
+
+
+A generic example
+
+
+Understanding SQL-query templates in Zenskar
+
+
+Example 1: Deriving aggregates from raw metrics
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

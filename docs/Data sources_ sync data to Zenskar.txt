@@ -1,0 +1,274 @@
+Data sources: sync data to Zenskar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceData sources: sync data to ZenskarSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Data sources: sync data to ZenskarZenskar connects with your data source, such as a database, data warehouse, comma-separated-value file, or spreadsheet.Overview
+Data ingestion is the process of moving or replicating data from data source to destination. Zenskar connects with your data source, such as a database, data warehouse, comma-separated-value file, or spreadsheet. Subsequently, we move or replicate the data on our data infrastructure (destination) for further processing, as shown in the figure below.
+👍SecurityZenskar takes the security of your data seriously. All connection details and credentials are stored in a secure encrypted vault.
+Fig. 1: Raw metrics or aggregates ingested via configured data sources.
+
+Zenskar's data-source-specific connectors
+Zenskar uses data-source-specific connectors to connect with your data sources and ingest data.
+👷Engineering effort requiredThe details needed for this step are source-type dependent. Therefore, some technical knowledge is expected to complete this step.
+To set up a connector, do the following:
+
+Set Up Source: Provide a Source Name and select a Source Type from the drop-down. The list of available Zenskar connectors is given below.
+Source Config: Provide credentials and other configuration details to establish a connection with the data source. Refer the documentation of the connector you are interested in to know the configuration details.
+
+📚NoteIrrespective of the data source type, Zenkar stores all ingested data in the form of RDBMS tables.Tables are database objects that contain all the data in a database. In tables, data is logically organized in a row-and-column format similar to a spreadsheet.
+Zenskar connectors
+Data sourceDescriptionAuth0Auth0 is a flexible, drop-in solution to add authentication and authorization services to your applications.BigQueryBigQuery is a serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data.CockroachDBA distributed SQL database designed for speed, scale, and survival.Google SheetsAn online spreadsheet editor from Google.LookerYour unified business intelligence platform. Self-service. Governed. Embedded.MetabaseAn open-source business intelligence platform.MongoDBCross-platform document-oriented database.MySQLAn open-source relational database management system.PostgreSQLPostgreSQL is a powerful, open source object-relational database system with over 35 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.QuickBooksAn online accounting software for small businesses.SnowflakeData platform as a self-managed service.RedshiftAmazon Redshift is a data warehouse product which forms part of the larger cloud-computing platform Amazon Web Services.
+
+An example: using the Google Sheets connector to let Zenskar ingest data from your data source
+Let us assume:
+
+You are a telecom provider who sells call minutes, SMSes, and internet data
+You store raw metrics related to a customer's daily usage in a Google Sheets sheet
+Your Google Sheets sheet has the following schema:
+
+Customer IDTimestampCall MinutesSMSData8578d067-b019-471c-b28c-5a3f35a3d05a2024-04-16 11:33:38.00056.0433.78578d067-b019-471c-b28c-5a3f35a3d05a2024-04-17 11:25:02.00023.0122.08578d067-b019-471c-b28c-5a3f35a3d05a2024-04-18 11:25:43.00034.0161.8
+Fig. 2: The Google Sheets data source.
+Step 1: add a new Google Sheets data source connector
+
+To add and configure a connector, navigate to Metering > Data Sources in the left sidebar.
+Click on the + ADD DATA SOURCE button to land on the Add New Data Source page.
+Provide a descriptive name for the data source in the Source Name.
+Provide the necessary configuration details.
+Click on the VALIDATE SOURCE button.
+
+Fig. 3: Google Sheets data source connector set up.
+
+You will be automatically be taken to a page where you can select the tables and columns based on which you wish Zenskar to ingest data.
+
+The destination table schema and name are derived from the schema and name, respectively, of the sheet
+Columns in the sheet become columns in Zenskar's table
+
+
+
+Fig. 4: Sheets in the source Google Sheets become tables in Zenskar.
+Fig. 5: Select tables you wish Zenskar to ingest data into.
+Fig. 6: Call_SMS_Data_Usage table has been selected for data ingestion.
+Fig. 7: Select columns in the Call_SMS_Data_Usage table.
+
+If you make any changes to the Google Sheets schema, during or after configuring the connector, you can use the REFRESH SOURCE button to refresh the schema information in Zenskar.
+
+Fig. 8: Refresh schema information in Zenskar.
+
+You can select a sync frequency. Zenskar will periodically sync data based on this frequency.
+
+Fig. 9: Configuring sync frequency.
+
+Click the FINISH SETUP button to save the configuration and exit.
+
+Step 2: data processing to extract usage aggregates
+📚NoteIrrespective of the data source type, Zenkar stores all ingested data in the form of RDBMS tables.Tables are database objects that contain all the data in a database. In tables, data is logically organized in a row-and-column format similar to a spreadsheet.
+The ingested raw data must be processed to derive billing determinants that will help Zenskar generate invoices. Zenskar uses SQL to derive aggregates from the raw data.
+
+To set up a usage aggregate, navigate to Metering > Usage Aggregatesin the left sidebar.
+Click on the + ADD NEW AGGREGATE button to land on the Add New Aggregate page.
+Select the destination table that Zenskar has created to ingest data from your data source.
+
+Destination table nameStructure of the destination table namegooglesheets-_customer_daily_usage.call_sms_data_usage{Data_source_connector_name}.{table_name}
+
+
+Refer the documentation on usage aggregates to understand how to use the visual builder and the SQL builder to create aggregation queries.
+
+👍 Pros and 👎 cons
+👍 Pros👎 ConsNo engineering bandwidth is required for integrating Zenskar with your system.Initial data sync can take some time, depending on the size of the data.Invoices can be generated quickly.Data-ingestion frequency depends on the sync schedule. This does not matter if you are only interested in periodic billing.Zenskar allows you to edit usage data that has been synced.Viewing usage data is not supported.
+🔖NoteIf data ingestion via Zenskar's data-source connectors does not suit your needs, you may look at the following options:
+Data ingestion via APIs
+Data ingestion via Zenskar-compatible CSV file
+Data ingestion via Zenskar's web form
+Updated 17 days ago Data ingestionData sources: query remote data sourcesTable of Contents
+
+Overview
+
+
+Zenskar's data-source-specific connectors
+
+
+
+Zenskar connectors
+
+
+
+An example: using the Google Sheets connector to let Zenskar ingest data from your data source
+
+
+
+Step 1: add a new Google Sheets data source connector
+Step 2: data processing to extract usage aggregates
+
+
+
+👍 Pros and 👎 cons
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,242 @@
+Auth0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceAuth0SearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Auth0🐕‍🦺 Setup guide
+The Zenskar Auth0 data-source connector fetches data from Auth0 Management API.
+🚧Prerequisites
+You must have a free or paid Auth0 account.
+You must authorize Zenskar to read data from your account.
+
+⚙️ Set up an Auth0 account
+
+Sign up for an account in Auth0.
+Confirm your email.
+
+⚙️ Get a temporary access token for testing
+
+Go to the API Explorer tab of your Auth0 Management API. A token is automatically generated and displayed there.
+Click Copy Token.
+
+More details can be found in this documentation.
+⚙️ Create a new app for OAuth2 for automated token generation
+
+To allow Zenskar to make scheduled calls to Auth0, you must set up an OAuth2 integration. This helps Zenskar generate access tokens automatically.
+In Auth0, navigate to Dashboard > Applications > Applications.
+Create a new application, name it Zenskar. Choose the application type Machine to Machine Applications (M2M).
+Select Management API V2. This is the API Zenksar will call.
+Each M2M app that accesses an API must be granted a set of permissions (or scopes). Here, we only need permissions starting with read (e.g. read:users). Under the API doc, each api will list the required scopes.
+More details can be found from this documentation.
+
+⚙️ Set up Auth0 as data source in Zenskar
+Set up data source
+
+Log into your Zenskar account.
+In the left navigation bar, navigate to Metering > Data Sources. In the top-right corner, click + ADD DATA SOURCE.
+In the Set Up Source section of the Add New Data Source page, enter a name for the Auth0 data source connection.
+Select Auth0 from the Source Type dropdown.
+
+Configure data source
+In the Source Config section of the Add New Data Source page, do the following:
+
+Base URL: the authentication API is served over HTTPS. The Base URL will be of the form https://<yourDomain>.
+Authentication Method: select from:
+
+OAuth2 Confidential Application
+
+Client ID: the client Id of your Auth0 application
+Client Secret: the client secret of your Auth0 application
+
+
+OAuth2 Access Token
+
+OAuth2 Access Token: paste the access token retrieved from Auth0.
+
+
+
+
+
+Supported sync modes
+The Auth0 source connector supports the following sync modes:
+
+Full Refresh
+Incremental
+
+Supported Streams
+
+Clients
+Organizations
+OrganizationMembers
+OrganizationMemberRoles
+Users
+Clients
+
+Performance considerations
+The connector is restricted by Auth0 rate limits.Updated 17 days ago Stripe TaxAWS AthenaTable of Contents
+
+🐕‍🦺 Setup guide
+
+
+
+⚙️ Set up an Auth0 account
+⚙️ Get a temporary access token for testing
+⚙️ Create a new app for OAuth2 for automated token generation
+⚙️ Set up Auth0 as data source in Zenskar
+
+
+
+Supported sync modes
+
+
+Supported Streams
+
+
+Performance considerations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

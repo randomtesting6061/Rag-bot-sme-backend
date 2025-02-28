@@ -1,0 +1,231 @@
+What does Zenskar pilot program entail?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceWhat does Zenskar pilot program entail?SearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by What does Zenskar pilot program entail?The Zenskar free pilot program is where the rubber meets the road. Billing tools promise the world but end up falling short on expectations when you actually use them. Our pilot program is designed to give you a risk-free environment to experience the power of our platform firsthand.
+You can choose the specific use cases you want to test. We help configure your own sample contracts (pricing agreements), usage data flows (if applicable), and corresponding invoices, with the option to redact sensitive information, to see the platform live in action.
+There is no obligation to buy until you're confident Zenskar is the perfect fit for your business needs. If you've already chosen Zenskar, you can skip the pilot and get started right away.
+ObjectivesTime frameZenskar's responsibilitiesYour responsibilities (Zenskar will be your guide)🤝 Agree on the objectives and success criteria for the pilot.Day 1Document and share the objectives and success criteria of the pilot based on your inputs.Share and approve the objectives and success criteria of the pilot.⚖️ Determine and finalize data flows for customers, contracts (pricing agreements), and usage data for billing and downstream workflows related to collections and  revenue recognition.Week 1Configure data flows:
+• let Zenskar pull data from your data sources.
+• push data to Zenskar using Zenskar's data-ingestion APIs.
+• use Zenskar connectors to connect Zenskar with your CRM/ERP/CPQ/Tax software.Review the data flows proposed by Zenskar.• ⚙️ Configuring sample contracts (pricing agreements) and usage data.
+• 🧪 Test corresponding invoices generated,  usage reports, and accounting entries.Week 2–3• Configure sample contracts (pricing plans) and usage data as received from client.
+• Test corresponding invoices generated, usage reports, and accounting entries.• Share required sample documents - contracts (pricing plans), usage data, corresponding invoices,etc
+• Test and confirm if everything is functioning as expected
+
+Scope of the pilot program
+ModuleScopeCustomersImport customer data using any of the following options:
+• Manually
+• Upload CSV
+• Zenskar APIs
+• IntegrationsExport customers using any of the following options:
+• CSV
+• Integrations
+• Zenskar APIsContracts (i.e. Pricing Agreements)Create and configure contracts of any complexity using the following components:
+• Product, sub-product, add-on, and product catalog
+• Plans (reusable contract patterns)
+• Pricing modelsUsage meteringIngest usage-data using any of the following options:
+• Push data to Zenskar using Zenksar's data-ingestion APIs.
+• Let Zenskar pull data from your data sources using the Zenskar data-source connectors.
+• Upload a Zenskar-compatible CSV.Create usage aggregates:
+• Derive billing determinants by creating usage aggregates.InvoicesGenerate, approve and reconcile invoices.Revenue recognition• Manage your accounting sub-ledgers for all billing related accounts, such as revenue (broken down by product and customer), accounts receivables (broken down by customer), credit balances, unearned revenue, etc.
+• Revenue recognition: flexible accounting rule engine that can be customised to your specific revenue recognition needs.Receivables• Communicate with your customers using email and document templates
+• Create segments of customers based on country, invoice due date or any other custom criteria
+• Automate Dunning processEntitlementsAdd and monitor services or products that a customer is entitled to.MonitoringMonitor data related to your customer's usage.Analytics• Monitor analytics regarding invoices and outstanding amounts.
+• Calculate revenue at company-level or at per-customer level.
+• Receive usage reports.IntegrationsTest important third-party software integrations:
+• CRM/CPQ: HubSpot, Salesforce
+• ERP: NetSuite, QuickBooks, Xero, Zoho Books
+• Payment gateway: Stripe
+• Sales tax: Avalara AvaTaxExport journal entries to your ERP:
+• Use Zenskar's accounting system to generate double-entry journal entries
+• Use ERP's accounting systemWebhook alertsSet up and configure webhook alerts.Customer-facing billing portalProvide your customers complete information about their accounts.
+🚧NOTEThe pilot program will involve end-to-end testing of a couple of different types of contracts to get a sense of how well Zenskar interacts with your internal systems.Updated 17 days ago Understanding ZenskarWhat does Zenskar implementation entail?Table of Contents
+Scope of the pilot program
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,238 @@
+Usage events: data-ingestion APIs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceUsage events: data-ingestion APIsSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Usage events: data-ingestion APIsOverview
+Raw metrics or aggregates ingested via Zenskar API
+You can integrate Zenskar in your application workflow by configuring a data-ingestion API. You can call this API like any other REST API and help Zenskar ingest your raw metrics or aggregates. Zenskar expects the input data in JavaScript Object Notation (JSON) format: a universal data-interchange format like XML.
+
+Set up a data-ingestion API in Zenskar
+
+To set up a data-ingestion API, navigate to Metering > Usage Events page.
+Click on the + ADD USAGE EVENT button.
+On the Add Usage Event page, fill in the following details.
+
+FieldDescriptionUsage event nameA descriptive name.API slug endpointThe slug of the endpoint URL which is automatically derived from the raw metric name. However, you can override the auto-generated name. The slug must contain alphanumeric characters, underscores, and dashes only. For example, if the raw metric name is a raw metric, the slug generated will be a_raw_metric.Root fieldscustomer_id and timestamp are read-only root fields mandatory for Zenskar.Your data schemaDefine the schema of the JSON data you wish to send to Zenskar. Zenskar will use this schema to create tables.Order byZenskar orders the data by timestamp.
+
+Click on the ADD USAGE EVENT button to save the API.
+
+Some examples are shown below:
+
+If you are providing a compute resource (for example, CPU time) for rent, a raw metric schema in JSON form may look like the following:
+
+JSON{
+    "data": {
+        "cpu_usage_hours_per_day": "5"
+    },
+    "timestamp": "2023-05-21 09:30:38.731",
+    "customer_id": "[email protected]"
+}
+
+If you are providing a compute resource (for example, CPU time) for rent, a JSON aggregate data may look like the following:
+
+JSON{
+    "data": {
+        "cpu_usage_hours_per_month": "300"
+    },
+    "timestamp": "2023-05-21 09:30:38.731",
+    "customer_id": "[email protected]"
+}
+The customer_id and timestamp are mandatory fields. A combination of these mandatory fields provides Zenskar the capability to uniquely identify a raw metric or an aggregate.
+Sample API calls to send raw metrics or aggregate data to Zenskar would look like the following. The examples below use curl utility which can act as a REST client. However, the same can be done from any REST client:
+JSONJSONcurl --location --request POST 'https://api.zenskar.com/usage/test_1' \
+-H 'organisation: 23507783-d5b4-4854-b012-2bf4ea922205' \
+-H 'authorization: Bearer b3VyY2VfYWNjZXNzIjp7OiIwOTkxNTEyYy0wMzI3LTQzMzEtYjQ1NS1jNzgxZjg2YWRjNzMiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6Ik1vaGFuIFNyZWVrYW50IiwicHJlZmVycmVkX3VzZXJuYW1lIjoibW9oYW5AemVuc2thci5jb20iLCJnaXZlbl9uYW1lIjoiTW9oYW4iLCJmYW1pbHlfbmFtZSI6IlNyZWVrYW50IiwiZW1haWwiOiJtb2hhbkB6ZW5za2FyLmNvbSJ9.K5fuK2fBlzJjQQ06Etu_H3syFjT3Q7ZtZzQqFi51YDkdJCDc-_l9JQakXWRIyeXiAM4XmbnuOorUUItNYopwfD033kQL5aI6vPnDR5DoRRkelwTam7bn94Ce83IgXbzzi0rLBzhC47lMStj-CLnNY2qdEAFRyrL8eWDsjE_8IXUB-LYb1V9I3dMOpgme77zLKySo3dHYQkBC-rZc9sNTdnaLdZy7nLrJ2-uoDvPvtOq6JLeR5ozf3bn5XEBhaHRzY23VMAgOX64-Ow_CAeVng0xIEq5P2CgqFDuNFdT3gfB8-qjKlPHdC_ndAAGGcyxbcCwrhKMgwsP6q2ZvaFDwYA' \
+-H 'Content-Type: application/json' \
+--data-raw '{"data":{"cpu_usage_hours_per_day":5},"timestamp":"2023-05-21 09:30:38.731","customer_id":"[email protected]"}'curl --location --request POST 'https://api.zenskar.com/usage/test_1' \
+-H 'organisation: 23507783-d5b4-4854-b012-2bf4ea922205' \
+-H 'authorization: Bearer b3VyY2VfYWNjZXNzIjp7OiIwOTkxNTEyYy0wMzI3LTQzMzEtYjQ1NS1jNzgxZjg2YWRjNzMiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6Ik1vaGFuIFNyZWVrYW50IiwicHJlZmVycmVkX3VzZXJuYW1lIjoibW9oYW5AemVuc2thci5jb20iLCJnaXZlbl9uYW1lIjoiTW9oYW4iLCJmYW1pbHlfbmFtZSI6IlNyZWVrYW50IiwiZW1haWwiOiJtb2hhbkB6ZW5za2FyLmNvbSJ9.K5fuK2fBlzJjQQ06Etu_H3syFjT3Q7ZtZzQqFi51YDkdJCDc-_l9JQakXWRIyeXiAM4XmbnuOorUUItNYopwfD033kQL5aI6vPnDR5DoRRkelwTam7bn94Ce83IgXbzzi0rLBzhC47lMStj-CLnNY2qdEAFRyrL8eWDsjE_8IXUB-LYb1V9I3dMOpgme77zLKySo3dHYQkBC-rZc9sNTdnaLdZy7nLrJ2-uoDvPvtOq6JLeR5ozf3bn5XEBhaHRzY23VMAgOX64-Ow_CAeVng0xIEq5P2CgqFDuNFdT3gfB8-qjKlPHdC_ndAAGGcyxbcCwrhKMgwsP6q2ZvaFDwYA' \
+-H 'Content-Type: application/json' \
+--data-raw '{"data":{"cpu_usage_hours_per_month":300},"timestamp":"2023-05-21 09:30:38.731","customer_id":"[email protected]"}'
+The JSON data you send us is securely stored in our database as a table after the requisite transformations are applied.
+📚NoteIrrespective of the data source type, Zenskar stores all ingested data in the form of RDBMS tables.Tables are database objects that contain all the data in a database. In tables, data is logically organized in a row-and-column format similar to a spreadsheet.
+Push data to Zenskar
+Integrate the data-ingestion APIs in your application workflow
+👷Engineering effort requiredIntegrating Zenskar data-ingestion REST API in your application workflow will require engineering effort. However, to test all you need is a REST client. Prominent examples of REST clients are Postman (feature-rich) and Thunder Client (lightweight).
+👍 Pros and 👎 cons
+👍 Pros👎 ConsYour data model and Zenskar are decoupled: you can change your database schema without worrying about affecting your integration with Zenskar.Using data-ingestion APIs requires engineering effort. The integration time depends on the number of usage metrics that need to be integrated and the available engineering bandwidth.Real-time data transmission from your system to Zenskar ensures that the usage data is always up-to-date.Real-time data transmission from your system to Zenskar ensures quick invoice generation.Real-time usage-based entitlement tracking, monitoring, and alerts are possible.Zenskar allows you to edit usage data that has been synced.
+🔖NoteIf data ingestion via Zenskar's APIs does not suit your needs, you may look at the following options:
+Data ingestion via data-source connectors
+Data ingestion via Zenskar-compatible CSV file
+Data ingestion via Zenskar's web form
+Updated 14 days ago Data sources: query remote data sourcesManual: upload Zenskar-compatible CSV fileTable of Contents
+Overview
+Set up a data-ingestion API in Zenskar
+Push data to Zenskar
+
+
+Integrate the data-ingestion APIs in your application workflow
+
+
+👍 Pros and 👎 cons
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

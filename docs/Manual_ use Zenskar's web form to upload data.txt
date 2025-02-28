@@ -1,0 +1,259 @@
+Manual: use Zenskar's web form to upload data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceManual: use Zenskar's web form to upload dataSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Manual: use Zenskar's web form to upload dataYou can use the web form to enter raw metrics manually.
+📚AssumptionAn example raw metric, telephone usage, with the following schema is used throughout this document.JSON{
+  "data": {
+    "sms": "int",
+    "data": "float",
+    "call_minutes": "float"
+  },
+  "timestamp": "timestamp",
+  "customer_id": "string"
+}
+
+Navigate to Metering > Raw Metrics.
+Click on the raw metric you are interested in.
+
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/42f09ff-image.png",
+        null,
+        ""
+      ],
+      "align": "center",
+      "border": true
+    }
+  ]
+}
+
+On the View Raw Metric page, click on the drop-down menu beside the UPLOAD CSV button to access the + Add a single event option.
+
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/4597951-image.png",
+        null,
+        ""
+      ],
+      "align": "center",
+      "border": true
+    }
+  ]
+}
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/185ca8c-image.png",
+        null,
+        ""
+      ],
+      "align": "center",
+      "border": true
+    }
+  ]
+}
+
+Click on the + Add a single event menu option.
+Fill in the required details in the Add New Event form.
+
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/0b81551-image.png",
+        null,
+        ""
+      ],
+      "align": "center",
+      "border": true
+    }
+  ]
+}
+🔖NoteThe input text boxes on Add New Event form will correspond to the raw-metric schema you are currently working with. In the current example, the text boxes sms, data, and call_minutes correspond to the schema of the telephone usage raw metric with the following schema.JSON{
+  "data": {
+    "sms": "int",
+    "data": "float",
+    "call_minutes": "float"
+  },
+  "timestamp": "timestamp",
+  "customer_id": "string"
+}
+
+Click on the ADD EVENT button. It may take a few seconds for your data to appear in the Events Table.
+
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/b5e8042-image.png",
+        null,
+        ""
+      ],
+      "align": "center",
+      "border": true
+    }
+  ]
+}
+👍 Pros and 👎 cons
+👍 Pros👎 ConsYou can record and maintain usage data directly in Zenskar instead of a spreadsheet.Not ideal for large amounts of data.The main use case is where a only few events are periodically recorded. For example, a lawyer may record data directly in Zenskar rather than relying on a spreadsheet.
+🔖NoteIf manual data ingestion via Zenskar's web form does not suit your needs, you may look at the following options:
+Data ingestion via data-source connectors
+Data ingestion via APIs
+Data ingestion via Zenskar-compatible CSV file
+Updated 17 days ago Manual: upload Zenskar-compatible CSV fileBillable metricsTable of Contents
+👍 Pros and 👎 cons
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

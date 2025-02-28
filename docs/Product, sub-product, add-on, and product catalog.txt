@@ -1,0 +1,325 @@
+Product, sub-product, add-on, and product catalog
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceProduct, sub-product, add-on, and product catalogSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Product, sub-product, add-on, and product catalogA Zenskar concept that defines any service or product you sell to your customer as part of a contract.This guide will help you understand:
+
+the concepts of product and product bundle in Zenskar
+how to use products and product bundles in plans and contracts
+
+What is a product?
+🔖DefinitionIn Zenskar, a product is any service or product you sell to your customer as part of a contract.
+In a metered product, you measure customer activity or consumption of resources.
+In a non-metered product, you do not measure customer activity or consumption of resources. You charge the customer based on the number of units purchased.
+
+
+What is a product bundle?
+🔖DefinitionA product bundle is a collection of related products that can be used together in a plan.
+Product catalog
+Product catalog is a place where an organization can define the list of products/services that they offer to their customers. These products then can be directly used in a contract or plan.
+A product catalog can be accessed in two ways:
+
+Navigate to Contracts > Products to land on the Products page.
+
+
+
+Click on the + ADD PRODUCT button while creating or editing a contract or plan.
+
+
+Components of a product
+Pricing models
+
+Pricing modelDescriptionFlat feeA simple pricing strategy used in business contracts where the total cost, scope, and timeline are agreed upon in advance.Per-unit pricingPer-unit pricing is a strategy in which you charge your customer for each unit of service or product you sell.Volume pricingA pricing strategy in which the price of a service or product is adjusted based on the quantity purchasedTiered pricingA pricing strategy where the cost of a product or service is set at different levels, or tiers, based on various factors such as quantity, quality, features, or customer segmentsPercent pricingA pricing strategy in which a service or product is sold at a price that is a percentage of the price of another product in the contractPackage pricingA pricing strategy in which a service or product that is sold as a packageMatrix pricingA pricing strategy where the cost of a product or service is dependent on multiple dimensionsCustom tiered pricingCustom tiered pricing allows you to use create products based on customized tiered and volume pricing models.Step pricingA tiered pricing strategy that defines a flat-fee for each tier or step
+Features
+Features at contract level
+
+FeatureDescriptionDiscountThe discount feature allows you to deduct a certain percentage or fixed value from the usual cost of a service or product.TaxThe payment terms feature helps you to set a due date for payment.CommitmentThe minimum commitment feature helps you set contract terms that require the customers to consume a minimum amount.ConsumptionsZenskar helps you generate invoices in a currency of your choice using the custom currency feature.
+Features at product level
+
+FeatureDescriptionDiscountTaxFree unitsCommitmentGrantsConsumption
+Putting it all together using an example
+Let us assume:
+
+you are a cloud service provider who provides compute resources in different regions of US
+your services are priced differently in every region
+
+In plain English, the product can be defined as shown below:
+MarkdownCompute (product) with Minimum Gurantee - 100 USD
+    Compute East Zone (sub-product)
+		- Per-unit pricing - 0.01 USD/min (metered)
+    Compute West Zone (sub-product)
+		- Per-unit pricing - 0.02 USD/min (metered)
+    Compute North Zone (sub-product)	
+		- Per-unit pricing - 0.05 USD/min (metered)
+    Block storage
+		- Per-unit pricing - 0.01 USD/GB (metered)
+Your customer is allowed to use a compute resource in any of the regions. The combined minimum charges for all the sub-products will be 100 USD, irrespective of the usage.
+Add a product
+The same product when defined in Zenskar will look like the following:
+
+Here, Compute is the parent product that contains three sub-products:
+
+Compute East Zone
+Compute West Zone
+Compute North Zone
+
+You can notice that the parent product does not have a pricing model or an aggregate attached to it.
+The Minimum Commitment feature is assigned to the parent product, Compute. The baseline charge irrespective of usage is set to 100 USD.
+Add sub-products
+Compute East Zone
+
+The compute resources are provided in the east zone at 0.01 USD/min.
+The usage is metered. You must select an appropriate aggregate from the Usage Aggregate drop-down.
+
+
+Compute West Zone
+
+The compute resources are provided in the west zone at 0.02 USD/min.
+The usage is metered. You must select an appropriate aggregate from the Usage Aggregate drop-down.
+
+
+Compute North Zone
+
+The compute resources are provided in the north zone at 0.05 USD/min.
+The usage is metered. You must select an appropriate aggregate from the Usage Aggregate drop-down.
+
+
+Add add-ons
+The compute resource already comes with enough storage to install an operating system. However, if needed, the customer can add more block storage. Block storage is never sold individually and must be purchased in the context of a compute product. Therefore, block storage is an add-on.
+To keep the example simple, let us assume that the block storage is charged at 0.01 USD/GB (metered) in all the zones.
+
+A new network-related add-on
+Imagine a scenario where you are forced to charge for network usage in the east zone:
+
+from 0–1 TB/month, 1 USD/month
+from 2 TB/month onward, 1.5 USD/month
+
+The new contract for east zone can be described in English as follows:
+MarkdownCompute (product) with Minimum Gurantee - 100 USD
+    Compute East Zone (sub-product)
+		- Per-unit pricing - 0.01 USD/min (metered)
+    Compute West Zone (sub-product)
+		- Per-unit pricing - 0.02 USD/min (metered)
+    Compute North Zone (sub-product)	
+		- Per-unit pricing - 0.05 USD/min (metered)
+    Block storage
+		- Per-unit pricing - 0.01 USD/GB (metered)
+    Network
+    - Tiered pricing
+    	- from 0–1 TB/month, 1 USD/month (metered)
+      - from 2 TB/month onward, 1.5 USD/month (metered)
+You can edit a product and add a new add-on for network related usage and charges.
+
+The Compute East Zone sub-product will now have a Block Storage and a Network add-on:
+Updated 14 days ago ContractsFree unitsTable of Contents
+
+What is a product?
+
+
+What is a product bundle?
+
+
+
+Product catalog
+
+
+
+Components of a product
+
+
+
+Pricing models
+Features
+
+
+
+Putting it all together using an example
+
+
+
+Add a product
+Add sub-products
+Add add-ons
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

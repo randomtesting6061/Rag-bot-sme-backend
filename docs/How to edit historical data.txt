@@ -1,0 +1,423 @@
+How to edit historical data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceHow to edit historical dataSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by How to edit historical dataThe need for editing historical data
+Editing historical data can be necessary for several reasons:
+
+
+Error correction: Mistakes in data entry or processing can lead to inaccuracies. Correcting these errors ensures the data reflects true events or values.
+
+
+Compliance and regulations: Certain industries have strict regulations that may require updates to historical data to remain compliant, especially if the data impacts financial reporting or legal obligations.
+
+
+Improved analysis: As new insights or methodologies emerge, historical data may need to be adjusted to ensure analyses are relevant and accurate, allowing for better decision-making.
+
+
+Data quality enhancement: Over time, organizations may refine their data quality standards. Updating historical records can help align them with current standards.
+
+
+Business strategy changes: Shifts in business strategy might necessitate alterations in historical data for better reporting or strategic analysis.
+
+
+By carefully managing these edits, you can ensure that the historical data remains a valuable asset for analysis and decision-making.
+🚧WarningEditing historical data in a database should be approached with caution, as it can affect data integrity and accuracy.
+How to edit historical data
+How you edit the data depends on how the data was ingested by Zenskar:
+
+If you used usage event APIs to send data to Zenskar, refer to the section Edit historical data using usage-event APIs.
+If you used data-source connectors, refer to the following sections conditionally:
+
+Edit historical data when data source supports remote querying
+Edit historical data when data source does not support remote querying
+
+
+
+Edit historical data using usage-event APIs
+Edit historical data when billable metrics are derived using the COUNT SQL aggregate function
+In this example, you rent out your office space on a per day basis. The following data schema is used for sending usage events to Zenskar:
+JSON{
+  "data": {
+    "Id": "string",
+    "was_office_space_used": "string"
+  },
+  "timestamp": "timestamp",
+  "customer_id": "string"
+}
+Let us assume that the usage event APIs are used to send the following data to Zenskar:
+data.Iddata.was_office_space_usedtimestampcustomer_idc01Yes2023-04-28T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c02Yes2023-04-29T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c03Yes2023-04-30T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715
+The billable metric, in this example, is the number of days the office space was used. The following SQL query uses COUNT aggregate function on the data.was_office_space_used column to calculate the billable metric.
+SQLSELECT 
+		COALESCE(COUNT(CASE WHEN data.was_office_space_used = 'Yes' THEN 1 ELSE null END)) AS "quantity"FROM 
+    your_table
+WHERE 
+    DATE("timestamp") >= DATE({{start_date}}) AND
+    DATE("timestamp") <= DATE({{end_date}}) AND
+    "customer_id" = CAST({{customer.external_id}} AS String)
+
+
+Breakdown of the SQL query
+SELECT clause:
+SQLCOALESCE(COUNT(CASE WHEN data.was_office_space_used = 'Yes' THEN 1 ELSE null END)) AS "quantity"
+
+COUNT: This function counts non-null values.
+CASE statement: checks if the column data.was_office_space_used has the value Yes. If it does, it returns 1; otherwise, it returns null.
+COALESCE: this function returns the first non-null value in the list. If there are no instances where data.was_office_space_used is Yes, COUNT would return 0, and COALESCE ensures that it is treated as such.
+
+FROM clause:
+SQLFROM your_table
+Replace your_table with the actual name of the table containing your data.
+WHERE Clause:
+SQLWHERE  
+    DATE("timestamp") >= DATE({{start_date}}) AND  
+    DATE("timestamp") \<= DATE({{end_date}}) AND  
+    "customer_id" = CAST({{customer.external_id}} AS String)
+
+DATE("timestamp"): This converts the timestamp field to a date format, ensuring the comparison works with date values.
+DATE({{start_date}}) and DATE({{end_date}}): These placeholders represent the start and end dates for filtering.
+customer_id = CAST({{customer.external_id}} AS String): This checks if the customer_id in the table matches the provided external_id, which is also cast to a string to ensure type compatibility.
+
+Method 1: modify the data schema by introducing a new data field
+🔖NoteThe examples given in this document are for reference only. The ideas given herein are guidelines and not rules. You must adapt the ideas given in this document as per your use case.
+You realize that an error was made in data entry. To correct the error, you decide to introduce a new field in the data schema. In this example, we will use a boolean type.
+JSON{
+  "data": {
+    "Id": "string",
+    "was_office_space_used": "float",
+    "deduct_from_count": "bool"
+  },
+  "timestamp": "timestamp",
+  "customer_id": "string"
+}
+The following is the database table schema that Zenskar will create.
+data.Iddata.was_office_space_useddata.deduct_from_counttimestampcustomer_idc01Yes2023-04-28T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c02Yes2023-04-29T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c03Yes2023-04-30T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c04NoTrue2023-05-01T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715
+The following SQL query calculates the adjusted count of data.was_office_space_used column by taking into account the count of the newly introduced data.deduct_from_count column:
+SQLSELECT 
+		COALESCE(COUNT(CASE WHEN data.was_office_space_used = 'Yes' THEN 1 ELSE null END)) - COUNT(NULLIF(data.deduct_from_count,'')) AS "quantity"
+FROM 
+    your_table
+WHERE 
+    DATE("timestamp") >= DATE({{start_date}}) AND
+    DATE("timestamp") <= DATE({{end_date}}) AND
+    "customer_id" = CAST({{customer.external_id}} AS String)
+
+
+Breakdown of the SQL query
+SELECT clause:
+
+COALESCE(...): This function returns the first non-null value in its list of arguments. Here, it is used to ensure that if the result of the subtraction is null, which can happen if there are no rows, it will return 0 instead.
+COUNT(data.was_office_space_used): This counts the number of non-null entries in the data.was_office_space_used column.
+COUNT(NULLIF(data.deduct_from_count, '')): The NULLIF function returns NULL if data.deduct_from_count is an empty string (''), effectively counting only non-empty entries. So, this counts the number of non-empty entries in data.deduct_from_count. The entire expression calculates the difference between the count of data.was_office_space_used and the count of non-empty data.deduct_from_count.
+
+FROM clause specifies the table from which the data is being queried.
+WHERE clause:
+
+DATE("timestamp") >= DATE({{start_date}}) AND DATE("timestamp") <= DATE({{end_date}}): this filters the results to include only those records where the timestamp is within the specified date range, defined by the variables {{start_date}} and {{end_date}}.
+"customer_id" = CAST({{customer.external_id}} AS String): This filters the results to include only rows where the customer_id matches the external_id, after converting external_id to a string.
+
+Method 2: introduce a new usage event for deduction
+Let us assume that you used the following data schema for sending usage events:
+JSON{
+  "data": {
+    "Id": "string",
+    "Premises_used": "string"
+  },
+  "timestamp": "timestamp",
+  "customer_id": "string"
+}
+Let us assume that the usage event APIs are used to send the following data to Zenskar:
+data.Iddata.Premises_usedtimestampcustomer_idc01Yes2023-04-28T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c02Yes2023-04-29T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c03Yes2023-04-30T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715
+You may define another schema that can be used for deduction:
+JSON{
+  "data": {
+    "Id": "string",
+    "Error": "string"
+  },
+  "timestamp": "timestamp",
+  "customer_id": "string"
+}
+Let us assume that the usage event APIs are used to send the following data to Zenskar for deduction:
+data.Iddata.Errortimestampcustomer_idc01Yes2023-05-15T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c02Yes2023-05-29T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715
+SQLSELECT 
+    (SELECT COUNT(data.was_office_space_used) FROM your_table) - 
+    (SELECT COUNT(data.Error) FROM your_error_table) AS "quantity";
+
+Edit historical data when billable metrics are derived using the SUM aggregate function
+Let us assume that you used the following data schema for sending usage events:
+JSON{
+  "data": {
+    "Id": "string",
+    "Usage": "float"
+  },
+  "timestamp": "timestamp",
+  "customer_id": "string"
+}
+Let us assume that the usage event APIs are used to send the following data to Zenskar:
+data.Iddata.Usagetimestampcustomer_idc01301.42023-04-28T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c025002023-04-29T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c03104.82023-04-30T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715
+You realize that for data.Id equaling c02 should be 475 and not 500. In this case, you can make another usage event API call to add another unique data.Id with a data.Usage of -25, as shown below.
+data.Iddata.Usagetimestampcustomer_idc01301.42023-04-28T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c025002023-04-29T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c03104.82023-04-30T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c04-252023-05-01T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715
+When aggregating using the SUM function, the negative entry in the data.Usage column will account for the data error.
+SQLSELECT 
+    SUM(data.Usage) AS "quantity"
+FROM 
+    your_table
+WHERE 
+    DATE("timestamp") >= DATE({{start_date}}) AND
+    DATE("timestamp") <= DATE({{end_date}}) AND
+    "customer_id" = CAST({{customer.external_id}} AS String)
+
+Edit historical data when billable metrics are derived using the MAX, AVG, MIN, and UNIQUE COUNT aggregate functions
+Techniques similar to the ones mentioned for COUNT and SUM aggregate functions can be used for MAX, AVG, MIN, and UNIQUE COUNT` aggregate functions.
+Editing historical data using ROW_NUMBER() OVER (PARTITION BY) SQL function
+The ROW_NUMBER() function in SQL is a window function that assigns a unique sequential integer to rows within a partition of a result set. It is often used to uniquely identify rows within groups of data. The PARTITION BY clause is used to define how the rows are divided into groups.
+Breakdown of ROW_NUMBER() OVER (PARTITION BY)
+
+ROW_NUMBER(): generates a unique number for each row in the result set, starting from 1 for the first row in each partition.
+OVER: specifies the window over which the function operates. It can include:
+PARTITION BY: defines the groups (partitions) within the data. Each partition is treated independently when generating row numbers.
+
+Let us assume that the usage event APIs are used to send the following data to Zenskar:
+data.Iddata.Usagetimestampcustomer_idc01301.42023-04-28T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c025002023-04-29T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c03104.82023-04-30T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715
+You realize that for data.Id equaling c02, data.Usage should be 475 and not 500. In this case, you can make another usage event API call to add a row with data.Id equaling c02,  data.Usage of 475, and latest timestamp, as shown below.
+data.Iddata.Usagetimestampcustomer_idc01301.42023-04-28T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c025002023-04-29T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c024752023-05-01T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c03104.82023-04-30T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715
+The following query deduplicates the readings based on the most recent timestamp.
+SQLWITH DeduplicatedReadings AS (
+    SELECT 
+        data.Id,
+        data.Usage,
+        timestamp,
+        customer_id,
+        ROW_NUMBER() OVER (PARTITION BY data.Id ORDER BY timestamp DESC) AS rn
+    FROM 
+        device_readings
+)
+SELECT 
+ 				data.Id,
+        data.Usage,
+        timestamp,
+        customer_id,
+FROM 
+    DeduplicatedReadings
+WHERE 
+    rn = 1;
+
+The above SQL query will give the following result:
+data.Iddata.Usagetimestampcustomer_idc01301.42023-04-28T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c024752023-05-01T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715c03104.82023-04-30T13:26:05.017000acc93335-aabb-43e9-aabb-138ac880b715
+
+Edit historical data using data-source connectors
+Edit historical data when data source supports remote querying
+Edit data in your database and let Zenskar take care of the rest of the workflow.
+Edit historical data when data source does not support remote querying
+Edit data in your database and let the periodic sync take care of the syncing the updated data with Zenskar.Updated 13 days ago How to edit an invoiceHow to manage API keysTable of Contents
+
+The need for editing historical data
+
+
+How to edit historical data
+
+
+Edit historical data using usage-event APIs
+
+
+
+Edit historical data when billable metrics are derived using the COUNT SQL aggregate function
+Breakdown of the SQL query
+Method 1: modify the data schema by introducing a new data field
+Method 2: introduce a new usage event for deduction
+Edit historical data when billable metrics are derived using the SUM aggregate function
+Edit historical data when billable metrics are derived using the MAX , AVG , MIN , and UNIQUE COUNT aggregate functions
+Editing historical data using ROW_NUMBER() OVER (PARTITION BY) SQL function
+Breakdown of ROW_NUMBER() OVER (PARTITION BY)
+
+
+
+Edit historical data using data-source connectors
+
+
+
+Edit historical data when data source supports remote querying
+Edit historical data when data source does not support remote querying
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,269 @@
+Step pricing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceStep pricingSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Step pricingA tiered pricing strategy that defines a flat-fee for each tier or step.In Zenskar, step pricing strategy has the concept of steps which is equivalent to tiers in the volume and tiered pricing strategies. In volume and tiered pricing strategies, each tier has a per-unit price associated with it. However, unlike volume and tiered pricing strategies, each step has a flat fee associated with it.
+How to add a product based on step pricing in Zenskar
+🔖ImportantRefer the products documentation to learn more about the concept of products in Zenskar.
+Step 1: Create a product based on step pricing
+
+Navigate to Contracts > Products, and click on the ADD PRODUCT button.
+Select the Step Pricing from the drop-down.
+Select or deselect Metered:
+
+If the service or product is metered, select the appropriate usage aggregate from the drop-down.
+If the service or product is not metered, enter the quantity.
+
+
+Fill in all other details, and select all the desired features.
+Save the product.
+
+Example: non-metered purchase
+Let us assume that:
+
+you sell cloud storage space for three months as a one-time purchase
+after three months, the customer is moved to the free tier
+economies of scale allow you to provide the following steps:
+
+Storage step (GB)Flat fee (USD)1-10015101-1000301000-∞60
+
+Example: metered purchase
+Let us assume that:
+
+you sell cloud storage space as a monthly subscription
+if the subscription is not renewed, the customer is moved to the free tier
+economies of scale allow you to provide the following steps:
+
+Storage step (GB)Flat fee (USD)1-1005101-1000101000-∞20
+
+Step 2
+Add product to new contract
+
+Navigate to Contracts > Contracts, and click on the + ADD NEW CONTRACT button.
+Click on the + ADD NEW PRODUCT button.
+Select the product(s) based on package pricing for the contract.
+
+Add product to new template
+
+Navigate to Contracts > Templates, and click on the + ADD NEW TEMPLATE button.
+Click on the + ADD NEW PRODUCT button.
+Select the product(s) based on package pricing for the template.
+
+How is step pricing strategy different from volume and tiered pricing strategies
+Step pricing strategy is based on a flat fee defined for each step. However, the volume and tiered pricing strategies are based on per-unit pricing for each tier. Therefore, in step pricing strategy, if a step is defined as 1-100 units of a service or product, the flat fee defined for the step will be applicable irrespective of whether the customer purchases 1 or 100 units of the service or product.
+📖Tiered versus volume vs step pricingLet us assume:
+you are in the business of selling software licenses
+you are selling 250 licenses to a particular customer
+you have defined tiers as shown below:
+Number of licensesPrice per unit in USD1-100100101-20090201-∞80In stark contrast, steps in step pricing strategy are defined based on flat-fee as shown below:Number of licensesFlat fee in USD1-10010000101-20018000201-∞20000Comparing the total cost of 250 licenses in tiered, volume and step pricing strategies:Number of licensesTiered pricingVolume pricingStep pricing1-100100 * 100101-200100 * 90201-25050 * 80250 * 8020000Total230002000020000Updated 13 days ago Percent pricingTiered pricingTable of Contents
+
+How to add a product based on step pricing in Zenskar
+
+
+
+Step 1: Create a product based on step pricing
+Step 2
+
+
+
+How is step pricing strategy different from volume and tiered pricing strategies
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,265 @@
+Monitoring
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceMonitoringSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by MonitoringYou can monitor various aspects of your customer's contract and usage.
+Add a monitor
+
+Click on Monitoring in the left sidebar.
+Click on the ADD MONITOR button.
+Fill in the following details:
+
+
+Monitor name: a descriptive name for the monitor.
+Monitor description: add a description for the monitor.
+Monitor source: choose from Contract and Usage Aggregate.
+
+
+Select contract
+
+Click on the Select Contract dropdown.
+Select the contract you would like to add monitors for.
+
+The example contract, A Simple Contract, has only one flat-fee based product.
+
+
+Click on the newly added Select Item dropdown.
+
+
+
+Select itmes:
+
+
+You can add monitors for various aspects of the billing period, such as:
+
+end_date: end date of the billing period.
+start_date: start date of the billing period.
+cycle_length: how many days/weeks/months/years does a billing cycle last.
+cycle_unit: unit of the cycle (day/week/month/year).
+cycle_start_date: start date of the billing cycle.
+contract_start_date: start date of the contract.
+
+
+You can add monitors for various aspects of a product. The aspects are dependent on the product.
+
+For example, for a flat-fee-based product, amount, billed_amount, and billed_days can be selected.
+For example, for a volume-pricing-based product, only amount can be monitored.
+
+
+
+
+
+
+You can add a monitor for invoice by selecting invoice_total.
+
+Select usage aggregate
+🚧Coming soon
+View a monitor
+
+Click on Monitoring in the left sidebar.
+All available monitors will be listed on the Monitoring page.
+
+
+
+Click on the monitor you are interested in.
+A panel will appear on the right side. Select the following parameters to view the monitor:
+
+
+Customer: select the customer.
+Select date: select the date for which you want to view the monitor.
+Net or increment: The net value of the monitor or the increment compared to the previous day.
+
+Updated 17 days ago What’s NextCheckout the API Docs section for our client facing APIs for integrating it in your Product/Analytics Dashboards.Table of Contents
+
+Add a monitor
+
+
+
+Select contract
+Select usage aggregate
+
+
+
+View a monitor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

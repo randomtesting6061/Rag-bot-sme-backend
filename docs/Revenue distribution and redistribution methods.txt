@@ -1,0 +1,246 @@
+Revenue distribution and redistribution methods
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceRevenue distribution and redistribution methodsSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Revenue distribution and redistribution methodsRevenue distribution methods
+📚DefinitionA revenue distribution method is a method or an algorithm that is used to distribute or amortize deferred revenue over a contract period.
+
+Revenue distribution or amortization in this guide are based on an invoice that shows following:
+
+Contract start date of 20 August
+Contract end date of 19 December of the same year
+Total of $400
+
+🚧NoteOnly those revenue distribution methods that are available end-to-end have been described in this document. A few work-in-progress methods are also available in the UI.
+Equal over all periods
+This method distributes the revenue evenly across all periods, including partial periods. Revenue is not prorated based on the number of days in any given period.
+PeriodRevenueAugust$80September$80October$80November$80December$80Total$400
+
+Prorated by days
+This method distributes revenue individually for each period based on the number of days in each period.
+
+Each day in a given period recognizes an equal amount.
+However, each period may recognize a different amount. The full amortization period is 122 days, which is $3.278689 per day.
+
+For the current example:
+
+The first period is a partial one and is prorated for 20 August through 31 August, or 12 days.
+The second period is prorated for the entire month of September, or 30 days.
+The third period is prorated for the entire month of October, or 31 days.
+The fourth period is prorated for the entire month of November, or 30 days.
+The fifth period is also a partial one and prorated for 1 December through 19 December, or 19 days.
+
+PeriodRevenueCalculationAugust$39.3412 days ÷122 days × $400 = $39.34September$98.3630 days ÷122 days × $400 = $98.36October$101.6431 days ÷122 days × $400 = $101.64November$98.3630 days ÷122 days × $400 = $98.36December$62.3031 days ÷122 days × $400 = $62.30Total$400
+
+Equal prorate first and last period
+This method determines the full number of periods in the contract and allocates revenues based on the proportional period amount. The example has four full periods, and the amount per period is $100.
+PeriodRevenueCalculationAugust$38.7112 days ÷ 31 days × $100September$100October$100November$100December$61.2919 days ÷ 31 days × $100Total$400
+
+Revenue redistribution methods
+📚DefinitionsA revenue redistribution method is a method or an algorithm that is used to redistribute or re-amortize deferred revenue over the open contract periods due to change in contract, such as a change in the start or end dates.An open contract period is a period whose revenue has not been recognized.A closed contract period is a period whose revenue has been recognized.
+
+Revenue redistribution or re-amortization in this guide are based on an invoice that shows following:
+Initial contract configuration:
+
+Contract start date of 20 August
+Contract end date of 19 December of the same year
+Total of $400
+
+Modified contract configuration:
+
+New revenue start date of 20 October (a shift of two months)
+Contract end date of 19 December of the same year (same as original)
+
+🚧NoteOnly those revenue distribution methods that are available end-to-end have been described in this document. A few work-in-progress methods are also available in the UI.
+Straight line
+This method redistributes the revenue evenly across all periods, including partial periods. Revenue is not prorated based on the number of days in any given period. Continuing with the above example invoice:
+
+Unallocated revenue is $80 each for the month of August and September, totaling $160.
+The $160 unallocated revenue has to be redistributed over the open contract periods.
+There are three such open contract periods: October, November, and December.
+$160/3 = $53.33
+
+PeriodRevenueAugust$0September$0October$80 + $53.33November$80 + $53.33December$80 + $53.33Total$400
+
+Front-loaded distribution
+In this method, the revenue is calculated per period, and the first partial period of the subscription term will get full revenue recognition. The unallocated revenue is also loaded to the first period.
+In the current example, October is the first partial period and a revenue of $240 will be recognized, whereas a revenue of $80 will be recognized in November and December.
+PeriodRevenueAugust$0September$0October$240November$80December$80Total$400
+
+Back-loaded distribution
+In this method, the revenue is calculated per period, and the last partial period of the subscription term will get full revenue recognition. The unallocated revenue is also loaded to the last period. This is the exact opposite of the front-loaded distribution method.
+In the current example, December is the last partial period and a revenue of $240 will be recognized, whereas a revenue of $80 will be recognized in October and November.
+PeriodRevenueAugust$0September$0October$80November$80December$240Total$400Updated 13 days ago Revenue recognitionPerformance obligation policiesTable of Contents
+
+Revenue distribution methods
+
+
+
+Equal over all periods
+Prorated by days
+Equal prorate first and last period
+
+
+
+Revenue redistribution methods
+
+
+
+Straight line
+Front-loaded distribution
+Back-loaded distribution
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

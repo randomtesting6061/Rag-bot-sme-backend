@@ -1,0 +1,219 @@
+Email alerts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceEmail alertsSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Email alertsConfigure automated email alerts for segments of customers.This guide will help you configure automated email alerts for a segment of customers. A segment of customers share certain common attributes. For example, you may segment your customers based on the following criteria:
+
+pay by card
+pay using Stripe
+live in a particular geography
+
+You can configure automated email alerts based on events. For example, you can send email alerts reminding the customer of:
+
+the approaching due date  in the event of generation of an invoice
+an overdue payment in the event of passing of the due date
+
+How to create an email alert
+
+🚧LimitationsCurrently, Zenskar supports creation of the following two types of email alerts:
+before due date: when an invoice is generated, remind customers about the approaching due date
+after due date: alert customers that the invoice payment is overdue
+Also, alerts can be sent only to one segment of customers: all customers.
+
+Navigate to Communication > Email Alerts.
+Click 
+
+Before due date: remind customers about the approaching due date
+
+Click on ADD REMINDER button under the INVOICE GENERATED section.
+Fill in the details in the following form.
+Click SAVE ALERT.
+
+
+FieldValue to enterSend email before due (days)Enter the number of days before the due date when you would like Zenskar to send automated email alerts to your customers to remind them of the approaching due date.SenderSelect the sender on whose behalf you would like Zenskar to send mails to your customers.Email templateThe drop-down will list all email templates of the type payment reminder.
+Email attachmentRead-only field. Invoice is attached by default.Email subjectRead-only field that displays the subject of the template.Email bodyRead-only field that displays the body of the template.
+After due date: alert customer that the invoice payment is overdue
+
+Click on ADD REMINDER button under the DUE DATE section.
+Fill in the details in the following form.
+Click SAVE ALERT.
+
+
+FieldValue to enterSend email after due (days)Enter the number of days after the due date when you would like Zenskar to send automated payment overdue reminder email alert to your customers.SenderSelect the sender on whose behalf you would like Zenskar to send mails to your customers.Email templateThe drop-down will list all email templates of the type payment reminder.
+Email attachmentRead-only field. Invoice is attached by default.Email subjectRead-only field that displays the subject of the template.Email bodyRead-only field that displays the body of the template.Updated 17 days ago Email templatesUsage alertsTable of Contents
+
+How to create an email alert
+
+
+
+Before due date: remind customers about the approaching due date
+After due date: alert customer that the invoice payment is overdue
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

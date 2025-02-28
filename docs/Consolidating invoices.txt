@@ -1,0 +1,213 @@
+Consolidating invoices
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceConsolidating invoicesSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Consolidating invoicesZenskar can help you to consolidate invoices. This guide will help you understand the feature.
+Why consolidate invoices?
+Imagine an organization with multiple departments. You may wish to generate department-level invoices for each department. You may also wish to have an organization-level invoice that consolidates the department-level invoices.
+🚧NoteThe invoice consolidation is an advanced feature used rarely. Therefore, this feature can be enabled only by sending a request to [email protected].
+How to consolidate invoices
+Step 1: Create a parent customer
+
+Create a customer that will act as a parent. This could be your organization.
+There is no setting you need to enable.
+Assign a contract to the parent customer.
+
+Fig. 1: Contract assigned to the fictitious An Amazing Company
+Step 2: Create children customers
+
+Create one or more customers that will act as a children. These could be your departments.
+There is no setting you need to enable.
+Assign a contract to the children customer.
+
+Fig. 2: Contract assigned to An Amazing Department of the An Amazing Company
+Fig. 3: Contract assigned to Another Amazing Department of the An Amazing Company
+Step 3: Contact Zenskar support
+Once the parent and child customers have been created, contact [email protected] to enable invoice-consolidation feature for them. The Zenskar support team will enable the necessary backend and frontend settings.
+Generate invoices
+Generate invoices for the parent and the child customers.
+Consolidate invoices
+
+Navigate to Invoices in the side panel.
+The invoices generated for the parent and child customers will be in the   state.
+
+🚧NoteFor regular customers, new invoices are assigned the  state. For parent and child customers involved in the invoice-consolidation feature, new invoices will be assigned the  state
+Fig. 4: New invoices are generated in the upcoming state
+
+Select the invoices you wish to consolidate.
+Click on the CONSOLIDATE link.
+
+Fig. 5: Consolidate invoices
+
+The final consolidated invoice will be generated.
+Updated 17 days ago Integrating your ERP software with ZenskarAnalyticsTable of Contents
+
+Why consolidate invoices?
+
+
+How to consolidate invoices
+
+
+
+Step 1: Create a parent customer
+Step 2: Create children customers
+Step 3: Contact Zenskar support
+Generate invoices
+Consolidate invoices
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

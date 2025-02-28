@@ -1,0 +1,238 @@
+Xero
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceXeroSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by XeroAccounting software for everyday business.Connect to Xero
+
+Click on the drop-up menu at the bottom of the left sidebar.
+Click on the Settings option on the drop-up menu.
+On the Settings page, move to the Connectors tab.
+Click on ERP filter to access the Xero connector. Alternatively, you may use the search box to search for Xero.
+Click on the Connect button on the Xero card, and login to Xero, as shown in Fig. 1:
+
+Fig. 1: Connect Zenskar to your Xero account.
+
+Once the login is completed, you must allow Zenskar access to your Xero account, as shown below.
+
+Fig. 2: Allow Zenskar access to your Xero account.
+
+Once you allow Zenskar access to your Xero account, you will be redirected to the following page.
+
+
+Account Mapping
+The account mapping will be as shown in Fig. 2:
+Fig. 2: Zenskar and Xero mapping
+Each Zenskar account must be mapped with an account on Xero, as shown in Fig. 3. The dropdown shows all the non-system accounts present on Xero i.e., accounts for which journal entry creation is possible. You can select an appropriate account:
+Fig. 3: Zenskar and Xero mapping
+If you find that the accounts listed are inappropriate, you can create a new account by checking the Create Account checkbox beside the dropdown. An account creation window shall appear, as shown in Fig.4:
+Fig. 4: New Xero account creation window
+
+Enter a name in the Name field.
+Select an account type in the Account Type dropdown. The dropdown contains all account types supported by Xero.
+Click on ADD. You have successfully configured Xero.
+
+How Zenskar journal entries look on Xero
+Xero does not allow you to create entries with line amount equal to zero. Therefore, entries created with line amount zero such as Free units are not synced with Xero.
+The actual Accounts Receivable and other system accounts cannot be used to create Journals. This is a known limitation of Xero. Therefore, you should map the Zenskar Accounts Receivable with something similar in Xero. For example, you can use the Create Account checkbox to create a new account with similar name in Xero.
+Example 1: When credits are issued to a Customer
+
+System account names for these entries are:
+
+Customer Wallet: 4a003f19-ae13-4fe2-b7bb-98666a8abcd
+Expenses: Sales Returns and Allowances: 4a003f19-ae13-4fe2-b7bb-98666a8abcd
+
+Example 2: When an invoice is approved
+
+System account names for these entries are:
+
+Revenue: Storage - Volume Pricing: 4d24700c-29de-4351-aa5a-965e3334abcd
+Revenue: SQS - Per Unit Pricing: 4d24700c-29de-4351-aa5a-965e3334abcd
+Assets: Accounts Receivable: 4d24700c-29de-4351-aa5a-965e3334abcd
+
+Example 3: When a payment is made
+
+System account names for these entries were:
+Assets: Cash: 4d24700c-29de-4351-aa5a-965e3334abcd
+Assets: Accounts Receivable: 4d24700c-29de-4351-aa5a-965e3334abcd
+Usually the last element in the system account name is customer Id. Therefore it is ignored. All the accounts visible in the entries are created according to the mapping. The customer visible in the description is also created on Xero if it is not already present.Updated 17 days ago SAPZoho BooksTable of Contents
+
+Connect to Xero
+
+
+Account Mapping
+
+
+How Zenskar journal entries look on Xero
+
+
+
+Example 1: When credits are issued to a Customer
+Example 2: When an invoice is approved
+Example 3: When a payment is made
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

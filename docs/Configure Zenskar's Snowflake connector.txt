@@ -1,0 +1,227 @@
+Configure Zenskar's Snowflake connector
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Jump to ContentDocumentationDocumentationAPI ReferenceDocumentationDocumentationMoon (Dark Mode)Sun (Light Mode)DocumentationAPI ReferenceConfigure Zenskar's Snowflake connectorSearchAllPagesStart typing to search…IntroductionIntroduction to ZenskarUnderstanding Zenskarintegration and migration guidesWhat does Zenskar pilot program entail?What does Zenskar implementation entail?Data migration and integration optionsIntegrating your ERP software with ZenskarPRODUCT GUIDESConsolidating invoicesZenskar ModulesAnalyticsCustomersMeteringData ingestionData sources: sync data to ZenskarData sources: query remote data sourcesUsage events: data-ingestion APIsManual: upload Zenskar-compatible CSV fileManual: use Zenskar's web form to upload dataBillable metricsSQL-query templatesContractsProduct, sub-product, add-on, and product catalogFree unitsCreditsDiscountAvaTaxPayment termsMinimum commitmentCustom currencyPlansContract renewalInvoicesLife cycle of an invoiceGenerate invoicesCredit notesPaymentsPayment MethodsDefault Payment MethodPayment GatewaysAccountingHierarchy of default accountsCreditsRevenue recognitionRevenue distribution and redistribution methodsPerformance obligation policiesReceivablesMonitoringEntitlementsCommunicationsEmail templatesEmail alertsUsage alertsDocument templatesSegmentsSendersRole-based access controlUsersRolesWebhook alertsCustomer-facing portalBusiness entitiesPRICING MODELSFlat-fee pricingMatrix pricingPackage pricingPer-unit pricingPercent pricingStep pricingTiered pricingTiered pricing with flat feeTwo-dimensional tiered pricingVolume pricingVolume pricing with flat feeBUSINESS MODELSPrepaid commitment with postpaid overagesPrepaid subscription with postpaid overagesCRM:CPQ INTEGRATIONSDealHubHubSpotMicrosoft Dynamics 365PipedriveSalesforceInstallation and setup of Zenskar’s package for SalesforceUse default FlowCreate your own FlowERP INTEGRATIONSNetSuiteQuickBooksSageSAPXeroZoho BooksPAYMENT-GATEWAY INTEGRATIONSAdyenRazorpayStripeTAX-AUTOMATION INTEGRATIONSAnrokAvalara AvaTaxStripe TaxZENSKAR DATA-SOURCE CONNECTORSAuth0AWS AthenaBigQueryClickHouseCockroachDBDatabricks LakehouseGoogle SheetsLookerMetabaseMongoDBMySQLPostgreSQLQuickBooksRedshiftShopifySnowflakeSet up Snowflake for integration with ZenskarConfigure Zenskar's Snowflake connectorCoinAPIZenskar IPsSECURITYTwo-factor authenticationSingle sign-on authenticationSAML authenticationHOW-TO GUIDESHow to edit an invoiceHow to edit historical dataHow to manage API keysPowered by Configure Zenskar's Snowflake connectorConfiguration settings for the connector.🐕‍🦺 Setup guide
+This guide will help you configure Zenskar's Snowflake connector. Consequently, you can use Snowflake as a data source in Zenskar.
+🚧PrerequisitesBefore configuring Zenskar's Snowflake connector, ensure that you have set up your Snowflake account for integration.
+⚙️ Set up data source and type
+
+Log into your Zenskar account.
+In the left navigation bar, click Metering > Data Sources. In the top-right corner, click + ADD DATA SOURCE.
+In the Set Up Source section of the Add New Data Source page, enter a name for the Snowflake data source connection.
+Select Snowflake from the Source Type dropdown.
+
+
+⚙️ Configure data source
+In the Source Config section of the Add New Data Source page, add the following details:
+FieldDescriptionAuthorization MethodSelect Username and Password from the drop-down menu.auth_typeThe phrase username/password will be prepopulated. Do not change.UsernameEnter the username you created.PasswordEnter the password associated with the username.HostEnter the host domain of the Snowflake instance (must include the account, region, cloud environment, and end with snowflakecomputing.com). For example, accountname.us-east-2.aws.snowflakecomputing.com.RoleEnter the role you created.WarehouseEnter the warehouse you created.DatabaseEnter the database you created.SchemaEnter the default schema used as the target schema for all statements issued from the connection that do not explicitly specify a schema name.JDBC URL Params (Optional)Enter the additional properties to pass to the JDBC URL string when connecting to the database formatted as key=value pairs separated by the symbol &. For example, key1=value1&key2=value2&key3=value3
+Select tables and columns to sync
+Select tables to sync
+If the connector is configured correctly, you will be asked to select the tables to sync:
+
+Select columns to sync
+A table can be expanded to select the columns to sync.
+
+A cursor can be set against a column.
+A column can be set as the primary key.
+
+
+Select sync frequency
+A sync frequency can also be configured.
+
+Finally, click on the FINISH SETUP button to save the connector.
+Updated 17 days ago Set up Snowflake for integration with ZenskarCoinAPITable of Contents
+
+🐕‍🦺 Setup guide
+
+
+
+⚙️ Set up data source and type
+⚙️ Configure data source
+Select tables and columns to sync
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
